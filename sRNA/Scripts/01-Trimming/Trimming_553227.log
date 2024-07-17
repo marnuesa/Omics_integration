@@ -1,0 +1,1549 @@
+Output field already exist.
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+GCGGATATAGTTGAATGGTAAAATTTCTCCTTGCCAAGGA
+GCGGATATAGTTGAATGGTAAAATTTCTCCTTGCCAAGGA
+TCCGTTGTCGTCCAGCGGTTAGGATATCTGGCTTTCACC
+
+TCCGTTGTCGTCCAGCGGTTAGGATATCTGGCTTTCACC
+
+
+GCGGATATAGTTGAATGGTAAAATTTCTCCTTGCCAAG
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+No adapter detected for read1
+
+
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+
+
+
+
+
+
+
+
+
+
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+
+
+Read1 before filtering:
+total reads: 4248591
+total bases: 97779867
+Q20 bases: 97128598(99.3339%)
+Q30 bases: 95403653(97.5698%)
+
+Read1 after filtering:
+total reads: 3042002
+total bases: 69766156
+Q20 bases: 69532064(99.6645%)
+Q30 bases: 68560071(98.2712%)
+
+Filtering result:
+reads passed filter: 3042002
+reads failed due to low quality: 43
+reads failed due to too many N: 3
+reads failed due to too short: 718065
+reads failed due to too long: 488478
+reads with adapter trimmed: 25556
+bases trimmed due to adapters: 740545
+reads with polyX in 3' end: 2460
+bases trimmed in polyX tail: 23619
+
+Duplication rate (may be overestimated since this is SE data): 58.0001%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T3_SD_3.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T3_SD_3.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 101 seconds
+Read1 before filtering:
+total reads: 4723273
+total bases: 108324671
+Q20 bases: 107615921(99.3457%)
+Q30 bases: 105729421(97.6042%)
+
+Read1 after filtering:
+total reads: 3497612
+total bases: 80146855
+Q20 bases: 79884018(99.6721%)
+Q30 bases: 78782089(98.2972%)
+
+Filtering result:
+reads passed filter: 3497612
+reads failed due to low quality: 43
+reads failed due to too many N: 5
+reads failed due to too short: 770792
+reads failed due to too long: 454821
+reads with adapter trimmed: 29062
+bases trimmed due to adapters: 861711
+reads with polyX in 3' end: 2574
+bases trimmed in polyX tail: 24721
+
+Duplication rate (may be overestimated since this is SE data): 58.6369%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T3_SD_2.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T3_SD_2.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 111 seconds
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+GCGGATATAGTTGAATGGTAAAATTTCTCCTTGCCAAGGA
+
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Read1 before filtering:
+total reads: 4638747
+total bases: 112875452
+Q20 bases: 112121966(99.3325%)
+Q30 bases: 110151291(97.5866%)
+
+Read1 after filtering:
+total reads: 3065591
+total bases: 70501476
+Q20 bases: 70262888(99.6616%)
+Q30 bases: 69277651(98.2641%)
+
+Filtering result:
+reads passed filter: 3065591
+reads failed due to low quality: 22
+reads failed due to too many N: 4
+reads failed due to too short: 563063
+reads failed due to too long: 1010067
+reads with adapter trimmed: 59513
+bases trimmed due to adapters: 1860331
+reads with polyX in 3' end: 1999
+bases trimmed in polyX tail: 19250
+
+Duplication rate (may be overestimated since this is SE data): 54.5532%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T3_D_3.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T3_D_3.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 117 seconds
+Detecting adapter sequence for read1...
+GCGGATATAGTTGAATGGTAAAATTTCTCCTTGCCAAGG
+
+Read1 before filtering:
+total reads: 3829716
+total bases: 195315516
+Q20 bases: 193603296(99.1234%)
+Q30 bases: 191774734(98.1871%)
+
+Read1 after filtering:
+total reads: 1427486
+total bases: 32611256
+Q20 bases: 32419502(99.412%)
+Q30 bases: 32151165(98.5892%)
+
+Filtering result:
+reads passed filter: 1427486
+reads failed due to low quality: 0
+reads failed due to too many N: 4738
+reads failed due to too short: 257677
+reads failed due to too long: 2139815
+reads with adapter trimmed: 3706912
+bases trimmed due to adapters: 89448916
+reads with polyX in 3' end: 745
+bases trimmed in polyX tail: 8232
+
+Duplication rate (may be overestimated since this is SE data): 74.6161%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T1_MON_3.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T1_MON_3.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 120 seconds
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Read1 before filtering:
+total reads: 4289170
+total bases: 218747670
+Q20 bases: 216775276(99.0983%)
+Q30 bases: 214567898(98.0892%)
+
+Read1 after filtering:
+total reads: 1363725
+total bases: 30997727
+Q20 bases: 30809525(99.3929%)
+Q30 bases: 30545725(98.5418%)
+
+Filtering result:
+reads passed filter: 1363725
+reads failed due to low quality: 0
+reads failed due to too many N: 659
+reads failed due to too short: 705498
+reads failed due to too long: 2219288
+reads with adapter trimmed: 4111844
+bases trimmed due to adapters: 103274989
+reads with polyX in 3' end: 1400
+bases trimmed in polyX tail: 15783
+
+Duplication rate (may be overestimated since this is SE data): 80.4111%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T2_C_3.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T2_C_3.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 130 seconds
+Detecting adapter sequence for read1...
+GCGGATATAGTTGAATGGTAAAATTTCTCCTTGCCAAGG
+
+Read1 before filtering:
+total reads: 4912766
+total bases: 250551066
+Q20 bases: 248327389(99.1125%)
+Q30 bases: 245917908(98.1508%)
+
+Read1 after filtering:
+total reads: 1933800
+total bases: 43426593
+Q20 bases: 43165087(99.3978%)
+Q30 bases: 42790380(98.535%)
+
+Filtering result:
+reads passed filter: 1933800
+reads failed due to low quality: 0
+reads failed due to too many N: 5866
+reads failed due to too short: 842269
+reads failed due to too long: 2130831
+reads with adapter trimmed: 4704973
+bases trimmed due to adapters: 123880994
+reads with polyX in 3' end: 837
+bases trimmed in polyX tail: 9142
+
+Duplication rate (may be overestimated since this is SE data): 80.5911%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T1_C_3.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T1_C_3.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 133 seconds
+Detecting adapter sequence for read1...
+Read1 before filtering:
+total reads: 5980014
+total bases: 304980714
+Q20 bases: 302015799(99.0278%)
+Q30 bases: 298794642(97.9717%)
+
+Read1 after filtering:
+total reads: 3127470
+total bases: 70295471
+Q20 bases: 69843229(99.3567%)
+Q30 bases: 69216538(98.4651%)
+
+Filtering result:
+reads passed filter: 3127470
+reads failed due to low quality: 0
+reads failed due to too many N: 7064
+reads failed due to too short: 1982517
+reads failed due to too long: 862963
+reads with adapter trimmed: 5773676
+bases trimmed due to adapters: 171381228
+reads with polyX in 3' end: 755
+bases trimmed in polyX tail: 7601
+
+Duplication rate (may be overestimated since this is SE data): 77.2594%
+Read1 before filtering:
+total reads: 5003801
+total bases: 255193851
+Q20 bases: 252810844(99.0662%)
+Q30 bases: 250224586(98.0527%)
+
+Read1 after filtering:
+total reads: 2671379
+total bases: 60847689
+Q20 bases: 60508183(99.442%)
+Q30 bases: 60027457(98.652%)
+
+Filtering result:
+reads passed filter: 2671379
+reads failed due to low quality: 0
+reads failed due to too many N: 751
+reads failed due to too short: 731825
+reads failed due to too long: 1599846
+reads with adapter trimmed: 4740018
+bases trimmed due to adapters: 127512513
+reads with polyX in 3' end: 1976
+bases trimmed in polyX tail: 20055
+
+Duplication rate (may be overestimated since this is SE data): 67.33%
+TGCAGTGATGTATGCAGCTGAGGCATCCTAACAGACCGGTAGACTTGAA
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T1_NT_3.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T1_NT_3.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 134 seconds
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T2_SD_3.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T2_SD_3.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 134 seconds
+
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+Read1 before filtering:
+total reads: 5286271
+total bases: 269599821
+Q20 bases: 267109200(99.0762%)
+Q30 bases: 264310679(98.0382%)
+
+Read1 after filtering:
+total reads: 2630034
+total bases: 60001372
+Q20 bases: 59656415(99.4251%)
+Q30 bases: 59172922(98.6193%)
+
+Filtering result:
+reads passed filter: 2630034
+reads failed due to low quality: 0
+reads failed due to too many N: 803
+reads failed due to too short: 1359167
+reads failed due to too long: 1296267
+reads with adapter trimmed: 5108739
+bases trimmed due to adapters: 146468950
+reads with polyX in 3' end: 1884
+bases trimmed in polyX tail: 18860
+
+Duplication rate (may be overestimated since this is SE data): 67.5566%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T2_D_3.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T2_D_3.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 134 seconds
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Read1 before filtering:
+total reads: 4954197
+total bases: 252664047
+Q20 bases: 250462978(99.1289%)
+Q30 bases: 248039439(98.1697%)
+
+Read1 after filtering:
+total reads: 2657482
+total bases: 60803569
+Q20 bases: 60460535(99.4358%)
+Q30 bases: 59984901(98.6536%)
+
+Filtering result:
+reads passed filter: 2657482
+reads failed due to low quality: 0
+reads failed due to too many N: 737
+reads failed due to too short: 630917
+reads failed due to too long: 1665061
+reads with adapter trimmed: 4730096
+bases trimmed due to adapters: 125181929
+reads with polyX in 3' end: 2545
+bases trimmed in polyX tail: 26530
+
+Duplication rate (may be overestimated since this is SE data): 63.143%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T2_SD_1.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T2_SD_1.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 142 seconds
+Detecting adapter sequence for read1...
+GCGGATATAGTTGAATGGTAAAATTTCTCCTTGCCAAGG
+Read1 before filtering:
+total reads: 5458858
+total bases: 136837749
+Q20 bases: 135907970(99.3205%)
+Q30 bases: 133522178(97.577%)
+
+Read1 after filtering:
+total reads: 3149008
+total bases: 72023981
+Q20 bases: 71781332(99.6631%)
+Q30 bases: 70773785(98.2642%)
+
+Filtering result:
+reads passed filter: 3149008
+reads failed due to low quality: 25
+reads failed due to too many N: 9
+reads failed due to too short: 686813
+reads failed due to too long: 1623003
+reads with adapter trimmed: 92183
+bases trimmed due to adapters: 2917682
+reads with polyX in 3' end: 2128
+bases trimmed in polyX tail: 20539
+
+Duplication rate (may be overestimated since this is SE data): 61.844%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T3_D_1.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T3_D_1.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 142 seconds
+
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Read1 before filtering:
+total reads: 5181713
+total bases: 264267363
+Q20 bases: 261963988(99.1284%)
+Q30 bases: 259405187(98.1601%)
+
+Read1 after filtering:
+total reads: 2267350
+total bases: 51509950
+Q20 bases: 51219896(99.4369%)
+Q30 bases: 50809794(98.6407%)
+
+Filtering result:
+reads passed filter: 2267350
+reads failed due to low quality: 0
+reads failed due to too many N: 841
+reads failed due to too short: 720532
+reads failed due to too long: 2192990
+reads with adapter trimmed: 4947950
+bases trimmed due to adapters: 127948087
+reads with polyX in 3' end: 1823
+bases trimmed in polyX tail: 19547
+
+Duplication rate (may be overestimated since this is SE data): 70.2451%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T2_D_2.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T2_D_2.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 144 seconds
+Detecting adapter sequence for read1...
+GCGGATATAGTTGAATGGTAAAATTTCTCCTTGCCAAGGA
+
+Read1 before filtering:
+total reads: 4574331
+total bases: 233290881
+Q20 bases: 231241847(99.1217%)
+Q30 bases: 229076533(98.1935%)
+
+Read1 after filtering:
+total reads: 1385185
+total bases: 31136519
+Q20 bases: 30950192(99.4016%)
+Q30 bases: 30687694(98.5585%)
+
+Filtering result:
+reads passed filter: 1385185
+reads failed due to low quality: 0
+reads failed due to too many N: 5544
+reads failed due to too short: 627292
+reads failed due to too long: 2556310
+reads with adapter trimmed: 4317096
+bases trimmed due to adapters: 105064534
+reads with polyX in 3' end: 752
+bases trimmed in polyX tail: 8625
+
+Duplication rate (may be overestimated since this is SE data): 81.992%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T1_C_2.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T1_C_2.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 147 seconds
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Read1 before filtering:
+total reads: 5125799
+total bases: 261415749
+Q20 bases: 259048602(99.0945%)
+Q30 bases: 256388888(98.0771%)
+
+Read1 after filtering:
+total reads: 1533565
+total bases: 34849485
+Q20 bases: 34639251(99.3967%)
+Q30 bases: 34341497(98.5423%)
+
+Filtering result:
+reads passed filter: 1533565
+reads failed due to low quality: 0
+reads failed due to too many N: 747
+reads failed due to too short: 822630
+reads failed due to too long: 2768857
+reads with adapter trimmed: 4871136
+bases trimmed due to adapters: 120280001
+reads with polyX in 3' end: 1217
+bases trimmed in polyX tail: 13715
+
+Duplication rate (may be overestimated since this is SE data): 81.5141%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T2_C_2.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T2_C_2.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 152 seconds
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Read1 before filtering:
+total reads: 5446980
+total bases: 277795980
+Q20 bases: 275023912(99.0021%)
+Q30 bases: 271966607(97.9016%)
+
+Read1 after filtering:
+total reads: 2402402
+total bases: 54676225
+Q20 bases: 54315301(99.3399%)
+Q30 bases: 53811531(98.4185%)
+
+Filtering result:
+reads passed filter: 2402402
+reads failed due to low quality: 0
+reads failed due to too many N: 837
+reads failed due to too short: 918148
+reads failed due to too long: 2125593
+reads with adapter trimmed: 5238371
+bases trimmed due to adapters: 138481774
+reads with polyX in 3' end: 1589
+bases trimmed in polyX tail: 16820
+
+Duplication rate (may be overestimated since this is SE data): 70.347%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T2_NT_3.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T2_NT_3.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 153 seconds
+Detecting adapter sequence for read1...
+GCGGATATAGTTGAATGGTAAAATTTCTCCTTGCCAAGGA
+
+Read1 before filtering:
+total reads: 6558846
+total bases: 151036442
+Q20 bases: 149823547(99.197%)
+Q30 bases: 146482371(96.9848%)
+
+Read1 after filtering:
+total reads: 4343432
+total bases: 100302653
+Q20 bases: 99852583(99.5513%)
+Q30 bases: 98056396(97.7605%)
+
+Filtering result:
+reads passed filter: 4343432
+reads failed due to low quality: 48
+reads failed due to too many N: 171
+reads failed due to too short: 1353278
+reads failed due to too long: 861917
+reads with adapter trimmed: 32261
+bases trimmed due to adapters: 586286
+reads with polyX in 3' end: 2979
+bases trimmed in polyX tail: 28773
+
+Duplication rate (may be overestimated since this is SE data): 62.6815%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T3_C_2.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T3_C_2.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 155 seconds
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Read1 before filtering:
+total reads: 5111085
+total bases: 260665335
+Q20 bases: 258406229(99.1333%)
+Q30 bases: 255991553(98.207%)
+
+Read1 after filtering:
+total reads: 2102902
+total bases: 47809878
+Q20 bases: 47528411(99.4113%)
+Q30 bases: 47135964(98.5904%)
+
+Filtering result:
+reads passed filter: 2102902
+reads failed due to low quality: 0
+reads failed due to too many N: 6120
+reads failed due to too short: 476250
+reads failed due to too long: 2525813
+reads with adapter trimmed: 4860385
+bases trimmed due to adapters: 122044228
+reads with polyX in 3' end: 933
+bases trimmed in polyX tail: 9774
+
+Duplication rate (may be overestimated since this is SE data): 79.8948%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T1_D_1.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T1_D_1.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 157 seconds
+Read1 before filtering:
+total reads: 4951069
+total bases: 252504519
+Q20 bases: 250323341(99.1362%)
+Q30 bases: 248007665(98.2191%)
+
+Read1 after filtering:
+total reads: 1855062
+total bases: 42884688
+Q20 bases: 42630760(99.4079%)
+Q30 bases: 42270591(98.568%)
+
+Filtering result:
+reads passed filter: 1855062
+reads failed due to low quality: 0
+reads failed due to too many N: 6018
+reads failed due to too short: 421576
+reads failed due to too long: 2668413
+reads with adapter trimmed: 4720352
+bases trimmed due to adapters: 115423663
+reads with polyX in 3' end: 1382
+bases trimmed in polyX tail: 14679
+
+Duplication rate (may be overestimated since this is SE data): 75.4613%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T1_D_3.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T1_D_3.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 157 seconds
+Detecting adapter sequence for read1...
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+
+Read1 before filtering:
+total reads: 6183080
+total bases: 152513982
+Q20 bases: 151499106(99.3346%)
+Q30 bases: 148833906(97.5871%)
+
+Read1 after filtering:
+total reads: 4050116
+total bases: 92979538
+Q20 bases: 92661860(99.6583%)
+Q30 bases: 91339438(98.2361%)
+
+Filtering result:
+reads passed filter: 4050116
+reads failed due to low quality: 46
+reads failed due to too many N: 4
+reads failed due to too short: 524470
+reads failed due to too long: 1608444
+reads with adapter trimmed: 0
+bases trimmed due to adapters: 0
+reads with polyX in 3' end: 2174
+bases trimmed in polyX tail: 20893
+
+Duplication rate (may be overestimated since this is SE data): 60.0996%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T3_NT_3.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T3_NT_3.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 160 seconds
+Detecting adapter sequence for read1...
+GCGGATATAGTTGAATGGTAAAATTTCTCCTTGCCAAGGA
+
+Read1 before filtering:
+total reads: 5422636
+total bases: 276554436
+Q20 bases: 273902285(99.041%)
+Q30 bases: 271023638(98.0001%)
+
+Read1 after filtering:
+total reads: 2630271
+total bases: 60238196
+Q20 bases: 59894947(99.4302%)
+Q30 bases: 59417039(98.6368%)
+
+Filtering result:
+reads passed filter: 2630271
+reads failed due to low quality: 0
+reads failed due to too many N: 814
+reads failed due to too short: 678704
+reads failed due to too long: 2112847
+reads with adapter trimmed: 5146568
+bases trimmed due to adapters: 133262734
+reads with polyX in 3' end: 2423
+bases trimmed in polyX tail: 25802
+
+Duplication rate (may be overestimated since this is SE data): 66.6432%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T2_MON_1.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T2_MON_1.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 161 seconds
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Read1 before filtering:
+total reads: 5180442
+total bases: 264202542
+Q20 bases: 261896728(99.1273%)
+Q30 bases: 259303824(98.1458%)
+
+Read1 after filtering:
+total reads: 2066904
+total bases: 47203475
+Q20 bases: 46925068(99.4102%)
+Q30 bases: 46535015(98.5839%)
+
+Filtering result:
+reads passed filter: 2066904
+reads failed due to low quality: 0
+reads failed due to too many N: 801
+reads failed due to too short: 553605
+reads failed due to too long: 2559132
+reads with adapter trimmed: 4858807
+bases trimmed due to adapters: 118996157
+reads with polyX in 3' end: 1929
+bases trimmed in polyX tail: 22224
+
+Duplication rate (may be overestimated since this is SE data): 72.1211%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T2_NT_2.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T2_NT_2.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 167 seconds
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Read1 before filtering:
+total reads: 5080542
+total bases: 259107642
+Q20 bases: 256802653(99.1104%)
+Q30 bases: 254395987(98.1816%)
+
+Read1 after filtering:
+total reads: 1773348
+total bases: 41044765
+Q20 bases: 40803872(99.4131%)
+Q30 bases: 40459586(98.5743%)
+
+Filtering result:
+reads passed filter: 1773348
+reads failed due to low quality: 0
+reads failed due to too many N: 6140
+reads failed due to too short: 279562
+reads failed due to too long: 3021492
+reads with adapter trimmed: 4701325
+bases trimmed due to adapters: 110126128
+reads with polyX in 3' end: 1305
+bases trimmed in polyX tail: 14404
+
+Duplication rate (may be overestimated since this is SE data): 71.6217%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T1_SD_3.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T1_SD_3.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 175 seconds
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Read1 before filtering:
+total reads: 5405442
+total bases: 275677542
+Q20 bases: 273344237(99.1536%)
+Q30 bases: 270892326(98.2642%)
+
+Read1 after filtering:
+total reads: 1941094
+total bases: 44521699
+Q20 bases: 44263519(99.4201%)
+Q30 bases: 43905534(98.616%)
+
+Filtering result:
+reads passed filter: 1941094
+reads failed due to low quality: 0
+reads failed due to too many N: 6616
+reads failed due to too short: 384116
+reads failed due to too long: 3073616
+reads with adapter trimmed: 5073691
+bases trimmed due to adapters: 121897200
+reads with polyX in 3' end: 1653
+bases trimmed in polyX tail: 17605
+
+Duplication rate (may be overestimated since this is SE data): 74.1779%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T1_SD_1.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T1_SD_1.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 177 seconds
+Detecting adapter sequence for read1...
+GCGGATATAGTTGAATGGTAAAATTTCTCCTTGCCAAGGA
+
+Read1 before filtering:
+total reads: 5034758
+total bases: 121207985
+Q20 bases: 120390442(99.3255%)
+Q30 bases: 118254832(97.5636%)
+
+Read1 after filtering:
+total reads: 3220857
+total bases: 73776704
+Q20 bases: 73525271(99.6592%)
+Q30 bases: 72478230(98.24%)
+
+Filtering result:
+reads passed filter: 3220857
+reads failed due to low quality: 37
+reads failed due to too many N: 4
+reads failed due to too short: 667855
+reads failed due to too long: 1146005
+reads with adapter trimmed: 35286
+bases trimmed due to adapters: 994952
+reads with polyX in 3' end: 1809
+bases trimmed in polyX tail: 17469
+
+Duplication rate (may be overestimated since this is SE data): 62.3249%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T3_NT_1.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T3_NT_1.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 126 seconds
+Read1 before filtering:
+total reads: 4562316
+total bases: 110896881
+Q20 bases: 110137609(99.3153%)
+Q30 bases: 108144046(97.5177%)
+
+Read1 after filtering:
+total reads: 3065197
+total bases: 70141226
+Q20 bases: 69897967(99.6532%)
+Q30 bases: 68879366(98.201%)
+
+Filtering result:
+reads passed filter: 3065197
+reads failed due to low quality: 33
+reads failed due to too many N: 4
+reads failed due to too short: 432563
+reads failed due to too long: 1064519
+reads with adapter trimmed: 9186
+bases trimmed due to adapters: 293318
+reads with polyX in 3' end: 2263
+bases trimmed in polyX tail: 21885
+
+Duplication rate (may be overestimated since this is SE data): 64.9055%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T3_NT_4.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T3_NT_4.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 112 seconds
+Read1 before filtering:
+total reads: 5550011
+total bases: 130732115
+Q20 bases: 129793871(99.2823%)
+Q30 bases: 127326394(97.3949%)
+
+Read1 after filtering:
+total reads: 3953490
+total bases: 90655828
+Q20 bases: 90326599(99.6368%)
+Q30 bases: 88960063(98.1294%)
+
+Filtering result:
+reads passed filter: 3953490
+reads failed due to low quality: 61
+reads failed due to too many N: 4
+reads failed due to too short: 736992
+reads failed due to too long: 859464
+reads with adapter trimmed: 40077
+bases trimmed due to adapters: 1231939
+reads with polyX in 3' end: 2338
+bases trimmed in polyX tail: 22553
+
+Duplication rate (may be overestimated since this is SE data): 55.2055%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T3_MON_1.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T3_MON_1.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 134 seconds
+Read1 before filtering:
+total reads: 5172378
+total bases: 120378395
+Q20 bases: 119545793(99.3083%)
+Q30 bases: 117372161(97.5027%)
+
+Read1 after filtering:
+total reads: 3538725
+total bases: 81165534
+Q20 bases: 80888436(99.6586%)
+Q30 bases: 79735516(98.2381%)
+
+Filtering result:
+reads passed filter: 3538725
+reads failed due to low quality: 28
+reads failed due to too many N: 4
+reads failed due to too short: 868580
+reads failed due to too long: 765041
+reads with adapter trimmed: 33524
+bases trimmed due to adapters: 928481
+reads with polyX in 3' end: 1986
+bases trimmed in polyX tail: 19081
+
+Duplication rate (may be overestimated since this is SE data): 53.3418%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T3_MON_2.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T3_MON_2.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 123 seconds
+Read1 before filtering:
+total reads: 4412430
+total bases: 225033930
+Q20 bases: 222994832(99.0939%)
+Q30 bases: 220798509(98.1179%)
+
+Read1 after filtering:
+total reads: 2181048
+total bases: 49659243
+Q20 bases: 49382018(99.4417%)
+Q30 bases: 48994786(98.662%)
+
+Filtering result:
+reads passed filter: 2181048
+reads failed due to low quality: 0
+reads failed due to too many N: 711
+reads failed due to too short: 443660
+reads failed due to too long: 1787011
+reads with adapter trimmed: 4223897
+bases trimmed due to adapters: 108402840
+reads with polyX in 3' end: 1593
+bases trimmed in polyX tail: 16231
+
+Duplication rate (may be overestimated since this is SE data): 67.553%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T2_NT_1.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T2_NT_1.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 124 seconds
+Read1 before filtering:
+total reads: 5557620
+total bases: 283438620
+Q20 bases: 280859935(99.0902%)
+Q30 bases: 277999568(98.081%)
+
+Read1 after filtering:
+total reads: 3086551
+total bases: 70514229
+Q20 bases: 70117124(99.4368%)
+Q30 bases: 69563551(98.6518%)
+
+Filtering result:
+reads passed filter: 3086551
+reads failed due to low quality: 0
+reads failed due to too many N: 845
+reads failed due to too short: 734242
+reads failed due to too long: 1735982
+reads with adapter trimmed: 5395153
+bases trimmed due to adapters: 143943938
+reads with polyX in 3' end: 2258
+bases trimmed in polyX tail: 23413
+
+Duplication rate (may be overestimated since this is SE data): 68.2052%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T2_MON_3.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T2_MON_3.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 152 seconds
+Read1 before filtering:
+total reads: 4087583
+total bases: 208466733
+Q20 bases: 206627289(99.1176%)
+Q30 bases: 204580893(98.136%)
+
+Read1 after filtering:
+total reads: 1879153
+total bases: 42588568
+Q20 bases: 42343894(99.4255%)
+Q30 bases: 42005670(98.6313%)
+
+Filtering result:
+reads passed filter: 1879153
+reads failed due to low quality: 0
+reads failed due to too many N: 614
+reads failed due to too short: 728268
+reads failed due to too long: 1479548
+reads with adapter trimmed: 3918734
+bases trimmed due to adapters: 104483604
+reads with polyX in 3' end: 1372
+bases trimmed in polyX tail: 14171
+
+Duplication rate (may be overestimated since this is SE data): 70.2963%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T2_D_1.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T2_D_1.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 115 seconds
+Read1 before filtering:
+total reads: 4997207
+total bases: 254857557
+Q20 bases: 252532641(99.0878%)
+Q30 bases: 250119833(98.141%)
+
+Read1 after filtering:
+total reads: 1689994
+total bases: 38608511
+Q20 bases: 38380472(99.4094%)
+Q30 bases: 38064210(98.5902%)
+
+Filtering result:
+reads passed filter: 1689994
+reads failed due to low quality: 0
+reads failed due to too many N: 6235
+reads failed due to too short: 357762
+reads failed due to too long: 2943216
+reads with adapter trimmed: 4724298
+bases trimmed due to adapters: 111997201
+reads with polyX in 3' end: 1298
+bases trimmed in polyX tail: 15027
+
+Duplication rate (may be overestimated since this is SE data): 72.2924%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T1_MON_1.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T1_MON_1.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 165 seconds
+Read1 before filtering:
+total reads: 4994748
+total bases: 116435010
+Q20 bases: 115492299(99.1904%)
+Q30 bases: 112917294(96.9788%)
+
+Read1 after filtering:
+total reads: 3249099
+total bases: 75203624
+Q20 bases: 74868296(99.5541%)
+Q30 bases: 73523131(97.7654%)
+
+Filtering result:
+reads passed filter: 3249099
+reads failed due to low quality: 29
+reads failed due to too many N: 124
+reads failed due to too short: 995344
+reads failed due to too long: 750152
+reads with adapter trimmed: 26137
+bases trimmed due to adapters: 648319
+reads with polyX in 3' end: 2246
+bases trimmed in polyX tail: 21764
+
+Duplication rate (may be overestimated since this is SE data): 62.0825%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T3_C_1.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T3_C_1.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 120 seconds
+Read1 before filtering:
+total reads: 5042789
+total bases: 257182239
+Q20 bases: 254796105(99.0722%)
+Q30 bases: 252257986(98.0853%)
+
+Read1 after filtering:
+total reads: 1738129
+total bases: 39158498
+Q20 bases: 38923015(99.3986%)
+Q30 bases: 38588033(98.5432%)
+
+Filtering result:
+reads passed filter: 1738129
+reads failed due to low quality: 0
+reads failed due to too many N: 6226
+reads failed due to too short: 713175
+reads failed due to too long: 2585259
+reads with adapter trimmed: 4810664
+bases trimmed due to adapters: 120387498
+reads with polyX in 3' end: 668
+bases trimmed in polyX tail: 7385
+
+Duplication rate (may be overestimated since this is SE data): 79.9962%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T1_C_1.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T1_C_1.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 147 seconds
+Read1 before filtering:
+total reads: 5063229
+total bases: 258224679
+Q20 bases: 255898504(99.0992%)
+Q30 bases: 253467671(98.1578%)
+
+Read1 after filtering:
+total reads: 2428710
+total bases: 54798126
+Q20 bases: 54493833(99.4447%)
+Q30 bases: 54069055(98.6695%)
+
+Filtering result:
+reads passed filter: 2428710
+reads failed due to low quality: 0
+reads failed due to too many N: 6208
+reads failed due to too short: 970435
+reads failed due to too long: 1657876
+reads with adapter trimmed: 4874350
+bases trimmed due to adapters: 133353720
+reads with polyX in 3' end: 826
+bases trimmed in polyX tail: 8313
+
+Duplication rate (may be overestimated since this is SE data): 75.8449%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T1_NT_1.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T1_NT_1.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 129 seconds
+Read1 before filtering:
+total reads: 5865492
+total bases: 139060670
+Q20 bases: 138069207(99.287%)
+Q30 bases: 135460014(97.4107%)
+
+Read1 after filtering:
+total reads: 3701759
+total bases: 84781913
+Q20 bases: 84477411(99.6408%)
+Q30 bases: 83211531(98.1477%)
+
+Filtering result:
+reads passed filter: 3701759
+reads failed due to low quality: 43
+reads failed due to too many N: 4
+reads failed due to too short: 968503
+reads failed due to too long: 1195183
+reads with adapter trimmed: 44960
+bases trimmed due to adapters: 1298827
+reads with polyX in 3' end: 3100
+bases trimmed in polyX tail: 30136
+
+Duplication rate (may be overestimated since this is SE data): 60.987%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T3_MON_3.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T3_MON_3.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 143 seconds
+Read1 before filtering:
+total reads: 6424193
+total bases: 147486294
+Q20 bases: 146273566(99.1777%)
+Q30 bases: 142934241(96.9136%)
+
+Read1 after filtering:
+total reads: 3974900
+total bases: 91824352
+Q20 bases: 91407819(99.5464%)
+Q30 bases: 89734219(97.7238%)
+
+Filtering result:
+reads passed filter: 3974900
+reads failed due to low quality: 40
+reads failed due to too many N: 153
+reads failed due to too short: 1496011
+reads failed due to too long: 953089
+reads with adapter trimmed: 27330
+bases trimmed due to adapters: 605639
+reads with polyX in 3' end: 4155
+bases trimmed in polyX tail: 40482
+
+Duplication rate (may be overestimated since this is SE data): 68.1721%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T3_C_3.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T3_C_3.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 144 seconds
+Read1 before filtering:
+total reads: 5316612
+total bases: 271147212
+Q20 bases: 268676675(99.0889%)
+Q30 bases: 265933027(98.077%)
+
+Read1 after filtering:
+total reads: 2952239
+total bases: 67456545
+Q20 bases: 67070385(99.4275%)
+Q30 bases: 66530052(98.6265%)
+
+Filtering result:
+reads passed filter: 2952239
+reads failed due to low quality: 0
+reads failed due to too many N: 759
+reads failed due to too short: 850204
+reads failed due to too long: 1513410
+reads with adapter trimmed: 5133486
+bases trimmed due to adapters: 139262629
+reads with polyX in 3' end: 2423
+bases trimmed in polyX tail: 25137
+
+Duplication rate (may be overestimated since this is SE data): 66.8448%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T2_SD_2.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T2_SD_2.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 144 seconds
+Read1 before filtering:
+total reads: 4648756
+total bases: 237086556
+Q20 bases: 234796316(99.034%)
+Q30 bases: 232275543(97.9708%)
+
+Read1 after filtering:
+total reads: 2373434
+total bases: 54354393
+Q20 bases: 54027650(99.3989%)
+Q30 bases: 53576244(98.5684%)
+
+Filtering result:
+reads passed filter: 2373434
+reads failed due to low quality: 0
+reads failed due to too many N: 747
+reads failed due to too short: 741977
+reads failed due to too long: 1532598
+reads with adapter trimmed: 4456626
+bases trimmed due to adapters: 118365728
+reads with polyX in 3' end: 2357
+bases trimmed in polyX tail: 24538
+
+Duplication rate (may be overestimated since this is SE data): 66.3506%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T2_MON_2.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T2_MON_2.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 130 seconds
+Read1 before filtering:
+total reads: 5744036
+total bases: 134988093
+Q20 bases: 134110647(99.35%)
+Q30 bases: 131782402(97.6252%)
+
+Read1 after filtering:
+total reads: 4320335
+total bases: 99446864
+Q20 bases: 99117226(99.6685%)
+Q30 bases: 97747531(98.2912%)
+
+Filtering result:
+reads passed filter: 4320335
+reads failed due to low quality: 43
+reads failed due to too many N: 4
+reads failed due to too short: 710080
+reads failed due to too long: 713574
+reads with adapter trimmed: 34674
+bases trimmed due to adapters: 1039585
+reads with polyX in 3' end: 2363
+bases trimmed in polyX tail: 22670
+
+Duplication rate (may be overestimated since this is SE data): 57.1594%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T3_SD_1.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T3_SD_1.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 139 seconds
+Read1 before filtering:
+total reads: 5045612
+total bases: 257326212
+Q20 bases: 255095042(99.1329%)
+Q30 bases: 252722130(98.2108%)
+
+Read1 after filtering:
+total reads: 2027750
+total bases: 46461663
+Q20 bases: 46187981(99.411%)
+Q30 bases: 45802414(98.5811%)
+
+Filtering result:
+reads passed filter: 2027750
+reads failed due to low quality: 0
+reads failed due to too many N: 6169
+reads failed due to too short: 323516
+reads failed due to too long: 2688177
+reads with adapter trimmed: 4736118
+bases trimmed due to adapters: 115378562
+reads with polyX in 3' end: 1591
+bases trimmed in polyX tail: 17550
+
+Duplication rate (may be overestimated since this is SE data): 74.2988%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T1_SD_2.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T1_SD_2.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 162 seconds
+Read1 before filtering:
+total reads: 5409813
+total bases: 275900463
+Q20 bases: 273584087(99.1604%)
+Q30 bases: 271089162(98.2561%)
+
+Read1 after filtering:
+total reads: 2393972
+total bases: 54194454
+Q20 bases: 53881884(99.4232%)
+Q30 bases: 53445379(98.6178%)
+
+Filtering result:
+reads passed filter: 2393972
+reads failed due to low quality: 0
+reads failed due to too many N: 6421
+reads failed due to too short: 733045
+reads failed due to too long: 2276375
+reads with adapter trimmed: 5151750
+bases trimmed due to adapters: 133030792
+reads with polyX in 3' end: 1349
+bases trimmed in polyX tail: 14324
+
+Duplication rate (may be overestimated since this is SE data): 75.7913%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T1_NT_2.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T1_NT_2.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 158 seconds
+Read1 before filtering:
+total reads: 4986443
+total bases: 254308593
+Q20 bases: 252178992(99.1626%)
+Q30 bases: 249893173(98.2638%)
+
+Read1 after filtering:
+total reads: 2308945
+total bases: 52470273
+Q20 bases: 52174308(99.4359%)
+Q30 bases: 51757126(98.6409%)
+
+Filtering result:
+reads passed filter: 2308945
+reads failed due to low quality: 0
+reads failed due to too many N: 5918
+reads failed due to too short: 532177
+reads failed due to too long: 2139403
+reads with adapter trimmed: 4765084
+bases trimmed due to adapters: 121856751
+reads with polyX in 3' end: 1451
+bases trimmed in polyX tail: 15518
+
+Duplication rate (may be overestimated since this is SE data): 73.8825%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T1_D_2.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T1_D_2.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 146 seconds
+Read1 before filtering:
+total reads: 5494525
+total bases: 132274452
+Q20 bases: 131382036(99.3253%)
+Q30 bases: 129048127(97.5609%)
+
+Read1 after filtering:
+total reads: 3566787
+total bases: 81837502
+Q20 bases: 81561881(99.6632%)
+Q30 bases: 80404741(98.2493%)
+
+Filtering result:
+reads passed filter: 3566787
+reads failed due to low quality: 41
+reads failed due to too many N: 3
+reads failed due to too short: 729363
+reads failed due to too long: 1198331
+reads with adapter trimmed: 0
+bases trimmed due to adapters: 0
+reads with polyX in 3' end: 1556
+bases trimmed in polyX tail: 14950
+
+Duplication rate (may be overestimated since this is SE data): 63.4762%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T3_NT_2.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T3_NT_2.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 134 seconds
+Read1 before filtering:
+total reads: 5249960
+total bases: 137293764
+Q20 bases: 136283327(99.264%)
+Q30 bases: 133695907(97.3794%)
+
+Read1 after filtering:
+total reads: 2856142
+total bases: 65476734
+Q20 bases: 65235205(99.6311%)
+Q30 bases: 64229945(98.0958%)
+
+Filtering result:
+reads passed filter: 2856142
+reads failed due to low quality: 33
+reads failed due to too many N: 3
+reads failed due to too short: 541648
+reads failed due to too long: 1852134
+reads with adapter trimmed: 123560
+bases trimmed due to adapters: 4000082
+reads with polyX in 3' end: 1929
+bases trimmed in polyX tail: 18838
+
+Duplication rate (may be overestimated since this is SE data): 61.9281%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T3_D_2.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T3_D_2.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 140 seconds
+Read1 before filtering:
+total reads: 5293146
+total bases: 269950446
+Q20 bases: 267300708(99.0184%)
+Q30 bases: 264296780(97.9057%)
+
+Read1 after filtering:
+total reads: 1523376
+total bases: 34475056
+Q20 bases: 34264176(99.3883%)
+Q30 bases: 33964636(98.5195%)
+
+Filtering result:
+reads passed filter: 1523376
+reads failed due to low quality: 0
+reads failed due to too many N: 795
+reads failed due to too short: 1273382
+reads failed due to too long: 2495593
+reads with adapter trimmed: 5039249
+bases trimmed due to adapters: 130081218
+reads with polyX in 3' end: 964
+bases trimmed in polyX tail: 11273
+
+Duplication rate (may be overestimated since this is SE data): 82.4569%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T2_C_1.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T2_C_1.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 153 seconds
+Read1 before filtering:
+total reads: 5450463
+total bases: 277973613
+Q20 bases: 275406831(99.0766%)
+Q30 bases: 272694960(98.101%)
+
+Read1 after filtering:
+total reads: 2292740
+total bases: 52306178
+Q20 bases: 51986126(99.3881%)
+Q30 bases: 51541466(98.538%)
+
+Filtering result:
+reads passed filter: 2292740
+reads failed due to low quality: 0
+reads failed due to too many N: 6517
+reads failed due to too short: 519434
+reads failed due to too long: 2631772
+reads with adapter trimmed: 5202154
+bases trimmed due to adapters: 129111730
+reads with polyX in 3' end: 1913
+bases trimmed in polyX tail: 21641
+
+Duplication rate (may be overestimated since this is SE data): 69.406%
+
+JSON report: fastp.json
+HTML report: fastp.html
+
+/storage/apps/FASTP/0.23/bin/fastp --adapter_fasta /home/nuezsal/Omics_integration/sRNA/Additional_info/all_adapters.fa -i /home/nuezsal/Omics_integration/sRNA/Libraries/00-Raw_data/sRNA_T1_MON_2.fastq.gz -o /home/nuezsal/Omics_integration/sRNA/Libraries/01-Clean_data/sRNA_T1_MON_2.fastq.gz --cut_front --cut_front_window_size 1 --cut_front_mean_quality 3 --cut_right --cut_right_window_size 4 --cut_right_mean_quality 20 --length_required 20 --trim_poly_x --poly_x_min_len 10 --length_limit 25 --n_base_limit 0 
+fastp v0.23.2, time used: 163 seconds

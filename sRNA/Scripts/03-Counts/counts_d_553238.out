@@ -1,0 +1,10 @@
+
+EnvironmentNameNotFound: Could not find conda environment: sRNA_project
+You can list all discoverable environments with `conda info --envs`.
+
+
+Traceback (most recent call last):
+  File "/home/nuezsal/Omics_integration/sRNA/Scripts/03-Counts/sRNA_counts.py", line 49, in <module>
+srun: error: cn01: task 0: Exited with exit code 1
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'

@@ -1,0 +1,104 @@
+
+CondaError: Run 'conda init' before 'conda deactivate'
+
+
+IMPORTANT: RNAcentral database has been inserted.
+RNAcentral was previously Indexed!
+
+FILTER BY RNAcentral DATABASE.
+
+Filtering...
+
+['/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T3_SD_1.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T1_MON_2.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T1_D_2.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T3_MON_2.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T1_MON_1.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T3_NT_1.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T3_NT_2.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T1_C_2.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T3_D_1.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T1_SD_2.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T2_NT_2.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T3_SD_3.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T3_MON_1.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T2_NT_3.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T1_SD_1.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T2_C_2.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T3_C_2.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T2_D_3.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T2_SD_3.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T2_C_1.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T1_MON_3.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T1_NT_3.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T2_D_1.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T3_SD_2.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T2_SD_1.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T2_C_3.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T3_D_3.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T3_C_3.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T2_MON_2.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T1_C_3.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T1_NT_1.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T2_NT_1.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T1_NT_2.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T1_D_1.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T2_MON_1.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T2_D_2.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T3_D_2.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T2_MON_3.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T3_NT_4.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T1_C_1.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T1_SD_3.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T3_C_1.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T1_D_3.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T3_NT_3.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T2_SD_2.fasta', '/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta/sRNA_T3_MON_3.fasta']
+# reads processed: 4320335
+# reads with at least one alignment: 1101542 (25.50%)
+# reads that failed to align: 3218793 (74.50%)
+Reported 1101542 alignments
+# reads processed: 2292740
+# reads with at least one alignment: 789549 (34.44%)
+# reads that failed to align: 1503191 (65.56%)
+Reported 789549 alignments
+# reads processed: 2308945
+# reads with at least one alignment: 1134368 (49.13%)
+# reads that failed to align: 1174577 (50.87%)
+Reported 1134368 alignments
+# reads processed: 3538725
+# reads with at least one alignment: 688435 (19.45%)
+# reads that failed to align: 2850290 (80.55%)
+Reported 688435 alignments
+# reads processed: 1689994
+# reads with at least one alignment: 658541 (38.97%)
+# reads that failed to align: 1031453 (61.03%)
+Reported 658541 alignments
+# reads processed: 3220857
+# reads with at least one alignment: 996520 (30.94%)
+# reads that failed to align: 2224337 (69.06%)
+Reported 996520 alignments
+# reads processed: 3566787
+# reads with at least one alignment: 1150299 (32.25%)
+# reads that failed to align: 2416488 (67.75%)
+Reported 1150299 alignments
+# reads processed: 1385185
+# reads with at least one alignment: 898299 (64.85%)
+# reads that failed to align: 486886 (35.15%)
+Reported 898299 alignments
+# reads processed: 3149008
+# reads with at least one alignment: 573621 (18.22%)
+# reads that failed to align: 2575387 (81.78%)
+Reported 573621 alignments
+# reads processed: 2027750
+# reads with at least one alignment: 888606 (43.82%)
+# reads that failed to align: 1139144 (56.18%)
+Reported 888606 alignments
+# reads processed: 2066904
+# reads with at least one alignment: 840442 (40.66%)
+# reads that failed to align: 1226462 (59.34%)
+Reported 840442 alignments
+# reads processed: 3042002
+# reads with at least one alignment: 870687 (28.62%)
+# reads that failed to align: 2171315 (71.38%)
+Reported 870687 alignments
+# reads processed: 3953490
+# reads with at least one alignment: 779383 (19.71%)
+# reads that failed to align: 3174107 (80.29%)
+Reported 779383 alignments
+# reads processed: 2402402
+# reads with at least one alignment: 963029 (40.09%)
+# reads that failed to align: 1439373 (59.91%)
+Reported 963029 alignments
+# reads processed: 1941094
+# reads with at least one alignment: 699997 (36.06%)
+# reads that failed to align: 1241097 (63.94%)
+Reported 699997 alignments
+# reads processed: 1533565
+# reads with at least one alignment: 980510 (63.94%)
+# reads that failed to align: 553055 (36.06%)
+Reported 980510 alignments
+# reads processed: 4343432
+# reads with at least one alignment: 974805 (22.44%)
+# reads that failed to align: 3368627 (77.56%)
+Reported 974805 alignments
+# reads processed: 2630034
+# reads with at least one alignment: 902090 (34.30%)
+# reads that failed to align: 1727944 (65.70%)
+Reported 902090 alignments
+# reads processed: 2671379
+# reads with at least one alignment: 1098065 (41.10%)
+# reads that failed to align: 1573314 (58.90%)
+Reported 1098065 alignments
+# reads processed: 1523376
+# reads with at least one alignment: 1042204 (68.41%)
+# reads that failed to align: 481172 (31.59%)
+Reported 1042204 alignments
+# reads processed: 1427486
+# reads with at least one alignment: 827030 (57.94%)
+# reads that failed to align: 600456 (42.06%)
+Reported 827030 alignments
+# reads processed: 3127470
+# reads with at least one alignment: 1791296 (57.28%)
+# reads that failed to align: 1336174 (42.72%)
+Reported 1791296 alignments
+# reads processed: 1879153
+# reads with at least one alignment: 779886 (41.50%)
+# reads that failed to align: 1099267 (58.50%)
+Reported 779886 alignments
