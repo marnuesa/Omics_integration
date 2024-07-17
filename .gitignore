@@ -1,2 +1,5 @@
 /home/nuezsal/Omics_integration/sRNA/Libraries
 /home/nuezsal/Omics_integration/sRNA/Results
+
+# Ignore .log files
+*.log
