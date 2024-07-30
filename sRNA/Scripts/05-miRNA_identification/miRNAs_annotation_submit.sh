@@ -1,5 +1,13 @@
 #!/bin/bash
 
+#SBATCH --job-name=ident_miRNAs         # Job name to show with squeue
+#SBATCH --output=ident_miRNAs_%j.out    # Output file
+#SBATCH --ntasks=1                      # Maximum number of cores to use
+#SBATCH --time=00-01:00:00              # Time limit to execute the job
+#SBATCH --mem=2G                        # Required Memory
+#SBATCH --cpus-per-task=12              # CPUs assigned per task.
+#SBATCH --qos=short                     # QoS: short,medium,long,long-mem
+
 #******************************************************************************
 #  
 #   miRNAs_annotation_submit.sh
@@ -15,15 +23,41 @@
 #******************************************************************************
 
 # Input paths
-path_in=/home/marnuesa/Documentos/Omics_integration/sRNA_reverse/Results/04-deseq_sig
-path_mirbase=/home/marnuesa/Documentos/Omics_integration/sRNA_reverse/Additional_info/02-Mod_databases/miRBase
-path_PmiREN=/home/marnuesa/Documentos/Omics_integration/sRNA_reverse/Additional_info/02-Mod_databases/PmiREN
-path_sRNAanno=/home/marnuesa/Documentos/Omics_integration/sRNA_reverse/Additional_info/02-Mod_databases/sRNAanno
-path_ids_table=/home/marnuesa/Documentos/Omics_integration/sRNA_reverse/Additional_info/species_id.csv
+path_in=/home/nuezsal/Omics_integration/sRNA/Results/04-DEA/01-DEA_raw
+path_mirbase=/home/nuezsal/Omics_integration/sRNA/Additional_info/02-Mod_databases/miRBase
+path_PmiREN=/home/nuezsal/Omics_integration/sRNA/Additional_info/02-Mod_databases/PmiREN
+path_sRNAanno=/home/nuezsal/Omics_integration/sRNA/Additional_info/02-Mod_databases/sRNAanno
+path_ids_table=/home/nuezsal/Omics_integration/sRNA/Additional_info/species_id.csv
 mismatches=1
 
 # Ouput paths
-path_out=/home/marnuesa/Documentos/Omics_integration/sRNA_reverse/Results/05-Identification_miRNAs
+path_out=/home/nuezsal/Omics_integration/sRNA/Results/05-Identification_miRNAs
+
+# Threads
+num_threads=12
+
+# Execution 
+bash miRNAs_annotation.sh \
+     --input $path_in \
+     --output $path_out \
+     --mismatches $mismatches \
+     --mirbase $path_mirbase \
+     --pmiren $path_PmiREN \
+     --srnaanno $path_sRNAanno \
+     --species-ids $path_ids_table \
+     --threads $num_threads 
+
+
+# Input paths
+path_in=/home/nuezsal/Omics_integration/sRNA/Results/04-DEA/02-DEA_sig
+path_mirbase=/home/nuezsal/Omics_integration/sRNA/Additional_info/02-Mod_databases/miRBase
+path_PmiREN=/home/nuezsal/Omics_integration/sRNA/Additional_info/02-Mod_databases/PmiREN
+path_sRNAanno=/home/nuezsal/Omics_integration/sRNA/Additional_info/02-Mod_databases/sRNAanno
+path_ids_table=/home/nuezsal/Omics_integration/sRNA/Additional_info/species_id.csv
+mismatches=1
+
+# Ouput paths
+path_out=/home/nuezsal/Omics_integration/sRNA/Results/05-Identification_miRNAs
 
 # Threads
 num_threads=12
@@ -40,3 +74,4 @@ bash miRNAs_annotation.sh \
      --threads $num_threads 
 
 exit 0
+

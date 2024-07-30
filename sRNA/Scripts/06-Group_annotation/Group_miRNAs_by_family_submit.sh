@@ -22,10 +22,10 @@
 
 # Modules
 module load anaconda
-source activate sRNA
+source activate group_sRNA
 
 # Paths
-path_in_dea=/home/nuezsal/Omics_integration/sRNA/Results/04-DEA/02-DEA_sig
+path_in_dea=/home/nuezsal/Omics_integration/sRNA/Results/04-DEA
 path_in_annot=/home/nuezsal/Omics_integration/sRNA/Results/05-Identification_miRNAs
 path_out=/home/nuezsal/Omics_integration/sRNA/Results/06-miRNAs_grouped_by_family
 

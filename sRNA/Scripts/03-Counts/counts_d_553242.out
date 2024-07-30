@@ -138,3 +138,825 @@ Reported 1198664 alignments
 # reads with at least one alignment: 720525 (33.04%)
 # reads that failed to align: 1460523 (66.96%)
 Reported 720525 alignments
+# reads processed: 2393972
+# reads with at least one alignment: 1157969 (48.37%)
+# reads that failed to align: 1236003 (51.63%)
+Reported 1157969 alignments
+# reads processed: 2102902
+# reads with at least one alignment: 1249349 (59.41%)
+# reads that failed to align: 853553 (40.59%)
+Reported 1249349 alignments
+# reads processed: 2630271
+# reads with at least one alignment: 965871 (36.72%)
+# reads that failed to align: 1664400 (63.28%)
+Reported 965871 alignments
+# reads processed: 2267350
+# reads with at least one alignment: 933642 (41.18%)
+# reads that failed to align: 1333708 (58.82%)
+Reported 933642 alignments
+# reads processed: 2856142
+# reads with at least one alignment: 448973 (15.72%)
+# reads that failed to align: 2407169 (84.28%)
+Reported 448973 alignments
+# reads processed: 3086551
+# reads with at least one alignment: 1281985 (41.53%)
+# reads that failed to align: 1804566 (58.47%)
+Reported 1281985 alignments
+# reads processed: 3065197
+# reads with at least one alignment: 1163481 (37.96%)
+# reads that failed to align: 1901716 (62.04%)
+Reported 1163481 alignments
+# reads processed: 1738129
+# reads with at least one alignment: 1165988 (67.08%)
+# reads that failed to align: 572141 (32.92%)
+Reported 1165988 alignments
+# reads processed: 1773348
+# reads with at least one alignment: 728046 (41.05%)
+# reads that failed to align: 1045302 (58.95%)
+Reported 728046 alignments
+# reads processed: 3249099
+# reads with at least one alignment: 651290 (20.05%)
+# reads that failed to align: 2597809 (79.95%)
+Reported 651290 alignments
+# reads processed: 1855062
+# reads with at least one alignment: 835947 (45.06%)
+# reads that failed to align: 1019115 (54.94%)
+Reported 835947 alignments
+# reads processed: 4050116
+# reads with at least one alignment: 915173 (22.60%)
+# reads that failed to align: 3134943 (77.40%)
+Reported 915173 alignments
+# reads processed: 2952239
+# reads with at least one alignment: 1055473 (35.75%)
+# reads that failed to align: 1896766 (64.25%)
+Reported 1055473 alignments
+# reads processed: 3701759
+# reads with at least one alignment: 1079222 (29.15%)
+# reads that failed to align: 2622537 (70.85%)
+Reported 1079222 alignments
+/home/nuezsal/Omics_integration/sRNA/Libraries/03-RNAcentral_filtered/alignments
+
+Percentage of sequences aligned on RNAcentral database:
+--sRNA_T3_SD_1: 25.49668023428739%
+--sRNA_T1_MON_2: 34.43691827246003%
+--sRNA_T1_D_2: 49.1292776571118%
+--sRNA_T3_MON_2: 19.454323237889355%
+--sRNA_T1_MON_1: 38.96706142151984%
+--sRNA_T3_NT_1: 30.939591543492927%
+--sRNA_T3_NT_2: 32.25028576138693%
+--sRNA_T1_C_2: 64.85047123669402%
+--sRNA_T3_D_1: 18.215927047501943%
+--sRNA_T1_SD_2: 43.822266058439155%
+--sRNA_T2_NT_2: 40.661878829398944%
+--sRNA_T3_SD_3: 28.622170531117337%
+--sRNA_T3_MON_1: 19.71379717667175%
+--sRNA_T2_NT_3: 40.08608883941988%
+--sRNA_T1_SD_1: 36.06198360306095%
+--sRNA_T2_C_2: 63.9366443548203%
+--sRNA_T3_C_2: 22.44319699260861%
+--sRNA_T2_D_3: 34.29955658367915%
+--sRNA_T2_SD_3: 41.10480017998195%
+--sRNA_T2_C_1: 68.41410131182322%
+--sRNA_T1_MON_3: 57.93611986387257%
+--sRNA_T1_NT_3: 57.2762008908159%
+--sRNA_T2_D_1: 41.50199584600083%
+--sRNA_T3_SD_2: 30.945542272842157%
+--sRNA_T2_SD_1: 30.49804288420392%
+--sRNA_T2_C_3: 61.14238574492658%
+--sRNA_T3_D_3: 12.603736114830713%
+--sRNA_T3_C_3: 30.224156582555533%
+--sRNA_T2_MON_2: 35.71723502739069%
+--sRNA_T1_C_3: 65.38716516702866%
+--sRNA_T1_NT_1: 49.353936863602485%
+--sRNA_T2_NT_1: 33.03572411061105%
+--sRNA_T1_NT_2: 48.370198147680924%
+--sRNA_T1_D_1: 59.41070958133095%
+--sRNA_T2_MON_1: 36.72134924500175%
+--sRNA_T2_D_2: 41.17767437757735%
+--sRNA_T3_D_2: 15.719561562415313%
+--sRNA_T2_MON_3: 41.534547784889995%
+--sRNA_T3_NT_4: 37.95778868372897%
+--sRNA_T1_C_1: 67.08293803279274%
+--sRNA_T1_SD_3: 41.054886012220955%
+--sRNA_T3_C_1: 20.04524946762164%
+--sRNA_T1_D_3: 45.06302215235933%
+--sRNA_T3_NT_3: 22.596216997241562%
+--sRNA_T2_SD_2: 35.75161089600131%
+--sRNA_T3_MON_3: 29.15430204937707%
+
+CREATING THE ABSOLUTE COUNT TABLE OF EACH LIBRARY.
+
+Building the directory...
+
+
+Calculating the absolute counts...
+Process 0 launched.
+Process 1 launched.
+Process 2 launched.
+Process 3 launched.
+Process 4 launched.
+Process 5 launched.
+Process 6 launched.
+Process 7 launched.
+Process 8 launched.
+Process 9 launched.
+
+DONE!
+Time: 238.195 s
+
+CREATING THE RPM TABLE OF EACH LIBRARY.
+
+Building the directory...
+
+
+Calculating the RPM counts...
+Process 0 launched.
+Process 1 launched.
+Process 2 launched.
+Process 3 launched.
+Process 4 launched.
+Process 5 launched.
+Process 6 launched.
+Process 7 launched.
+Process 8 launched.
+Process 9 launched.
+
+DONE!
+Time: 416.294 s
+
+JOINING THE RPM AND ASBOLUTE TABLES IN TWO TABLES.
+
+Building the directory...
+
+
+Joining the tables mode = outer between replicates...
+sRNA_T1_C_3_RNAcentral_filtered_abs
+ (t_T1C_r_3)
+Inserting sRNA_T1_C_3_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T1C_r_3 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T1_C_3_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T1C_r_3 correctly!
+Creating index of t_T1C_r_3
+DONE!
+
+Inserting sRNA_T1_C_3_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T1C_r_3 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T2_SD_3_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T1C_r_3 correctly!
+Creating index of t_T1C_r_3
+DONE!
+
+sRNA_T1_C_2_RNAcentral_filtered_abs
+ (t_T1C_r_2)
+Inserting sRNA_T1_C_2_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T1C_r_2 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T1_C_2_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T1C_r_2 correctly!
+Creating index of t_T1C_r_2
+DONE!
+
+Inserting sRNA_T1_C_2_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T1C_r_2 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T2_SD_1_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T1C_r_2 correctly!
+Creating index of t_T1C_r_2
+DONE!
+
+sRNA_T2_MON_2_RNAcentral_filtered_abs
+ (t_T2MON_r_2)
+Inserting sRNA_T2_MON_2_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T2MON_r_2 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T2_MON_2_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T2MON_r_2 correctly!
+Creating index of t_T2MON_r_2
+DONE!
+
+Inserting sRNA_T2_MON_2_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T2MON_r_2 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T2_C_1_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T2MON_r_2 correctly!
+Creating index of t_T2MON_r_2
+DONE!
+
+sRNA_T3_SD_1_RNAcentral_filtered_abs
+ (t_T3SD_r_1)
+Inserting sRNA_T3_SD_1_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T3SD_r_1 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T3_SD_1_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T3SD_r_1 correctly!
+Creating index of t_T3SD_r_1
+DONE!
+
+Inserting sRNA_T3_SD_1_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T3SD_r_1 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T1_C_1_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T3SD_r_1 correctly!
+Creating index of t_T3SD_r_1
+DONE!
+
+sRNA_T2_SD_1_RNAcentral_filtered_abs
+ (t_T2SD_r_1)
+Inserting sRNA_T2_SD_1_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T2SD_r_1 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T2_SD_1_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T2SD_r_1 correctly!
+Creating index of t_T2SD_r_1
+DONE!
+
+Inserting sRNA_T2_SD_1_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T2SD_r_1 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T1_NT_1_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T2SD_r_1 correctly!
+Creating index of t_T2SD_r_1
+DONE!
+
+sRNA_T1_MON_3_RNAcentral_filtered_abs
+ (t_T1MON_r_3)
+Inserting sRNA_T1_MON_3_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T1MON_r_3 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T1_MON_3_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T1MON_r_3 correctly!
+Creating index of t_T1MON_r_3
+DONE!
+
+Inserting sRNA_T1_MON_3_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T1MON_r_3 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T3_NT_3_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T1MON_r_3 correctly!
+Creating index of t_T1MON_r_3
+DONE!
+
+sRNA_T3_D_1_RNAcentral_filtered_abs
+ (t_T3D_r_1)
+Inserting sRNA_T3_D_1_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T3D_r_1 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T3_D_1_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T3D_r_1 correctly!
+Creating index of t_T3D_r_1
+DONE!
+
+Inserting sRNA_T3_D_1_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T3D_r_1 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T2_D_2_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T3D_r_1 correctly!
+Creating index of t_T3D_r_1
+DONE!
+
+sRNA_T3_NT_3_RNAcentral_filtered_abs
+ (t_T3NT_r_3)
+Inserting sRNA_T3_NT_3_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T3NT_r_3 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T3_NT_3_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T3NT_r_3 correctly!
+Creating index of t_T3NT_r_3
+DONE!
+
+Inserting sRNA_T3_NT_3_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T3NT_r_3 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T2_MON_1_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T3NT_r_3 correctly!
+Creating index of t_T3NT_r_3
+DONE!
+
+sRNA_T2_NT_2_RNAcentral_filtered_abs
+ (t_T2NT_r_2)
+Inserting sRNA_T2_NT_2_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T2NT_r_2 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T2_NT_2_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T2NT_r_2 correctly!
+Creating index of t_T2NT_r_2
+DONE!
+
+Inserting sRNA_T2_NT_2_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T2NT_r_2 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T3_MON_3_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T2NT_r_2 correctly!
+Creating index of t_T2NT_r_2
+DONE!
+
+sRNA_T2_NT_1_RNAcentral_filtered_abs
+ (t_T2NT_r_1)
+Inserting sRNA_T2_NT_1_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T2NT_r_1 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T2_NT_1_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T2NT_r_1 correctly!
+Creating index of t_T2NT_r_1
+DONE!
+
+Inserting sRNA_T2_NT_1_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T2NT_r_1 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T3_D_2_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T2NT_r_1 correctly!
+Creating index of t_T2NT_r_1
+DONE!
+
+sRNA_T3_NT_2_RNAcentral_filtered_abs
+ (t_T3NT_r_2)
+Inserting sRNA_T3_NT_2_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T3NT_r_2 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T3_NT_2_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T3NT_r_2 correctly!
+Creating index of t_T3NT_r_2
+DONE!
+
+Inserting sRNA_T3_NT_2_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T3NT_r_2 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T1_MON_2_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T3NT_r_2 correctly!
+Creating index of t_T3NT_r_2
+DONE!
+
+sRNA_T1_NT_2_RNAcentral_filtered_abs
+ (t_T1NT_r_2)
+Inserting sRNA_T1_NT_2_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T1NT_r_2 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T1_NT_2_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T1NT_r_2 correctly!
+Creating index of t_T1NT_r_2
+DONE!
+
+Inserting sRNA_T1_NT_2_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T1NT_r_2 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T3_MON_2_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T1NT_r_2 correctly!
+Creating index of t_T1NT_r_2
+DONE!
+
+sRNA_T2_SD_3_RNAcentral_filtered_abs
+ (t_T2SD_r_3)
+Inserting sRNA_T2_SD_3_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T2SD_r_3 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T2_SD_3_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T2SD_r_3 correctly!
+Creating index of t_T2SD_r_3
+DONE!
+
+Inserting sRNA_T2_SD_3_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T2SD_r_3 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T3_SD_1_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T2SD_r_3 correctly!
+Creating index of t_T2SD_r_3
+DONE!
+
+sRNA_T1_D_1_RNAcentral_filtered_abs
+ (t_T1D_r_1)
+Inserting sRNA_T1_D_1_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T1D_r_1 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T1_D_1_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T1D_r_1 correctly!
+Creating index of t_T1D_r_1
+DONE!
+
+Inserting sRNA_T1_D_1_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T1D_r_1 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T2_D_1_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T1D_r_1 correctly!
+Creating index of t_T1D_r_1
+DONE!
+
+sRNA_T3_D_3_RNAcentral_filtered_abs
+ (t_T3D_r_3)
+Inserting sRNA_T3_D_3_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T3D_r_3 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T3_D_3_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T3D_r_3 correctly!
+Creating index of t_T3D_r_3
+DONE!
+
+Inserting sRNA_T3_D_3_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T3D_r_3 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T2_D_3_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T3D_r_3 correctly!
+Creating index of t_T3D_r_3
+DONE!
+
+sRNA_T1_NT_3_RNAcentral_filtered_abs
+ (t_T1NT_r_3)
+Inserting sRNA_T1_NT_3_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T1NT_r_3 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T1_NT_3_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T1NT_r_3 correctly!
+Creating index of t_T1NT_r_3
+DONE!
+
+Inserting sRNA_T1_NT_3_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T1NT_r_3 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T1_NT_2_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T1NT_r_3 correctly!
+Creating index of t_T1NT_r_3
+DONE!
+
+sRNA_T2_MON_3_RNAcentral_filtered_abs
+ (t_T2MON_r_3)
+Inserting sRNA_T2_MON_3_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T2MON_r_3 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T2_MON_3_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T2MON_r_3 correctly!
+Creating index of t_T2MON_r_3
+DONE!
+
+Inserting sRNA_T2_MON_3_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T2MON_r_3 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T2_SD_2_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T2MON_r_3 correctly!
+Creating index of t_T2MON_r_3
+DONE!
+
+sRNA_T2_MON_1_RNAcentral_filtered_abs
+ (t_T2MON_r_1)
+Inserting sRNA_T2_MON_1_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T2MON_r_1 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T2_MON_1_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T2MON_r_1 correctly!
+Creating index of t_T2MON_r_1
+DONE!
+
+Inserting sRNA_T2_MON_1_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T2MON_r_1 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T1_MON_3_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T2MON_r_1 correctly!
+Creating index of t_T2MON_r_1
+DONE!
+
+sRNA_T1_NT_1_RNAcentral_filtered_abs
+ (t_T1NT_r_1)
+Inserting sRNA_T1_NT_1_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T1NT_r_1 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T1_NT_1_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T1NT_r_1 correctly!
+Creating index of t_T1NT_r_1
+DONE!
+
+Inserting sRNA_T1_NT_1_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T1NT_r_1 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T1_C_2_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T1NT_r_1 correctly!
+Creating index of t_T1NT_r_1
+DONE!
+
+sRNA_T3_C_3_RNAcentral_filtered_abs
+ (t_T3C_r_3)
+Inserting sRNA_T3_C_3_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T3C_r_3 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T3_C_3_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T3C_r_3 correctly!
+Creating index of t_T3C_r_3
+DONE!
+
+Inserting sRNA_T3_C_3_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T3C_r_3 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T3_SD_3_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T3C_r_3 correctly!
+Creating index of t_T3C_r_3
+DONE!
+
+sRNA_T1_MON_2_RNAcentral_filtered_abs
+ (t_T1MON_r_2)
+Inserting sRNA_T1_MON_2_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T1MON_r_2 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T1_MON_2_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T1MON_r_2 correctly!
+Creating index of t_T1MON_r_2
+DONE!
+
+Inserting sRNA_T1_MON_2_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T1MON_r_2 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T1_D_2_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T1MON_r_2 correctly!
+Creating index of t_T1MON_r_2
+DONE!
+
+sRNA_T2_D_3_RNAcentral_filtered_abs
+ (t_T2D_r_3)
+Inserting sRNA_T2_D_3_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T2D_r_3 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T2_D_3_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T2D_r_3 correctly!
+Creating index of t_T2D_r_3
+DONE!
+
+Inserting sRNA_T2_D_3_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T2D_r_3 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T3_NT_4_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T2D_r_3 correctly!
+Creating index of t_T2D_r_3
+DONE!
+
+sRNA_T2_SD_2_RNAcentral_filtered_abs
+ (t_T2SD_r_2)
+Inserting sRNA_T2_SD_2_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T2SD_r_2 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T2_SD_2_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T2SD_r_2 correctly!
+Creating index of t_T2SD_r_2
+DONE!
+
+Inserting sRNA_T2_SD_2_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T2SD_r_2 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T2_MON_3_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T2SD_r_2 correctly!
+Creating index of t_T2SD_r_2
+DONE!
+
+sRNA_T3_MON_1_RNAcentral_filtered_abs
+ (t_T3MON_r_1)
+Inserting sRNA_T3_MON_1_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T3MON_r_1 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T3_MON_1_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T3MON_r_1 correctly!
+Creating index of t_T3MON_r_1
+DONE!
+
+Inserting sRNA_T3_MON_1_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T3MON_r_1 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T3_NT_2_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T3MON_r_1 correctly!
+Creating index of t_T3MON_r_1
+DONE!
+
+sRNA_T2_C_3_RNAcentral_filtered_abs
+ (t_T2C_r_3)
+Inserting sRNA_T2_C_3_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T2C_r_3 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T2_C_3_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T2C_r_3 correctly!
+Creating index of t_T2C_r_3
+DONE!
+
+Inserting sRNA_T2_C_3_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T2C_r_3 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T1_NT_3_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T2C_r_3 correctly!
+Creating index of t_T2C_r_3
+DONE!
+
+sRNA_T3_NT_1_RNAcentral_filtered_abs
+ (t_T3NT_r_1)
+Inserting sRNA_T3_NT_1_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T3NT_r_1 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T3_NT_1_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T3NT_r_1 correctly!
+Creating index of t_T3NT_r_1
+DONE!
+
+Inserting sRNA_T3_NT_1_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T3NT_r_1 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T3_D_3_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T3NT_r_1 correctly!
+Creating index of t_T3NT_r_1
+DONE!
+
+sRNA_T3_D_2_RNAcentral_filtered_abs
+ (t_T3D_r_2)
+Inserting sRNA_T3_D_2_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T3D_r_2 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T3_D_2_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T3D_r_2 correctly!
+Creating index of t_T3D_r_2
+DONE!
+
+Inserting sRNA_T3_D_2_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T3D_r_2 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T3_SD_2_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T3D_r_2 correctly!
+Creating index of t_T3D_r_2
+DONE!
+
+sRNA_T3_C_2_RNAcentral_filtered_abs
+ (t_T3C_r_2)
+Inserting sRNA_T3_C_2_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T3C_r_2 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T3_C_2_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T3C_r_2 correctly!
+Creating index of t_T3C_r_2
+DONE!
+
+Inserting sRNA_T3_C_2_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T3C_r_2 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T2_C_3_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T3C_r_2 correctly!
+Creating index of t_T3C_r_2
+DONE!
+
+sRNA_T1_SD_2_RNAcentral_filtered_abs
+ (t_T1SD_r_2)
+Inserting sRNA_T1_SD_2_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T1SD_r_2 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T1_SD_2_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T1SD_r_2 correctly!
+Creating index of t_T1SD_r_2
+DONE!
+
+Inserting sRNA_T1_SD_2_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T1SD_r_2 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T1_MON_1_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T1SD_r_2 correctly!
+Creating index of t_T1SD_r_2
+DONE!
+
+sRNA_T1_MON_1_RNAcentral_filtered_abs
+ (t_T1MON_r_1)
+Inserting sRNA_T1_MON_1_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T1MON_r_1 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T1_MON_1_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T1MON_r_1 correctly!
+Creating index of t_T1MON_r_1
+DONE!
+
+Inserting sRNA_T1_MON_1_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T1MON_r_1 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T3_C_3_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T1MON_r_1 correctly!
+Creating index of t_T1MON_r_1
+DONE!
+
+sRNA_T3_NT_4_RNAcentral_filtered_abs
+ (t_T3NT_r_4)
+Inserting sRNA_T3_NT_4_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T3NT_r_4 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T3_NT_4_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T3NT_r_4 correctly!
+Creating index of t_T3NT_r_4
+DONE!
+
+Inserting sRNA_T3_NT_4_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T3NT_r_4 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T3_C_2_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T3NT_r_4 correctly!
+Creating index of t_T3NT_r_4
+DONE!
+
+sRNA_T2_C_1_RNAcentral_filtered_abs
+ (t_T2C_r_1)
+Inserting sRNA_T2_C_1_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T2C_r_1 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T2_C_1_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T2C_r_1 correctly!
+Creating index of t_T2C_r_1
+DONE!
+
+Inserting sRNA_T2_C_1_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T2C_r_1 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T1_SD_3_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T2C_r_1 correctly!
+Creating index of t_T2C_r_1
+DONE!
+
+sRNA_T3_SD_2_RNAcentral_filtered_abs
+ (t_T3SD_r_2)
+Inserting sRNA_T3_SD_2_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T3SD_r_2 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T3_SD_2_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T3SD_r_2 correctly!
+Creating index of t_T3SD_r_2
+DONE!
+
+Inserting sRNA_T3_SD_2_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T3SD_r_2 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T1_D_1_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T3SD_r_2 correctly!
+Creating index of t_T3SD_r_2
+DONE!
+
+sRNA_T1_SD_1_RNAcentral_filtered_abs
+ (t_T1SD_r_1)
+Inserting sRNA_T1_SD_1_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T1SD_r_1 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T1_SD_1_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T1SD_r_1 correctly!
+Creating index of t_T1SD_r_1
+DONE!
+
+Inserting sRNA_T1_SD_1_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T1SD_r_1 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T1_SD_1_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T1SD_r_1 correctly!
+Creating index of t_T1SD_r_1
+DONE!
+
+sRNA_T3_SD_3_RNAcentral_filtered_abs
+ (t_T3SD_r_3)
+Inserting sRNA_T3_SD_3_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T3SD_r_3 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T3_SD_3_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T3SD_r_3 correctly!
+Creating index of t_T3SD_r_3
+DONE!
+
+Inserting sRNA_T3_SD_3_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T3SD_r_3 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T3_C_1_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T3SD_r_3 correctly!
+Creating index of t_T3SD_r_3
+DONE!
+
+sRNA_T3_C_1_RNAcentral_filtered_abs
+ (t_T3C_r_1)
+Inserting sRNA_T3_C_1_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T3C_r_1 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T3_C_1_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T3C_r_1 correctly!
+Creating index of t_T3C_r_1
+DONE!
+
+Inserting sRNA_T3_C_1_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T3C_r_1 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T1_D_3_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T3C_r_1 correctly!
+Creating index of t_T3C_r_1
+DONE!
+
+sRNA_T2_NT_3_RNAcentral_filtered_abs
+ (t_T2NT_r_3)
+Inserting sRNA_T2_NT_3_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T2NT_r_3 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T2_NT_3_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T2NT_r_3 correctly!
+Creating index of t_T2NT_r_3
+DONE!
+
+Inserting sRNA_T2_NT_3_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T2NT_r_3 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T2_NT_2_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T2NT_r_3 correctly!
+Creating index of t_T2NT_r_3
+DONE!
+
+sRNA_T1_D_2_RNAcentral_filtered_abs
+ (t_T1D_r_2)
+Inserting sRNA_T1_D_2_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T1D_r_2 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T1_D_2_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T1D_r_2 correctly!
+Creating index of t_T1D_r_2
+DONE!
+
+Inserting sRNA_T1_D_2_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T1D_r_2 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T3_MON_1_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T1D_r_2 correctly!
+Creating index of t_T1D_r_2
+DONE!
+
+sRNA_T1_SD_3_RNAcentral_filtered_abs
+ (t_T1SD_r_3)
+Inserting sRNA_T1_SD_3_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T1SD_r_3 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T1_SD_3_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T1SD_r_3 correctly!
+Creating index of t_T1SD_r_3
+DONE!
+
+Inserting sRNA_T1_SD_3_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T1SD_r_3 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T3_NT_1_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T1SD_r_3 correctly!
+Creating index of t_T1SD_r_3
+DONE!
+
+sRNA_T3_MON_3_RNAcentral_filtered_abs
+ (t_T3MON_r_3)
+Inserting sRNA_T3_MON_3_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T3MON_r_3 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T3_MON_3_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T3MON_r_3 correctly!
+Creating index of t_T3MON_r_3
+DONE!
+
+Inserting sRNA_T3_MON_3_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T3MON_r_3 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T1_C_3_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T3MON_r_3 correctly!
+Creating index of t_T3MON_r_3
+DONE!
+
+sRNA_T2_D_2_RNAcentral_filtered_abs
+ (t_T2D_r_2)
+Inserting sRNA_T2_D_2_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T2D_r_2 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T2_D_2_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T2D_r_2 correctly!
+Creating index of t_T2D_r_2
+DONE!
+
+Inserting sRNA_T2_D_2_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T2D_r_2 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T1_SD_2_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T2D_r_2 correctly!
+Creating index of t_T2D_r_2
+DONE!
+
+sRNA_T3_MON_2_RNAcentral_filtered_abs
+ (t_T3MON_r_2)
+Inserting sRNA_T3_MON_2_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T3MON_r_2 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T3_MON_2_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T3MON_r_2 correctly!
+Creating index of t_T3MON_r_2
+DONE!
+
+Inserting sRNA_T3_MON_2_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T3MON_r_2 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T2_C_2_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T3MON_r_2 correctly!
+Creating index of t_T3MON_r_2
+DONE!
+
+sRNA_T1_D_3_RNAcentral_filtered_abs
+ (t_T1D_r_3)
+Inserting sRNA_T1_D_3_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T1D_r_3 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T1_D_3_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T1D_r_3 correctly!
+Creating index of t_T1D_r_3
+DONE!
+
+Inserting sRNA_T1_D_3_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T1D_r_3 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T2_MON_2_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T1D_r_3 correctly!
+Creating index of t_T1D_r_3
+DONE!
+
+sRNA_T2_D_1_RNAcentral_filtered_abs
+ (t_T2D_r_1)
+Inserting sRNA_T2_D_1_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T2D_r_1 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T2_D_1_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T2D_r_1 correctly!
+Creating index of t_T2D_r_1
+DONE!
+
+Inserting sRNA_T2_D_1_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T2D_r_1 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T2_NT_3_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T2D_r_1 correctly!
+Creating index of t_T2D_r_1
+DONE!
+
+sRNA_T2_C_2_RNAcentral_filtered_abs
+ (t_T2C_r_2)
+Inserting sRNA_T2_C_2_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T2C_r_2 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T2_C_2_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T2C_r_2 correctly!
+Creating index of t_T2C_r_2
+DONE!
+
+Inserting sRNA_T2_C_2_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T2C_r_2 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T2_NT_1_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T2C_r_2 correctly!
+Creating index of t_T2C_r_2
+DONE!
+
+sRNA_T1_C_1_RNAcentral_filtered_abs
+ (t_T1C_r_1)
+Inserting sRNA_T1_C_1_RNAcentral_filtered_abs table in database (Absolute Counts)...
+./tmp_merge/sRNA_omics_abs.db t_T1C_r_1 /home/nuezsal/Omics_integration/sRNA/Results/01-Absolute_counts_RF/sRNA_T1_C_1_RNAcentral_filtered_abs.csv counts_abs
+Data inserted in t_T1C_r_1 correctly!
+Creating index of t_T1C_r_1
+DONE!
+
+Inserting sRNA_T1_C_1_RNAcentral_filtered_abs table in database (RPM)...
+./tmp_merge/sRNA_omics_RPM.db t_T1C_r_1 /home/nuezsal/Omics_integration/sRNA/Results/02-RPM_counts_RF/sRNA_T3_D_1_RNAcentral_filtered_rpm.csv counts_rpm
+Data inserted in t_T1C_r_1 correctly!
+Creating index of t_T1C_r_1
+DONE!
+
+Joining samples of the same condition (Replicates)...
+Process 1 launched.
+Process 2 launched.
+DONE!
+
+Joining condition tables...
+Process 1 launched.
+Process 2 launched.
+DONE!
+
+Saving tables resulting from the joining process in a csv file (Absolute Counts)...
+Exporting data into CSV...
+Saving tables resulting from the joining process in a csv file (RPM)...
+Exporting data into CSV...
+Calculating average of replicates of each condition (Absolute Counts)...
+Calculating average of replicates of each condition(RPM)...
+DONE!
+
+
+Saving AVG-Abs tables in a csv file...
+Exporting data into CSV...
+
+Saving AVG-RPM tables in a csv file...
+Exporting data into CSV...
+Files saved!
+
