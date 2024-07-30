@@ -1003,9 +1003,13 @@ def fusion_tables (list_abs: list, list_rpm: list, path_write: str,
     # Create temporary directory
     os.system(f'mkdir -p ./tmp_merge')
 
+    # Sorted name lists
+    list_abs.sort()
+    list_rpm.sort()
+    
     # Iterate a number of times equal to len(list_abs) and len(list_rpm)
     for index1 in range(len(list_abs)):
-        sample_name = list_abs[index1].split("/")[-1].split('.')[0]
+        sample_name = list_abs[index1].split("/")[-1].split('.')[0].replace('_abs','')
         print(sample_name)
         time_num = sample_name.split('_')[1]
         stress_name = sample_name.split('_')[2]
@@ -1369,6 +1373,7 @@ def main():
     # Join tables
     print('\nJoining the tables mode = outer between replicates...')
     sys.stdout.flush()
+    print(csv_files_abs,csv_files_rpm)
     fusion_tables (csv_files_list_abs, csv_files_list_rpm, path_write_join, 'outer')
 
     ###############################################################
