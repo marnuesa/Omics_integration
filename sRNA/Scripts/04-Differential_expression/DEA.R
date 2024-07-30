@@ -29,9 +29,100 @@
 ###############################################################################
 
 # Load the libraries
-library("DESeq2")
-library("ggplot2")
-library("dplyr")
+suppressMessages(library("DESeq2"))
+suppressMessages(library("ggplot2"))
+suppressMessages(library("dplyr"))
+suppressMessages(library("argparse"))
+suppressMessages(library("tibble"))
+
+################################## FUNCTIONS ###################################
+
+
+#' Get the command line arguments
+#' This function parse the command line arguments entered into the program.
+#'
+#' @return List with the argument values
+
+get_arguments <- function() {
+  
+  # create parser object
+  parser <- ArgumentParser(prog = 'DEA.R',
+                           description = '
+    This program takes the tables of absolute counts and
+    1. Exploratory analysis
+    
+    This program takes the tables of absolute counts from a project and
+    performs a Principal Component Analysis (PCA) for each time of the stress
+    events considered in that project.
+     
+    2. Differential expression analysis
+     
+    Then, the program performs a differential expression analysis using
+    DESeq2. The absolute counts tables contain a group of control samples and
+    different treatment samples to which they are related. The differential
+    expression analysis is performed considering all possible combinations of
+    control vs treated, so the program returns a result table for each of them. 
+    The results table contains all the information provided by the results() 
+    function of DESeq2 together with the log2FoldChange and lfcSE from lfcShrink. 
+    In addition to the raw data obtained in the analysis, this script also provides
+    tables with those sequences with an adjusted p-value lower than 0.05.
+                           
+    3. Volcano plot graphs
+                           
+    Finally, the program create Volcano Plots for each differential expression
+    analysis',
+                           formatter_class = 'argparse.RawTextHelpFormatter')
+  
+  required <- parser$add_argument_group('required arguments')
+  
+  # specify our desired options 
+  # by default ArgumentParser will add an help option 
+  required$add_argument('-i', '--input',
+                        type = 'character',
+                        help = 'Project directory path.',
+                        required = TRUE)
+  required$add_argument('-o', '--output',
+                        type = 'character',
+                        help = 'Differential expression analysis output directory path. If it does not exist, it will be created',
+                        required = TRUE)
+  required$add_argument('-m', '--metadata',
+                        type = 'character',
+                        help = 'Exploratory analysis output directory path. If it does not exist, it will be created',
+                        required = TRUE)
+  parser$add_argument('-a', '--alpha',
+                      default = 0.05,
+                      type = 'double',
+                      help = 'Alpha significance level. Default is 0.05')
+  required$add_argument('-s', '--specie',
+                      type = 'character',
+                      help = "Data's specie name")
+  required$add_argument('-p', '--project',
+                      type = 'character',
+                      help = 'Project name')
+  required$add_argument('-g', '--graphs',
+                        type = 'character',
+                        help = 'Differential expression analysis graphs output directory path. If it does not exist, it will be created')
+  
+  # Arguments list
+  args <- parser$parse_args()
+  
+  #  Check for missing arguments
+  expected_arguments <- c('input', 'output', 'metadata','alpha','specie', 'project','graphs')
+  if (any(sapply(args, is.null))) {
+    empty_args <- names(args[sapply(args, is.null)])
+    error_message <- paste('\n\tError. Unspecified argument:', empty_args, sep = ' ')
+    stop(error_message)
+  }
+  
+  # Check if the input directory exists
+  if (!dir.exists(args$input)) {
+    stop('Error. The input directory does not exist.')
+  }
+  
+  return(args)
+}
+
+##################################### MAIN #####################################
 
 # Get programm arguments
 args <- get_arguments()
@@ -43,15 +134,22 @@ path_out <- args$output
 alpha_value <- args$alpha
 specie <- args$specie
 project <- args$project
+path_graph <- args$graphs
   
 # Create output paths
-path_raw_out <- paste(path_out, '01-DEA_raw', species, project, sep = '/')
-path_sig_out <- paste(path_out, '02-DEA_sig', species, project, sep = '/')
-path_out_ea <- paste(path_out, '00-PCA_graphs', sep = '/')
-path_out_vp <- paste(path_out, '03-Volcano_plots', sep = '/')
+path_raw_out <- paste(path_out, '01-DEA_raw', specie, project, sep = '/')
+path_sig_out <- paste(path_out, '02-DEA_sig', specie, project, sep = '/')
+path_out_ea <- paste(path_graph, '01-PCA_graphs', sep = '/')
+path_out_vp <- paste(path_graph, '02-Volcano_plots', sep = '/')
+
+# Create directories if they do not exist
+dir.create(path_raw_out, recursive = TRUE, showWarnings = FALSE)
+dir.create(path_sig_out, recursive = TRUE, showWarnings = FALSE)
+dir.create(path_out_ea, recursive = TRUE, showWarnings = FALSE)
+dir.create(path_out_vp, recursive = TRUE, showWarnings = FALSE)
 
 # Create countdata and metadata tables
-countdata <- read.csv(path_table, header=TRUE, row.names = "seq",quote = "")
+countdata <- read.csv(paste0(path_table, '/fusion_abs-outer.csv'), header=TRUE, row.names = "seq",quote = "")
 metadata <- read.table(path_metadata, sep=',', header = TRUE, stringsAsFactors = TRUE,row.names = 1)
 
 # This project have three times, each one will be a subproject which will be analised independiently
@@ -61,7 +159,7 @@ for (time in unique(metadata$Time)) {
   metadata_subproject <- metadata[metadata$Time == time,]
   
   # Filter columns of countdata 
-  countdata_subproject <- countdata[,rownames(samplestable_subproject)]
+  countdata_subproject <- countdata[,rownames(metadata_subproject)]
   
   # Create count matrix DESeq input
   dds_matrix <- DESeqDataSetFromMatrix(countData = countdata_subproject,
@@ -116,8 +214,8 @@ for (time in unique(metadata$Time)) {
       
       ### Create a volcano plot
       res_tb$expression_type <- "No differentially expressed"
-      res_tb$expression_type[res_tb$padj < alpha_value] <- "UP-regulated"
-      res_tb$expression_type[res_tb$padj < alpha_value] <- "DOWN-regulated"
+      res_tb$expression_type[res_tb$padj < alpha_value & res_tb$Shrunkenlog2FoldChange > 0] <- "UP-regulated"
+      res_tb$expression_type[res_tb$padj < alpha_value & res_tb$Shrunkenlog2FoldChange < 0] <- "DOWN-regulated"
       
       #### Calculate the number of sequences of each expression type
       counts <- res_tb %>% 
@@ -139,13 +237,13 @@ for (time in unique(metadata$Time)) {
         geom_hline(yintercept = -log10(0.05), col = "grey") +
         scale_color_manual(values = c("No differentially expressed" = "snow2", "UP-regulated" = "#FF6F61", "DOWN-regulated" = "#6EC5E9"),
                            labels = labels) +
-        labs(title = paste0("Differential Gene Expression in Time ", time, " under ", estres, " stress"), 
+        labs(title = paste0("Differential Gene Expression in Time ", time, " under ", stress, " stress"), 
              x = "Log2 Fold Change", 
              y = "-Log10 (P-valor ajustado)") +
         scale_x_continuous(limits = c(-10, 10)) +  
         scale_y_continuous(limits = c(0, 10)) +
         theme_bw()
-      ggsave(paste0(path_out_vp,"/",estres,"_T",time,".png"), plot = p, width = 8, height = 6, dpi = 300)
+      ggsave(paste0(path_out_vp,"/",stress,"_T",time,".png"), plot = p, width = 8, height = 6, dpi = 300)
     }
   }
 }
