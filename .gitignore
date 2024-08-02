@@ -3,6 +3,7 @@ sRNA/Results/
 
 RNA_seq/Libraries/
 RNA_seq/Results/
+RNA_seq/Additional_info/Melon_salmon_ind/
 
 Methylome/Libraries/
 Methylome/Results/
@@ -10,4 +11,5 @@ Methylome/Results/
 # Ignore .log and .out files
 *.log
 *.out
-
+*.fa
+*.gff3
