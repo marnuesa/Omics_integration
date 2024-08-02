@@ -4,6 +4,8 @@ sRNA/Results/
 RNA_seq/Libraries/
 RNA_seq/Results/
 
+Methylome/Libraries/
+Methylome/Results/
 
 # Ignore .log and .out files
 *.log
