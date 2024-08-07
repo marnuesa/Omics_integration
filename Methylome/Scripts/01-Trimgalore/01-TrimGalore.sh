@@ -53,23 +53,23 @@ sample_list=$( ls ${path_in})
 
 ## ADAPTER TRIMMING
 # Iterate files list
-#for sample in $sample_list
-#do
-    # Trimming
-#    echo "Trimming $sample sample"
-#    srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive trim_galore --paired \
-#        --phred33 \
-#        --quality 20 \
-#        --length 20 \
-#        --clip_R1 10 \
-#        --clip_R2 10 \
-#        --adapter GATCGGAAGAGCACACGTCTGAACTCCAGTCAC \
-#        --adapter2 AGATCGGAAGAGCGTCGTGTAGGGAAAGA \
-#        -o ${path_out_adapter} --basename $sample --cores 4 \
-#        ${path_in}/${sample}/${sample}_1.fq.gz ${path_in}/${sample}/${sample}_2.fq.gz &
+for sample in $sample_list
+do
+     Trimming
+    echo "Trimming $sample sample"
+    srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive trim_galore --paired \
+        --phred33 \
+        --quality 20 \
+        --length 20 \
+        --clip_R1 10 \
+        --clip_R2 10 \
+        --adapter GATCGGAAGAGCACACGTCTGAACTCCAGTCAC \
+        --adapter2 AGATCGGAAGAGCGTCGTGTAGGGAAAGA \
+        -o ${path_out_adapter} --basename $sample --cores 4 \
+        ${path_in}/${sample}/${sample}_1.fq.gz ${path_in}/${sample}/${sample}_2.fq.gz &
 
-#done
-#wait
+done
+wait
 
 ## POLI A TRIMMING
 # Iterate files list
@@ -89,6 +89,6 @@ do
 
 done
 wait
-exit 0
 
-# rm -r $path_out_adapter
+rm -r $path_out_adapter
+exit 0
