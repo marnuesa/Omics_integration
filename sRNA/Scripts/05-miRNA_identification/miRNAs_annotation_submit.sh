@@ -37,7 +37,7 @@ path_out=/home/nuezsal/Omics_integration/sRNA/Results/05-Identification_miRNAs
 num_threads=12
 
 # Execution 
-bash miRNAs_annotation.sh \
+srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive bash miRNAs_annotation.sh \
      --input $path_in \
      --output $path_out \
      --mismatches $mismatches \
@@ -45,25 +45,17 @@ bash miRNAs_annotation.sh \
      --pmiren $path_PmiREN \
      --srnaanno $path_sRNAanno \
      --species-ids $path_ids_table \
-     --threads $num_threads 
+     --threads $num_threads
 
 
 # Input paths
 path_in=/home/nuezsal/Omics_integration/sRNA/Results/04-DEA/02-DEA_sig
-path_mirbase=/home/nuezsal/Omics_integration/sRNA/Additional_info/02-Mod_databases/miRBase
-path_PmiREN=/home/nuezsal/Omics_integration/sRNA/Additional_info/02-Mod_databases/PmiREN
-path_sRNAanno=/home/nuezsal/Omics_integration/sRNA/Additional_info/02-Mod_databases/sRNAanno
-path_ids_table=/home/nuezsal/Omics_integration/sRNA/Additional_info/species_id.csv
-mismatches=1
-
-# Ouput paths
-path_out=/home/nuezsal/Omics_integration/sRNA/Results/05-Identification_miRNAs
 
 # Threads
 num_threads=12
 
 # Execution 
-bash miRNAs_annotation.sh \
+srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive bash miRNAs_annotation.sh \
      --input $path_in \
      --output $path_out \
      --mismatches $mismatches \

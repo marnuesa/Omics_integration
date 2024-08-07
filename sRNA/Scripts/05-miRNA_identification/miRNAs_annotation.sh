@@ -341,20 +341,20 @@ merge_tsv_files () {
     filename2_path=${path_file_2%.tsv}
 
     # Sort files to be joined
-    LANG=en_EN sort -k $key_file_1 -t$'\t' $path_file_1 -o $filename1_path"_sort.tsv"
-    LANG=en_EN sort -k $key_file_2 -t$'\t' $path_file_2 -o $filename2_path"_sort.tsv"
+    LC_ALL=C sort -k $key_file_1 -t$'\t' $path_file_1 -o $filename1_path"_sort.tsv"
+    LC_ALL=C sort -k $key_file_2 -t$'\t' $path_file_2 -o $filename2_path"_sort.tsv"
     
     # Inner join
     if [ $outer_join == "FALSE" ]
     then
-        LANG=en_EN join -1 $key_file_1 -2 $key_file_2 -t$'\t' \
+        LC_ALL=C join -1 $key_file_1 -2 $key_file_2 -t$'\t' \
             -o $output_cols -e "NULL" \
             $filename1_path"_sort.tsv" \
             $filename2_path"_sort.tsv"  > $output_file
     # Full outer join
     elif [ $outer_join == "TRUE" ]
     then
-        LANG=en_EN join -1 $key_file_1 -2 $key_file_2 -t$'\t' \
+        LC_ALL=C join -1 $key_file_1 -2 $key_file_2 -t$'\t' \
             -o $output_cols -e "NULL" \
             -a 1 -a 2 \
             $filename1_path"_sort.tsv" \
