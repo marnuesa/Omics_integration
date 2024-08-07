@@ -26,9 +26,9 @@
 module load anaconda
 
 # PATHs
-path_in='/home/nuezsal/omics_integration_G3/Metiloma/Libraries/00-Raw_data'
-path_out_adapter='/home/nuezsal/omics_integration_G3/Metiloma/Libraries/01-Clean_data_adapter'
-path_out='/home/nuezsal/omics_integration_G3/Metiloma/Libraries/01-Clean_data'
+path_in='/home/nuezsal/Omics_integration/Methylome/Libraries/00-Raw_data'
+path_out_adapter='/home/nuezsal/Omics_integration/Methylome/Libraries/01-Clean_data_adapter'
+path_out='/home/nuezsal/Omics_integration/Methylome/Libraries/01-Clean_data'
 
 # Create output fields
 if [ ! -d "$path_out_adapter" ]; then
@@ -53,24 +53,23 @@ sample_list=$( ls ${path_in})
 
 ## ADAPTER TRIMMING
 # Iterate files list
-for sample in $sample_list
-do
+#for sample in $sample_list
+#do
     # Trimming
-    echo "Trimming $sample sample"
-    srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive trim_galore --paired \
-        --phred33 \
-        --quality 20 \
-        --length 20 \
-        --clip_R1 10 \
-        --clip_R2 10 \
-        --adapter GATCGGAAGAGCACACGTCTGAACTCCAGTCAC \
-        --adapter2 AGATCGGAAGAGCGTCGTGTAGGGAAAGA \
-        -o ${path_out_adapter} --basename $sample --cores 4 \
-        ${path_in}/${sample}/${sample}_1.fq.gz ${path_in}/${sample}/${sample}_2.fq.gz &
+#    echo "Trimming $sample sample"
+#    srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive trim_galore --paired \
+#        --phred33 \
+#        --quality 20 \
+#        --length 20 \
+#        --clip_R1 10 \
+#        --clip_R2 10 \
+#        --adapter GATCGGAAGAGCACACGTCTGAACTCCAGTCAC \
+#        --adapter2 AGATCGGAAGAGCGTCGTGTAGGGAAAGA \
+#        -o ${path_out_adapter} --basename $sample --cores 4 \
+#        ${path_in}/${sample}/${sample}_1.fq.gz ${path_in}/${sample}/${sample}_2.fq.gz &
 
-done
-wait
-exit 0
+#done
+#wait
 
 ## POLI A TRIMMING
 # Iterate files list
@@ -84,7 +83,7 @@ do
         --length 20 \
         --clip_R1 10 \
         --clip_R2 10 \
-        -a A{10} -a2 A{10}
+        -a A{10} -a2 A{10} \
         -o ${path_out} --basename $sample --cores 4 \
         ${path_out_adapter}/${sample}_val_1.fq.gz ${path_out_adapter}/${sample}_val_2.fq.gz &
 
@@ -92,4 +91,4 @@ done
 wait
 exit 0
 
-rm -r $path_out_adapter
+# rm -r $path_out_adapter

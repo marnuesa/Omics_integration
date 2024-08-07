@@ -1,18 +1,17 @@
 #!/bin/bash
-
 #SBATCH --output=bismark_%j.log							# Standard output and error log.
 #SBATCH --qos long								# Partition (queue)
 #SBATCH --ntasks=4									# Run on one mode. 
 #SBATCH --cpus-per-task=24								# Number of tasks = cpus. 
 #SBATCH --time=15-00:00:00								# Time limit days-hrs:min:sec.
-#SBATCH --mem-per-cpu=3gb								# Job memory request.
+#SBATCH --mem=200gb								# Job memory request.
 
 
 ####### MODULES
 module load biotools
 
 ####### VARIABLES
-WD="/home/nuezsal/omics_integration_G3/Metiloma"
+WD="/home/nuezsal/Omics_integration/Methylome"
 F="$WD/Scripts/02-Bismark/Functions.sh"
 
 ####### DIRECTORY
