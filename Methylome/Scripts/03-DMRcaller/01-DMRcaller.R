@@ -1,32 +1,97 @@
-################################################################################
+# ==========================================================
+#                         01-DMRcaller.R
+# ==========================================================
+# 
+# Description: This script use CX reports of Bismark to extract
+# the differentially methylated regions (DMRs) with the bins method.
+# Bins method consist in bins where the genome is split and
+# all the reads are pooled together
 #
-# Predict DMRs
+# Author: Pascual Villalba y Marta Núñez
+# Data: 26/08/24
+# Versión: 1.0
 #
-################################################################################
+#
+# Notes:
+# ----------------------------------------------------------
+# 
+# Output:
+# ----------------------------------------------------------
+# 
 
 rm(list = ls())
 
-## LIBRARIES
-suppressMessages(library(DMRcaller)) #BiocManager::install("DMRcaller")
+############################## LIBRARIES #######################################
+suppressMessages(library("DMRcaller")) #BiocManager::install("DMRcaller")
+suppressMessages(library("argparse"))
 
-## VARIABLES
-## Create a vector with the arguments.
-args = commandArgs(trailingOnly=TRUE)
-if (length(args) < 4) {
-  stop("At least 4 arguments must be supplied.", call.=FALSE)
-} else {
-  WD = args[1]
-  CX_path = args[2]
-  summary = args[3]
-  cores = as.integer(args[4])
+################################## FUNCTIONS ###################################
+
+#' Get the command line arguments
+#' This function parse the command line arguments entered into the program.
+#'
+#' @return List with the argument values
+
+get_arguments <- function() {
+  
+  # create parser object
+  parser <- ArgumentParser(prog = 'DEA.R',
+                           description = '
+    This program takes the Bismarck CX reports and extract the DMRs',
+                           formatter_class = 'argparse.RawTextHelpFormatter')
+  
+  required <- parser$add_argument_group('required arguments')
+  
+  # specify our desired options 
+  # by default ArgumentParser will add an help option 
+  required$add_argument('-o', '--output',
+                        type = 'character',
+                        help = 'Project directory path.',
+                        required = TRUE)
+  required$add_argument('-i', '--input',
+                        type = 'character',
+                        help = 'Directory where is the CX report files',
+                        required = TRUE)
+  required$add_argument('-s', '--summary',
+                        type = 'character',
+                        help = "Metadata of the study",
+                        required = TRUE)
+  parser$add_argument('-c', '--cores',
+                      default = 1,
+                      type = 'double',
+                      help = 'cores that the program needs')
+  
+  # Arguments list
+  args <- parser$parse_args()
+  
+  #  Check for missing arguments
+  expected_arguments <- c('output', 'input', 'summary','cores')
+  if (any(sapply(args, is.null))) {
+    empty_args <- names(args[sapply(args, is.null)])
+    error_message <- paste('\n\tError. Unspecified argument:', empty_args, sep = ' ')
+    stop(error_message)
+  }
+  
+  # Check if the input directory exists
+  if (!dir.exists(args$input)) {
+    stop('Error. The input directory does not exist.')
+  }
+  
+  return(args)
 }
 
-# WD = "/mnt/doctorado/5-Integracion_omicas_melon/Metiloma/Results/02-DMRcaller/ENDTOEND"
-# CX_path = "/mnt/doctorado/5-Integracion_omicas_melon/Metiloma/Results/01-Bismark/ENDTOEND/04-Methylation_extractor"
-# summary="/mnt/doctorado/5-Integracion_omicas_melon/Metiloma/Additional_info/Summary_samples/summary_samples.tsv"
-# cores = 40
+##################################### MAIN #####################################
 
-## PIPELINE
+# Get programm arguments
+args <- get_arguments()
+
+# Save the the arguments in variables
+path_out <- args$output
+path_CX <- args$input
+summary <- args$summary
+cores <- args$cores
+
+# Read tables
 summary_tab = read.table(summary, sep = "\t", header = F, quote = "\"")
 colnames(summary_tab) = c("ID_original", "Time", "Condition", "Replicate")
 times = unique(summary_tab$Time)
@@ -37,7 +102,7 @@ for (t in times) {
     cat(paste0("-\tTime: ", t, "; stress: ", s, "\n"))
   
     ## 1-READING CX REPORTS COMING FROM BISMARK
-    files = list.files(CX_path, full.names = T)
+    files = list.files(path_CX, full.names = T)
     files = files[grepl(".CX_report.txt", files, fixed = T)]
     
     Stressed_files = files[grepl(paste0(t, "-", s, "-"), files, fixed = T)]
@@ -58,7 +123,7 @@ for (t in times) {
                              test = "fisher",
                              pValueThreshold = 0.05,
                              minCytosinesCount = 3,
-                             minProportionDifference = 0.15,
+                             minProportionDifference = 0.1,
                              minGap = 300,
                              minSize = 50,
                              minReadsPerCytosine = 8,
@@ -73,7 +138,7 @@ for (t in times) {
                               test = "fisher",
                               pValueThreshold = 0.05,
                               minCytosinesCount = 3,
-                              minProportionDifference = 0.15,
+                              minProportionDifference = 0.1,
                               minGap = 300,
                               minSize = 50,
                               minReadsPerCytosine = 8,
@@ -88,7 +153,7 @@ for (t in times) {
                               test = "fisher",
                               pValueThreshold = 0.05,
                               minCytosinesCount = 3,
-                              minProportionDifference = 0.15,
+                              minProportionDifference = 0.1,
                               minGap = 300,
                               minSize = 50,
                               minReadsPerCytosine = 8,
@@ -101,7 +166,7 @@ for (t in times) {
                                             metDataList[["NT"]],
                                             metDataList[["stressed"]],
                                             context = "CG",
-                                            minProportionDifference = 0.15,
+                                            minProportionDifference = 0.1,
                                             minReadsPerCytosine = 8,
                                             pValueThreshold = 0.05,
                                             test = "fisher",
@@ -113,7 +178,7 @@ for (t in times) {
                                              metDataList[["NT"]],
                                              metDataList[["stressed"]],
                                              context = "CHG",
-                                             minProportionDifference = 0.15,
+                                             minProportionDifference = 0.1,
                                              minReadsPerCytosine = 8,
                                              pValueThreshold = 0.05,
                                              test = "fisher",
@@ -125,30 +190,28 @@ for (t in times) {
                                              metDataList[["NT"]],
                                              metDataList[["stressed"]],
                                              context = "CHH",
-                                             minProportionDifference = 0.15,
+                                             minProportionDifference = 0.1,
                                              minReadsPerCytosine = 8,
                                              pValueThreshold = 0.05,
                                              test = "fisher",
                                              cores = cores)
     
     ## 4-WRITING REPORTS
-    if (!dir.exists(paste0(WD, "/DMRs"))){
-      dir.create(paste0(WD, "/DMRs"))
-    }
+    dir.create(path_out, recursive = TRUE, showWarnings = FALSE)
     
     DMRsBinsCGMerged = as.data.frame(DMRsBinsCGMerged)
-    write.table(DMRsBinsCGMerged, paste0(WD, "/DMRs/", t, "-", s, "_DMRs_Bins_CG.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
+    write.table(DMRsBinsCGMerged, paste0(path_out, t, "-", s, "_DMRs_Bins_CG.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
     DMRsBinsCHGMerged = as.data.frame(DMRsBinsCHGMerged)
-    write.table(DMRsBinsCHGMerged, paste0(WD, "/DMRs/", t, "-", s, "_DMRs_Bins_CHG.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
+    write.table(DMRsBinsCHGMerged, paste0(path_out, t, "-", s, "_DMRs_Bins_CHG.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
     DMRsBinsCHHMerged = as.data.frame(DMRsBinsCHHMerged)
-    write.table(DMRsBinsCHHMerged, paste0(WD, "/DMRs/", t, "-", s, "_DMRs_Bins_CHH.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
+    write.table(DMRsBinsCHHMerged, paste0(path_out, t, "-", s, "_DMRs_Bins_CHH.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
     
-    DMRsBinsCGMerged = DMRsBinsCGMerged[!duplicated(DMRsBinsCGMerged[,1:14]),]
-    write.table(DMRsBinsCGMerged, paste0(WD, "/DMRs/", t, "-", s, "_DMRs_Bins_CG_duplicates_removed.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
-    DMRsBinsCHGMerged = DMRsBinsCHGMerged[!duplicated(DMRsBinsCHGMerged[,1:14]),]
-    write.table(DMRsBinsCHGMerged, paste0(WD, "/DMRs/", t, "-", s, "_DMRs_Bins_CHG_duplicates_removed.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
-    DMRsBinsCHHMerged = DMRsBinsCHHMerged[!duplicated(DMRsBinsCHHMerged[,1:14]),]
-    write.table(DMRsBinsCHHMerged, paste0(WD, "/DMRs/", t, "-", s, "_DMRs_Bins_CHH_duplicates_removed.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
+    # DMRsBinsCGMerged = DMRsBinsCGMerged[!duplicated(DMRsBinsCGMerged[,1:14]),]
+    # write.table(DMRsBinsCGMerged, paste0(path_out, t, "-", s, "_DMRs_Bins_CG_duplicates_removed.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
+    # DMRsBinsCHGMerged = DMRsBinsCHGMerged[!duplicated(DMRsBinsCHGMerged[,1:14]),]
+    # write.table(DMRsBinsCHGMerged, paste0(path_out, t, "-", s, "_DMRs_Bins_CHG_duplicates_removed.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
+    # DMRsBinsCHHMerged = DMRsBinsCHHMerged[!duplicated(DMRsBinsCHHMerged[,1:14]),]
+    # write.table(DMRsBinsCHHMerged, paste0(path_out, t, "-", s, "_DMRs_Bins_CHH_duplicates_removed.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
+    
   }
 }
-

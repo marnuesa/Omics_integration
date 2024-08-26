@@ -1,6 +1,5 @@
 #!/bin/bash
-
-#SBATCH --output=DMRs_all_prediction_ENDTOEND.log                                                    # Standard output and error log.
+#SBATCH --output=DMRs_%j.log                                                    # Standard output and error log.
 #SBATCH --qos long                                                              # Partition (queue)
 #SBATCH --ntasks=1                                                                      # Run on one mode. 
 #SBATCH --cpus-per-task=40                                                              # Number of tasks = cpus. 
@@ -9,12 +8,12 @@
 
 
 ####### MODULES
+module load anaconda
 source activate group_sRNA
 
 ####### VARIABLES
-WD="/home/nuezsal/omics_integration_G3/Metiloma"
+path="/home/nuezsal/Omics_integration/Methylome"
 
 
 ####### PIPELINE
-Rscript 01-DMRcaller_all.R $WD/Results/03-DMRcaller_nuevo $WD/Results/02-Bismark/04-Methylation_extractor $WD/Additional_info/Summary_samples/summary_samples.tsv $SLURM_CPUS_PER_TASK
-
+srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript 01-DMRcaller.R $path/Results/03-DMRcaller $path/Results/02-Bismark/04-Methylation_extractor $path/Additional_info/Summary_samples/summary_samples.tsv $SLURM_CPUS_PER_TASK
