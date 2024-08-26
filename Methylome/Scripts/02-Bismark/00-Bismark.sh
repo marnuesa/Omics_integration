@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH --output=bismark_%j.log							# Standard output and error log.
-#SBATCH --qos long								# Partition (queue)
+#SBATCH --qos=medium								# Partition (queue)
 #SBATCH --ntasks=4									# Run on one mode. 
 #SBATCH --cpus-per-task=24								# Number of tasks = cpus. 
-#SBATCH --time=15-00:00:00								# Time limit days-hrs:min:sec.
+#SBATCH --time=06-00:00:00								# Time limit days-hrs:min:sec.
 #SBATCH --mem=200gb								# Job memory request.
 
 

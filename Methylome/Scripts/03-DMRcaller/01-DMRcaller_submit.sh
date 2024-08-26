@@ -16,4 +16,8 @@ path="/home/nuezsal/Omics_integration/Methylome"
 
 
 ####### PIPELINE
-srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript 01-DMRcaller.R $path/Results/03-DMRcaller $path/Results/02-Bismark/04-Methylation_extractor $path/Additional_info/Summary_samples/summary_samples.tsv $SLURM_CPUS_PER_TASK
+srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript 01-DMRcaller.R \
+	-o $path/Results/03-DMRcaller \
+	-i $path/Results/02-Bismark/04-Methylation_extractor \
+	-s $path/Additional_info/Summary_samples/summary_samples.tsv \
+	-o $SLURM_CPUS_PER_TASK

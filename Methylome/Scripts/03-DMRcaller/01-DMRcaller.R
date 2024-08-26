@@ -56,7 +56,7 @@ get_arguments <- function() {
                         type = 'character',
                         help = "Metadata of the study",
                         required = TRUE)
-  parser$add_argument('-c', '--cores',
+  required$add_argument('-c', '--cores',
                       default = 1,
                       type = 'double',
                       help = 'cores that the program needs')
@@ -206,12 +206,12 @@ for (t in times) {
     DMRsBinsCHHMerged = as.data.frame(DMRsBinsCHHMerged)
     write.table(DMRsBinsCHHMerged, paste0(path_out, t, "-", s, "_DMRs_Bins_CHH.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
     
-    # DMRsBinsCGMerged = DMRsBinsCGMerged[!duplicated(DMRsBinsCGMerged[,1:14]),]
-    # write.table(DMRsBinsCGMerged, paste0(path_out, t, "-", s, "_DMRs_Bins_CG_duplicates_removed.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
-    # DMRsBinsCHGMerged = DMRsBinsCHGMerged[!duplicated(DMRsBinsCHGMerged[,1:14]),]
-    # write.table(DMRsBinsCHGMerged, paste0(path_out, t, "-", s, "_DMRs_Bins_CHG_duplicates_removed.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
-    # DMRsBinsCHHMerged = DMRsBinsCHHMerged[!duplicated(DMRsBinsCHHMerged[,1:14]),]
-    # write.table(DMRsBinsCHHMerged, paste0(path_out, t, "-", s, "_DMRs_Bins_CHH_duplicates_removed.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
+    DMRsBinsCGMerged = DMRsBinsCGMerged[!duplicated(DMRsBinsCGMerged[,1:14]),]
+    write.table(DMRsBinsCGMerged, paste0(path_out, t, "-", s, "_DMRs_Bins_CG_duplicates_removed.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
+    DMRsBinsCHGMerged = DMRsBinsCHGMerged[!duplicated(DMRsBinsCHGMerged[,1:14]),]
+    write.table(DMRsBinsCHGMerged, paste0(path_out, t, "-", s, "_DMRs_Bins_CHG_duplicates_removed.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
+    DMRsBinsCHHMerged = DMRsBinsCHHMerged[!duplicated(DMRsBinsCHHMerged[,1:14]),]
+    write.table(DMRsBinsCHHMerged, paste0(path_out, t, "-", s, "_DMRs_Bins_CHH_duplicates_removed.tsv"), sep="\t", col.names=TRUE, row.names=FALSE, quote=FALSE)
     
   }
 }

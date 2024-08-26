@@ -6,7 +6,9 @@ RNA_seq/Results/
 RNA_seq/Additional_info/Melon_salmon_ind/
 
 Methylome/Libraries/
-Methylome/Results/
+Methylome/Results
+
+Integration_microRNA/Results/
 
 # Ignore .log and .out files
 *.log
