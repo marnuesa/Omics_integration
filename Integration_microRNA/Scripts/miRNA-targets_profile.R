@@ -44,6 +44,9 @@ suppressMessages(library(stringr))
 suppressMessages(library(gridExtra))
 suppressMessages(library("argparse"))
 suppressMessages(library(svglite))
+suppressMessages(library("cowplot"))
+suppressMessages(library("plotly"))
+suppressMessages(library(htmlwidgets))
 
 ################################## FUNCTIONS ###################################
 
@@ -270,15 +273,20 @@ for(miRNA in names(miRNAs)){
         scale_y_continuous(limits = y_limits) +
         guides(color = guide_legend(order = 1, title = miRNA)) +
         ggtitle(toupper(stress))
+
+	# Divide the plot space into legend and graph
+	p_no_legend <- p + theme(legend.position = "none")
+	legend <- get_legend(p)
+	combined_plot <- plot_grid(p_no_legend, legend, ncol = 2, rel_widths = c(2, 1))
       
-        plots[[stress]] <- p 
+        plots[[stress]] <- combined_plot 
     }
   }
   if(length(plots) > 0){
     final_plot <- grid.arrange(grobs = plots, ncol = 1)
   # Create and save plot with all stresses
   ggsave(plot = final_plot,filename = paste0(path_out_analysis1,"/Expression_profile_",miRNA,".svg"),
-         width = 30, height = 20, dpi = 300,bg = "white")
+         width = 30, height = 22, dpi = 300,bg = "white")
   }
   else{
     print(paste(miRNA, "has not valid sequence in any stress"))
@@ -343,6 +351,8 @@ for(mirna in miRNAs_common){
   lista_targets[[mirna]] <- targets_list
 }
 
+# Create a correlation table
+correlation_table <- data.frame()
 # Graph each sequence with each one of their targets
 for(mirna in names(general_miRNAs)){
   mirna_list <- general_miRNAs[[mirna]]
@@ -461,6 +471,23 @@ for(mirna in names(general_miRNAs)){
             
             ggsave(plot = p,filename = paste0(path_out_analysis2,"/Expression_profile_",mirna,"_",i,"_",gene,".svg"),
                    width = 20, height = 7, dpi = 300,bg = "white")
+            
+            # Create row of correlation matrix only with lfc
+            lfc_row_gene <- df_long_complete[df_long_complete$shape_group == "Gene", c("LFC","time", "stress")]
+            colnames(lfc_row_gene) <- c("LFC_gene", "time","stress")
+            lfc_row_micro <- df_long_complete[df_long_complete$shape_group == "microRNA", c("LFC","time", "stress")]
+            colnames(lfc_row_micro) <- c("LFC_micro", "time","stress")
+            lfc_row <- merge(lfc_row_gene, lfc_row_micro, by = c("time","stress"))
+            lfc_row$microRNA <- mirna
+            lfc_row$Gene <- gene
+            
+            # Save the row only if bpth LFC are higher than 0.5
+            for (i in 1:nrow(lfc_row)) {
+              if ((abs(lfc_row$LFC_gene[i]) >= 0.5) & (abs(lfc_row$LFC_micro[i]) >= 0.5)) {
+                # Agregar la fila a la tabla de correlación
+                correlation_table <- rbind(correlation_table, lfc_row[i, ])
+              }
+            }
           } 
           
           else{
@@ -482,6 +509,43 @@ for(mirna in names(general_miRNAs)){
     }
   }
 }
+
+print("Claculating the correlation...")
+
+write.table(correlation_table,paste0(path_out_analysis2,"/Correlation_table.txt"))
+# Calculate the correlation to a No normal data distribution
+cor_spearman <- cor.test(correlation_table$LFC_gene, correlation_table$LFC_micro, method = "spearman")
+print(cor_spearman)
+
+cor_kendall <- cor.test(correlation_table$LFC_gene, correlation_table$LFC_micro, method = "kendall")
+print(cor_kendall)
+
+# Create the plot
+p <- plot_ly(correlation_table, x = ~LFC_gene, y = ~LFC_micro,
+               text = ~paste("microRNA: ", microRNA, '<br>Gene:', Gene),
+               color = ~stress,
+               type = 'scatter',
+               mode = 'markers')
+
+# Extract the Spearman correlation coeficient
+spearman_coefficient <- cor_spearman$estimate
+
+# Add anotation to the plot
+p <- p %>% layout(
+  annotations = list(
+    x = 4,  # Coordenada x para la anotación
+    y = 10,  # Coordenada y para la anotación
+    text = paste("Correlación Spearman:", round(spearman_coefficient, 2)),  # Texto de la anotación
+    showarrow = FALSE,  # Ocultar la flecha
+    xref = "x",  # Referencia de la coordenada x
+    yref = "y",  # Referencia de la coordenada y
+    xanchor = 'left',  # Alineación horizontal del texto
+    yanchor = 'bottom'  # Alineación vertical del texto
+  )
+)
+
+# Save the plot as HTML file
+htmlwidgets::saveWidget(p, paste0(path_out_analysis2,"/Correlation_dotplot.html"), selfcontained = TRUE)
 
 ############################### Analysis 3 #####################################
 
@@ -638,3 +702,4 @@ for(mirna in names(miRNA_diff)){
     }
   }
 }
+
