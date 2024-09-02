@@ -3,7 +3,7 @@
 #SBATCH --qos long                                                              # Partition (queue)
 #SBATCH --ntasks=1                                                                      # Run on one mode. 
 #SBATCH --cpus-per-task=40                                                              # Number of tasks = cpus. 
-#SBATCH --time=4-00:00:00                                                              # Time limit days-hrs:min:sec.
+#SBATCH --time=10-00:00:00                                                              # Time limit days-hrs:min:sec.
 #SBATCH --mem=300gb                                                               # Job memory request.
 
 
@@ -17,7 +17,7 @@ path="/home/nuezsal/Omics_integration/Methylome"
 
 ####### PIPELINE
 srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript 01-DMRcaller.R \
-	-o $path/Results/03-DMRcaller \
+	-o $path/Results/03-DMRcaller/ \
 	-i $path/Results/02-Bismark/04-Methylation_extractor \
 	-s $path/Additional_info/Summary_samples/summary_samples.tsv \
-	-o $SLURM_CPUS_PER_TASK
+	-c $SLURM_CPUS_PER_TASK
