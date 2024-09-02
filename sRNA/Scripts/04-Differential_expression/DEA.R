@@ -228,20 +228,22 @@ for (time in unique(metadata$Time)) {
         mutate(label = paste0(count, " ", expression_type)) %>%
         pull(label)
       names(labels) <- counts$expression_type
+
+      # Calculate limit x
+      maxlfc <- max(abs(res_tb$Shrunkenlog2FoldChange))
       
       #### VP
       p <- ggplot(data = res_tb, aes(x = log2FoldChange, y = -log10(padj), col = expression_type)) + 
         geom_point() + 
         theme_minimal() +
-        geom_vline(xintercept = c(-0.6, 0.6), col = "grey") +
+        geom_vline(xintercept = 0, col = "grey") +
         geom_hline(yintercept = -log10(0.05), col = "grey") +
         scale_color_manual(values = c("No differentially expressed" = "snow2", "UP-regulated" = "#FF6F61", "DOWN-regulated" = "#6EC5E9"),
                            labels = labels) +
         labs(title = paste0("Differential Gene Expression in Time ", time, " under ", stress, " stress"), 
              x = "Log2 Fold Change", 
              y = "-Log10 (P-valor ajustado)") +
-        scale_x_continuous(limits = c(-10, 10)) +  
-        scale_y_continuous(limits = c(0, 10)) +
+        scale_x_continuous(limits = c((-maxlfc - 0.5),(maxlfc + 0.5))) +  
         theme_bw()
       ggsave(paste0(path_out_vp,"/",stress,"_T",time,".png"), plot = p, width = 8, height = 6, dpi = 300)
     }
