@@ -31,7 +31,7 @@ source activate sRNA
 # Paths
 path_lib='/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta'
 path_results='/home/nuezsal/Omics_integration/sRNA/Results'
-path_rnacentral='/storage/ncRNA/Projects/sRNA_project/05-Databases/miRNAs/Sequence_filtering/01-RNAcentral/rnacentral_plants_filtered.fasta'
+path_rnacentral='/home/nuezsal/Omics_integration/sRNA/Additional_info/01-RNAcentral/RNAcenral_viridiplantae_snrna_snorna_rrna_trna.fasta'
 
 # Execute
 srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive python3 sRNA_counts.py \

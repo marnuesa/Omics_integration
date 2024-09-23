@@ -351,7 +351,7 @@ for (time in unique(metadata_batch2$Time)) {
       names(labels) <- counts$expression_type
       
       # Calculate limit x
-      maxlfc <- max(abs(res_tb$lfcShrunk))
+      maxlfc <- max(abs(res_tb$Shrunkenlog2FoldChange))
       
       #### VP
       p <- ggplot(data = res_tb, aes(x = Shrunkenlog2FoldChange, y = -log10(padj), col = expression_type)) + 

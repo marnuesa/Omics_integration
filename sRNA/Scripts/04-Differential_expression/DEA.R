@@ -203,7 +203,7 @@ for (time in unique(metadata$Time)) {
       ### Add Shrunk values to results table
       res_tb$Shrunkenlog2FoldChange <- shrunk$log2FoldChange
       res_tb$lfcShrunkSE <- shrunk$lfcSE
-      
+      res_tb$padj[is.na(res_tb$padj)] <- 1      
       ### Save table
       write.csv(res_tb,paste0(path_raw_out,"/",stress,"_T",time,"_dea_raw.csv"),row.names = FALSE,quote = FALSE)
       
@@ -231,7 +231,7 @@ for (time in unique(metadata$Time)) {
 
       # Calculate limit x
       maxlfc <- max(abs(res_tb$Shrunkenlog2FoldChange))
-      
+      maxpvalue <- max(-log10(res_tb$padj))	      
       #### VP
       p <- ggplot(data = res_tb, aes(x = log2FoldChange, y = -log10(padj), col = expression_type)) + 
         geom_point() + 
@@ -243,7 +243,8 @@ for (time in unique(metadata$Time)) {
         labs(title = paste0("Differential Gene Expression in Time ", time, " under ", stress, " stress"), 
              x = "Log2 Fold Change", 
              y = "-Log10 (P-valor ajustado)") +
-        scale_x_continuous(limits = c((-maxlfc - 0.5),(maxlfc + 0.5))) +  
+        scale_x_continuous(limits = c((-maxlfc - 0.5),(maxlfc + 0.5))) +
+        scale_y_continuous(limits = c(0,(maxpvalue + 0.5))) +  
         theme_bw()
       ggsave(paste0(path_out_vp,"/",stress,"_T",time,".png"), plot = p, width = 8, height = 6, dpi = 300)
     }
