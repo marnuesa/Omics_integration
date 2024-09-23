@@ -10,8 +10,13 @@ Methylome/Results
 
 Integration_microRNA/Results/
 
+Integration_methylome/Results/
+Integration_methylome/Libraries/
+
 # Ignore .log and .out files
 *.log
 *.out
 *.fa
 *.gff3
+*.pdf
+*.ebwt
