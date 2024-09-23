@@ -20,3 +20,6 @@ Integration_methylome/Libraries/
 *.gff3
 *.pdf
 *.ebwt
+*.txt
+*.gtf
+*.sam
