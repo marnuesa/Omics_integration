@@ -124,13 +124,13 @@ for (stress in stresses){
     
         CG_file <- read.table(paste0(path_in,"/",time,"-",stress,"_DMRs_Bins_CG_genes.bed"),
                               sep = '\t', header = FALSE)
-        colnames(CG_file) <- c("Chr", "Start", "End", "Methylation_type", "ID", "Feature")
+        colnames(CG_file) <- c("Chr", "Start", "End", "Methylation_type", "Proportion_diff", "ID", "Feature")
         CHG_file <- read.table(paste0(path_in,"/",time,"-",stress,"_DMRs_Bins_CHG_genes.bed"),
                               sep = '\t', header = FALSE)
-        colnames(CHG_file) <- c("Chr", "Start", "End", "Methylation_type", "ID", "Feature")
+        colnames(CHG_file) <- c("Chr", "Start", "End", "Methylation_type","Proportion_diff","ID", "Feature")
         CHH_file <- read.table(paste0(path_in,"/",time,"-",stress,"_DMRs_Bins_CHH_genes.bed"),
                               sep = '\t', header = FALSE)
-        colnames(CHH_file) <- c("Chr", "Start", "End", "Methylation_type", "ID", "Feature")
+        colnames(CHH_file) <- c("Chr", "Start", "End", "Methylation_type", "Proportion_diff", "ID", "Feature")
         
         # Apply the function to modify the methylation type
         CG_file <- modify_methylation_type(CG_file)
