@@ -36,8 +36,7 @@ mkdir -p "$path_out"
 for file in "$path_tsv"/*duplicates_removed.tsv
 do
     name_file=$(basename "$file")
-    cut -f 1,2,3,16 $file | tail -n +2 > "${path_in}/${name_file%.tsv}.bed"
-
+    awk -F'\t' 'NR==1 {OFS="\t"; print $1, $2, $3, $16, "difference"} NR>1 {OFS="\t"; print $1, $2, $3, $16, $11 - $8}' $file | tail -n +2 > "${path_in}/${name_file%.tsv}.bed"
 done
 
 # Iterate over .bed files in path_in
@@ -107,7 +106,7 @@ unique_list=($(echo "${list[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
 # Iterate over the unique list
 for element in "${unique_list[@]}"; 
 do	
-	cut -f 1,2,3,4,8,9 "$path_out/${element}_duplicates_removed_annotation.bed" > temp_file.bed
+	cut -f 1,2,3,4,5,9,10 "$path_out/${element}_duplicates_removed_annotation.bed" > temp_file.bed
 	awk '{print $0 "\tUR\tunknown_region"}' "$path_out/${element}_duplicates_removed_undetermined.bed" > temp_IR.bed
 	cat temp_file.bed temp_IR.bed > "$path_out_2/${element}_genes.bed"	
    	rm temp_file.bed
