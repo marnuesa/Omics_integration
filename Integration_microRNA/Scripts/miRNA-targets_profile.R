@@ -473,13 +473,12 @@ for(mirna in names(general_miRNAs)){
                    width = 20, height = 7, dpi = 300,bg = "white")
             
             # Create row of correlation matrix only with lfc
-            lfc_row_gene <- df_long_complete[df_long_complete$shape_group == "Gene", c("LFC","time", "stress")]
+	    df_long_complete_sig <- df_long_complete[df_long_complete$significance == "Significativo",]
+            lfc_row_gene <- df_long_complete_sig[df_long_complete_sig$shape_group == "Gene", c("LFC","time", "stress")]
             colnames(lfc_row_gene) <- c("LFC_gene", "time","stress")
-            lfc_row_micro <- df_long_complete[df_long_complete$shape_group == "microRNA", c("LFC","time", "stress")]
+            lfc_row_micro <- df_long_complete_sig[df_long_complete_sig$shape_group == "microRNA", c("LFC","time", "stress")]
             colnames(lfc_row_micro) <- c("LFC_micro", "time","stress")
             lfc_row <- merge(lfc_row_gene, lfc_row_micro, by = c("time","stress"))
-            lfc_row$microRNA <- mirna
-            lfc_row$Gene <- gene
             
             # Save the row only if bpth LFC are higher than 0.5
             for (i in 1:nrow(lfc_row)) {
@@ -513,39 +512,98 @@ for(mirna in names(general_miRNAs)){
 print("Claculating the correlation...")
 
 write.table(correlation_table,paste0(path_out_analysis2,"/Correlation_table.txt"))
+
 # Calculate the correlation to a No normal data distribution
-cor_spearman <- cor.test(correlation_table$LFC_gene, correlation_table$LFC_micro, method = "spearman")
-print(cor_spearman)
+correlation_table$LFC_gene_jitter <- jitter(correlation_table$LFC_gene)
+correlation_table$LFC_micro_jitter <- jitter(correlation_table$LFC_micro)
+cor_spearman <- cor.test(correlation_table$LFC_gene_jitter, correlation_table$LFC_micro_jitter, method = "spearman")
 
-cor_kendall <- cor.test(correlation_table$LFC_gene, correlation_table$LFC_micro, method = "kendall")
-print(cor_kendall)
+# Calcula el valor máximo absoluto para ambos ejes
+max_abs_x <- max(abs(correlation_table$LFC_gene), na.rm = TRUE)
+max_abs_y <- max(abs(correlation_table$LFC_micro), na.rm = TRUE)
 
-# Create the plot
 p <- plot_ly(correlation_table, x = ~LFC_gene, y = ~LFC_micro,
-               text = ~paste("microRNA: ", microRNA, '<br>Gene:', Gene),
-               color = ~stress,
-               type = 'scatter',
-               mode = 'markers')
+             text = ~paste("microRNA: ", microRNA, '<br>Gene:', Gene, '<br>Time:', time),
+             color = ~stress,
+             type = 'scatter',
+             mode = 'markers') %>%
+  layout(
+    title = list(
+      text = 'microRNA-mRNA TARGETS CORRELATION DOTPLOT',   # Título del gráfico
+      font = list(size = 22)         # Tamaño de la fuente del título
+    ),
+    xaxis = list(
+      title = 'Log Fold Change (Gene)',  # Título del eje X
+      titlefont = list(size = 18),        # Tamaño de la fuente del título del eje X
+      tickfont = list(size = 14)          # Tamaño de la fuente de las marcas del eje X
+    ),
+    yaxis = list(
+      title = 'Log Fold Change (microRNA)',  # Título del eje Y
+      titlefont = list(size = 18),            # Tamaño de la fuente del título del eje Y
+      tickfont = list(size = 14)              # Tamaño de la fuente de las marcas del eje Y
+    ),
+    legend = list(
+      font = list(size = 18)  # Tamaño de la fuente de la leyenda
+    )
+  )
 
 # Extract the Spearman correlation coeficient
 spearman_coefficient <- cor_spearman$estimate
+spearman_p <- cor_spearman$p.value
 
-# Add anotation to the plot
+# Añade la anotación a la gráfica
 p <- p %>% layout(
   annotations = list(
     x = 4,  # Coordenada x para la anotación
     y = 10,  # Coordenada y para la anotación
-    text = paste("Correlación Spearman:", round(spearman_coefficient, 2)),  # Texto de la anotación
+    text = paste("Correlación Spearman:", round(spearman_coefficient, digits = 4), '<br>p-value:', round(spearman_p, digits = 10)),  # Texto de la anotación
     showarrow = FALSE,  # Ocultar la flecha
     xref = "x",  # Referencia de la coordenada x
     yref = "y",  # Referencia de la coordenada y
     xanchor = 'left',  # Alineación horizontal del texto
-    yanchor = 'bottom'  # Alineación vertical del texto
-  )
+    yanchor = 'bottom',  # Alineación vertical del texto
+    font = list(size = 18)
+  ),
+  xaxis = list(range = c(-(max_abs_y + 0.5), (max_abs_y + 0.5))),  # Configura el rango del eje x
+  yaxis = list(range = c(-(max_abs_y + 0.5), (max_abs_y +0.5)))   # Configura el rango del eje y
 )
 
 # Save the plot as HTML file
 htmlwidgets::saveWidget(p, paste0(path_out_analysis2,"/Correlation_dotplot.html"), selfcontained = TRUE)
+
+# Calcula el valor máximo absoluto para ambos ejes
+max_abs_x <- max(abs(correlation_table$LFC_micro), na.rm = TRUE) +0.5
+max_abs_y <- max(abs(correlation_table$LFC_gene), na.rm = TRUE) + 0.5
+
+# Extract the Spearman correlation coeficient
+spearman_coefficient <- cor_spearman$estimate
+spearman_p <- cor_spearman$p.value
+
+correlation_plot <- ggplot(correlation_table, aes(x = LFC_micro, y = LFC_gene, color = stress)) +
+  geom_point(size = 2) +
+  xlim(-max_abs_x, max_abs_x) +  # Ajusta los límites del eje x
+  ylim(-max_abs_y, max_abs_y) +  # Ajusta los límites del eje y
+  geom_vline(xintercept = 0, linetype = "dashed", color = "black") +  # Línea vertical en x = 0
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black") +  # Línea horizontal en y = 0
+  annotate("text", 
+           label = paste("Spearman's correlation:", round(spearman_coefficient, digits = 4), 
+                         "\np-value:", round(spearman_p, digits = 10)), 
+           x = 7, y = 6, size = 4, color = "black") +  # Añadir un comentario
+  theme_classic() +  # Estilo de tema minimalista
+  labs(x = "microRNA LFC", y = "Genes LFC", color = "Stress")  +  # Etiquetas de los ejes y la leyenda
+  theme(
+    plot.title = element_text(size = 16),      # Tamaño y estilo del título del gráfico
+    axis.title.x = element_text(size = 14, face = "bold"),                    # Tamaño del título del eje X
+    axis.title.y = element_text(size = 14, face = "bold"),                    # Tamaño del título del eje Y
+    axis.text.x = element_text(size = 12),                     # Tamaño de las etiquetas del eje X
+    axis.text.y = element_text(size = 12),                     # Tamaño de las etiquetas del eje Y
+    legend.title = element_text(size = 14),     # Tamaño y estilo del título de la leyenda
+    legend.text = element_text(size = 12),                     # Tamaño del texto de la leyenda
+    legend.position = "top"                                    # Colocar la leyenda en la parte superior
+  )
+
+ggsave("/home/marnuesa/Documentos/Omics_integration/Results/Integration_microRNA/Network_files/CORRELATION_PLOT.png", 
+       plot = correlation_plot, width = 10, height = 10, bg = "white")
 
 ############################### Analysis 3 #####################################
 
