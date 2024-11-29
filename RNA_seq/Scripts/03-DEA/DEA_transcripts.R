@@ -20,6 +20,10 @@
 ##  log2FoldChange and lfcSE from lfcShrink. In addition to the raw data
 ##  obtained in the analysis, this script also provides tables with those
 ##  sequences with an adjusted p-value lower than 0.05.
+##
+##  Information: It is structured in two analysis: batch1 and batch2
+##  because samples of cold in time three were sequenced in other
+##  time with other control samples.
 ##                                                                            
 ##                                                                            
 ##  Author: Marta Núñez Salvador
