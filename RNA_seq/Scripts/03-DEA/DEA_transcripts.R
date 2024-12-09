@@ -314,7 +314,7 @@ for (time in unique(metadata_batch2$Time)) {
                                      colData = metadata_subproject,
                                      design = ~Group)
   # Pre-filtering.
-  keep <- rowSums(counts(ddsTxi) > 5) >= 5
+  keep <- rowSums(counts(ddsTxi) > 5) >= 2
   ddsTxi<- ddsTxi[keep,]
 
   # Perform the median of ratios method of normalization
@@ -346,7 +346,7 @@ for (time in unique(metadata_batch2$Time)) {
   for(stress in unique(metadata_subproject$Condition)){
     if (stress != "control") {
       ### Extract results for the specified comparison (treatment vs. control at the given time point) 
-      res <- results(dds, name=paste0("Group_",stress,"_",time,"_vs_control_",time), alpha = alpha_value)
+      res <- results(dds, name=paste0("Group_",stress,"_",time,"_vs_control_",time),lfcThreshold = 0.585, alpha = alpha_value)
       
       ### Perform LFC shrinkage to stabilize the estimates, especially for genes with low counts or high variability.
       shrunk <- lfcShrink(dds, coef=paste0("Group_",stress,"_",time,"_vs_control_",time), res=res)
