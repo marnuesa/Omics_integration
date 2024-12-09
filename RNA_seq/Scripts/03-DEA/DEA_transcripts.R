@@ -154,6 +154,8 @@ path_out_vp <- paste(path_graph, '02-Volcano_plots', sep = '/')
 # Create directories if they do not exist
 dir.create(path_raw_out, recursive = TRUE, showWarnings = FALSE)
 dir.create(path_sig_out, recursive = TRUE, showWarnings = FALSE)
+dir.create(path_normalize, recursive = TRUE, showWarnings = FALSE)
+dir.create(path_normalize_filter, recursive = TRUE, showWarnings = FALSE)
 dir.create(path_out_ea, recursive = TRUE, showWarnings = FALSE)
 dir.create(path_out_vp, recursive = TRUE, showWarnings = FALSE)
 
@@ -196,7 +198,7 @@ for (time in unique(metadata_batch1$Time)) {
   genes_normalized_counts <- counts(dds_genes_norm, normalized=TRUE)
 
   # Save normalize counts table
-  write.table(genes_normalized_counts, file=paste0(path_normalize,"Table_normalize_counts_",time,".tsv"),sep="\t",row.names=TRUE,col.names=TRUE)
+  write.table(genes_normalized_counts, file=paste0(path_normalize,"Table_normalize_counts_T",time,".tsv"),sep="\t",row.names=TRUE,col.names=TRUE)
   
   # Exploratory analysis and visualization (variance stabilizing transformation)
   vsd_dds <- vst(ddsTxi, blind = FALSE)
@@ -284,7 +286,7 @@ for (time in unique(metadata_batch1$Time)) {
   DE_genes_list <- unique(DE_genes_list)
   genes_normalized_counts_normalize <- genes_normalized_counts[rownames(genes_normalized_counts) %in% DE_genes_list, ]
   # Save table
-  write.table(genes_normalized_counts, file=paste0(path_normalize_filter,"Table_normalize_filter_",time,".tsv"),sep="\t",row.names=TRUE,col.names=TRUE)
+  write.table(genes_normalized_counts, file=paste0(path_normalize_filter,"Table_normalize_filter_T",time,".tsv"),sep="\t",row.names=TRUE,col.names=TRUE)
 }
 
 
@@ -322,7 +324,7 @@ for (time in unique(metadata_batch2$Time)) {
   genes_normalized_counts <- counts(dds_genes_norm, normalized=TRUE)
 
   # Save normalize counts table
-  write.table(genes_normalized_counts, file=paste0(path_normalize,"Table_normalize_counts_",time,".tsv"),sep="\t",row.names=TRUE,col.names=TRUE)
+  write.table(genes_normalized_counts, file=paste0(path_normalize,"Table_normalize_counts_batch2_T",time,".tsv"),sep="\t",row.names=TRUE,col.names=TRUE)
   
   # Exploratory analysis and visualization (variance stabilizing transformation)
   vsd_dds <- vst(ddsTxi, blind = FALSE)
@@ -410,6 +412,6 @@ for (time in unique(metadata_batch2$Time)) {
   DE_genes_list <- unique(DE_genes_list)
   genes_normalized_counts_normalize <- genes_normalized_counts[rownames(genes_normalized_counts) %in% DE_genes_list, ]
   # Save table
-  write.table(genes_normalized_counts, file=paste0(path_normalize_filter,"Table_normalize_filter_batch2_",time,".tsv"),sep="\t",row.names=TRUE,col.names=TRUE)
+  write.table(genes_normalized_counts, file=paste0(path_normalize_filter,"Table_normalize_filter_batch2_T",time,".tsv"),sep="\t",row.names=TRUE,col.names=TRUE)
 }
 
