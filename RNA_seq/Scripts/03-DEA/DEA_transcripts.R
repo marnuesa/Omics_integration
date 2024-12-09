@@ -146,6 +146,8 @@ path_graph <- args$graphs
 # Create output paths
 path_raw_out <- paste(path_out, '01-DEA_raw', specie, project, sep = '/')
 path_sig_out <- paste(path_out, '02-DEA_sig', specie, project, sep = '/')
+path_normalize <- paste(path_out, '03-Table_normalize', specie, project, sep = '/')
+path_normalize_filter <- paste(path_out, '04-Table_normalize_filter', specie, project, sep = '/')
 path_out_ea <- paste(path_graph, '01-PCA_graphs', sep = '/')
 path_out_vp <- paste(path_graph, '02-Volcano_plots', sep = '/')
 
@@ -186,6 +188,15 @@ for (time in unique(metadata_batch1$Time)) {
   # Pre-filtering.
   keep <- rowSums(counts(ddsTxi) > 5) >= 5
   ddsTxi<- ddsTxi[keep,]
+
+  # Perform the median of ratios method of normalization
+  dds_genes_norm <- estimateSizeFactors(ddsTxi)
+
+  # Get the normalized matrix
+  genes_normalized_counts <- counts(dds_genes_norm, normalized=TRUE)
+
+  # Save normalize counts table
+  write.table(genes_normalized_counts, file=paste0(path_normalize,"Table_normalize_counts_",time,".tsv"),sep="\t",row.names=TRUE,col.names=TRUE)
   
   # Exploratory analysis and visualization (variance stabilizing transformation)
   vsd_dds <- vst(ddsTxi, blind = FALSE)
@@ -201,7 +212,8 @@ for (time in unique(metadata_batch1$Time)) {
   ## Relevel the 'Group' factor to set the specified control group at the given time as the reference level.
   dds$Group <- relevel(dds$Group, ref=paste0("control_",time))
   dds <- DESeq(dds)
-  
+
+  DE_genes_list <- c()
   ## Obtain results from each contrast
   for(stress in unique(metadata_subproject$Condition)){
     if (stress != "control") {
@@ -228,6 +240,9 @@ for (time in unique(metadata_batch1$Time)) {
       sig <- res_tb %>%
         dplyr::filter(padj < alpha_value)
       write.csv(sig,paste0(path_sig_out,"/",stress,"_T",time,"_dea_sig.csv"),row.names = FALSE,quote = FALSE)
+
+      ### save DE genes IDs
+      DE_genes_list <- c(DE_genes_list,sig$seq)
       
       ### Create a volcano plot
       res_tb$expression_type <- "No differentially expressed"
@@ -265,6 +280,11 @@ for (time in unique(metadata_batch1$Time)) {
       ggsave(paste0(path_out_vp,"/",stress,"_T",time,".png"), plot = p, width = 8, height = 6, dpi = 300)
     }
   }
+  # Filter normalize df
+  DE_genes_list <- unique(DE_genes_list)
+  genes_normalized_counts_normalize <- genes_normalized_counts[rownames(genes_normalized_counts) %in% DE_genes_list, ]
+  # Save table
+  write.table(genes_normalized_counts, file=paste0(path_normalize_filter,"Table_normalize_filter_",time,".tsv"),sep="\t",row.names=TRUE,col.names=TRUE)
 }
 
 
@@ -294,6 +314,15 @@ for (time in unique(metadata_batch2$Time)) {
   # Pre-filtering.
   keep <- rowSums(counts(ddsTxi) > 5) >= 5
   ddsTxi<- ddsTxi[keep,]
+
+  # Perform the median of ratios method of normalization
+  dds_genes_norm <- estimateSizeFactors(ddsTxi)
+
+  # Get the normalized matrix
+  genes_normalized_counts <- counts(dds_genes_norm, normalized=TRUE)
+
+  # Save normalize counts table
+  write.table(genes_normalized_counts, file=paste0(path_normalize,"Table_normalize_counts_",time,".tsv"),sep="\t",row.names=TRUE,col.names=TRUE)
   
   # Exploratory analysis and visualization (variance stabilizing transformation)
   vsd_dds <- vst(ddsTxi, blind = FALSE)
@@ -309,7 +338,8 @@ for (time in unique(metadata_batch2$Time)) {
   ## Relevel the 'Group' factor to set the specified control group at the given time as the reference level.
   dds$Group <- relevel(dds$Group, ref=paste0("control_",time))
   dds <- DESeq(dds)
-  
+
+  DE_genes_list <- c()
   ## Obtain results from each contrast
   for(stress in unique(metadata_subproject$Condition)){
     if (stress != "control") {
@@ -336,7 +366,10 @@ for (time in unique(metadata_batch2$Time)) {
       sig <- res_tb %>%
         dplyr::filter(padj < alpha_value)
       write.csv(sig,paste0(path_sig_out,"/",stress,"_T",time,"_dea_sig.csv"),row.names = FALSE,quote = FALSE)
-      
+
+      ### save DE genes IDs
+      DE_genes_list <- c(DE_genes_list,sig$seq)
+    
       ### Create a volcano plot
       res_tb$expression_type <- "No differentially expressed"
       res_tb$expression_type[res_tb$padj < alpha_value & res_tb$Shrunkenlog2FoldChange > 0] <- "UP-regulated"
@@ -373,5 +406,10 @@ for (time in unique(metadata_batch2$Time)) {
       ggsave(paste0(path_out_vp,"/",stress,"_T",time,".png"), plot = p, width = 8, height = 6, dpi = 300)
     }
   }
+  # Filter normalize df
+  DE_genes_list <- unique(DE_genes_list)
+  genes_normalized_counts_normalize <- genes_normalized_counts[rownames(genes_normalized_counts) %in% DE_genes_list, ]
+  # Save table
+  write.table(genes_normalized_counts, file=paste0(path_normalize_filter,"Table_normalize_filter_batch2_",time,".tsv"),sep="\t",row.names=TRUE,col.names=TRUE)
 }
 
