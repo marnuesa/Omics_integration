@@ -139,12 +139,14 @@ path_graph <- args$graphs
 # Create output paths
 path_raw_out <- paste(path_out, '01-DEA_raw', specie, project, sep = '/')
 path_sig_out <- paste(path_out, '02-DEA_sig', specie, project, sep = '/')
+path_normalize <- paste(path_out, '03-Table_normalize', specie, project, sep = '/')
 path_out_ea <- paste(path_graph, '01-PCA_graphs', sep = '/')
 path_out_vp <- paste(path_graph, '02-Volcano_plots', sep = '/')
 
 # Create directories if they do not exist
 dir.create(path_raw_out, recursive = TRUE, showWarnings = FALSE)
 dir.create(path_sig_out, recursive = TRUE, showWarnings = FALSE)
+dir.create(path_normalize, recursive = TRUE, showWarnings = FALSE)
 dir.create(path_out_ea, recursive = TRUE, showWarnings = FALSE)
 dir.create(path_out_vp, recursive = TRUE, showWarnings = FALSE)
 
@@ -169,6 +171,15 @@ for (time in unique(metadata$Time)) {
   # Pre-filtering; It filters sequences that are less than 5 times in 5 samples
   keep <- rowSums(countdata_subproject > 5) >= 5
   dds_matrix <- dds_matrix[keep,]
+
+  # Perform the median of ratios method of normalization
+  dds_micro_norm <- estimateSizeFactors(ddsTxi)
+
+  # Get the normalized matrix
+  micro_normalized_counts <- counts(dds_micro_norm, normalized=TRUE)
+
+  # Save normalize counts table
+  write.table(micro_normalized_counts, file=paste0(path_normalize,"Table_normalize_counts_T",time,".tsv"),sep="\t",row.names=TRUE,col.names=TRUE)
   
   # Exploratory analysis and visualization (variance stabilizing transformation)
   vsd_dds <- vst(dds_matrix, blind = FALSE)
