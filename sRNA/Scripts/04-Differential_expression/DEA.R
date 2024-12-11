@@ -173,13 +173,10 @@ for (time in unique(metadata$Time)) {
   dds_matrix <- dds_matrix[keep,]
 
   # Perform the median of ratios method of normalization
-  dds_micro_norm <- estimateSizeFactors(ddsTxi)
+  dds_micro_norm <- estimateSizeFactors(dds_matrix)
 
   # Get the normalized matrix
   micro_normalized_counts <- counts(dds_micro_norm, normalized=TRUE)
-
-  # Save normalize counts table
-  write.table(micro_normalized_counts, file=paste0(path_normalize,"Table_normalize_counts_T",time,".tsv"),sep="\t",row.names=TRUE,col.names=TRUE)
   
   # Exploratory analysis and visualization (variance stabilizing transformation)
   vsd_dds <- vst(dds_matrix, blind = FALSE)
@@ -196,6 +193,7 @@ for (time in unique(metadata$Time)) {
   dds$Group <- relevel(dds$Group, ref=paste0("control_",time))
   dds <- DESeq(dds)
 
+  DE_sRNA_list <- c()
   ## Obtain results from each contrast
   for(stress in unique(metadata_subproject$Condition)){
     if (stress != "control") {
@@ -222,6 +220,9 @@ for (time in unique(metadata$Time)) {
       sig <- res_tb %>%
         dplyr::filter(padj < alpha_value)
       write.csv(sig,paste0(path_sig_out,"/",stress,"_T",time,"_dea_sig.csv"),row.names = FALSE,quote = FALSE)
+
+      ### save DE genes IDs
+      DE_sRNA_list <- c(DE_sRNA_list,sig$seq)
       
       ### Create a volcano plot
       res_tb$expression_type <- "No differentially expressed"
@@ -260,4 +261,16 @@ for (time in unique(metadata$Time)) {
       ggsave(paste0(path_out_vp,"/",stress,"_T",time,".png"), plot = p, width = 8, height = 6, dpi = 300)
     }
   }
+  # Filter normalize df
+  DE_sRNA_list <- unique(DE_sRNA_list)
+  micro_normalized_counts_filter <- micro_normalized_counts[rownames(micro_normalized_counts) %in% DE_sRNA_list, ]
+  micro_normalized_counts_filter_named <- cbind(row.name = rownames(micro_normalized_counts), micro_normalized_counts_filter)
+
+  # Save normalize counts table
+  write.table(micro_normalized_counts_filter_named, 
+            file=paste0(path_normalize, "/Table_normalize_counts_T", time, ".tsv"),
+            sep="\t", 
+            row.names=FALSE, 
+            col.names=TRUE,  
+            quote=FALSE) 
 }
