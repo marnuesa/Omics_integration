@@ -181,7 +181,7 @@ for (time in unique(metadata_batch1$Time)) {
   
   # The tx2gene file was created using the transcriptome file headers.
   tx2gene <- read.table(paste0(path_metadata,"/tx2gene.txt"), sep = "\t", header = FALSE, stringsAsFactors = TRUE)
-  txi <- tximport(files_subproject, type = "salmon", tx2gene = tx2gene, countsFromAbundance = "lengthScaledTPM") 
+  txi <- tximport(files_subproject, type = "salmon", tx2gene = tx2gene, countsFromAbundance = "no") 
   
   # Let's construct a DESeqDataSet from the txi `object` and sample information in `sampletable`
   ddsTxi <- DESeqDataSetFromTximport(txi,
@@ -307,7 +307,7 @@ for (time in unique(metadata_batch2$Time)) {
   
   # The tx2gene file was created using the transcriptome file headers.
   tx2gene <- read.table(paste0(path_metadata,"/tx2gene.txt"), sep = "\t", header = FALSE, stringsAsFactors = TRUE)
-  txi <- tximport(files_subproject, type = "salmon", tx2gene = tx2gene, countsFromAbundance = "lengthScaledTPM") 
+  txi <- tximport(files_subproject, type = "salmon", tx2gene = tx2gene, countsFromAbundance = "no") 
   
   # Let's construct a DESeqDataSet from the txi `object` and sample information in `sampletable`
   ddsTxi <- DESeqDataSetFromTximport(txi,
