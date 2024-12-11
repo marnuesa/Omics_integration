@@ -196,7 +196,7 @@ for (time in unique(metadata_batch1$Time)) {
 
   # Get the normalized matrix
   genes_normalized_counts <- counts(dds_genes_norm, normalized=TRUE)
-  genes_normalized_counts_named <- cbind(row.name = rownames(genes_normalized_counts), genes_normalized_counts)
+  genes_normalized_counts_named <- cbind(Genes = rownames(genes_normalized_counts), genes_normalized_counts)
 
   # Save normalize counts table
   write.table(genes_normalized_counts_named, 
@@ -291,7 +291,7 @@ for (time in unique(metadata_batch1$Time)) {
   # Filter normalize df
   DE_genes_list <- unique(DE_genes_list)
   genes_normalized_counts_filter <- genes_normalized_counts[rownames(genes_normalized_counts) %in% DE_genes_list, ]
-  genes_normalized_counts_filter_named <- cbind(row.name = rownames(genes_normalized_counts_filter), genes_normalized_counts_filter)
+  genes_normalized_counts_filter_named <- cbind(Genes = rownames(genes_normalized_counts_filter), genes_normalized_counts_filter)
 
   # Save normalize counts table
   write.table(genes_normalized_counts_filter_named, 
@@ -338,7 +338,7 @@ for (time in unique(metadata_batch2$Time)) {
 
   # Get the normalized matrix
   genes_normalized_counts <- counts(dds_genes_norm, normalized=TRUE)
-  genes_normalized_counts_named <- cbind(row.name = rownames(genes_normalized_counts), genes_normalized_counts)
+  genes_normalized_counts_named <- cbind(Genes = rownames(genes_normalized_counts), genes_normalized_counts)
 
   # Save normalize counts table
   write.table(genes_normalized_counts_named, 
@@ -433,7 +433,7 @@ for (time in unique(metadata_batch2$Time)) {
   # Filter normalize df
   DE_genes_list <- unique(DE_genes_list)
   genes_normalized_counts_filter <- genes_normalized_counts[rownames(genes_normalized_counts) %in% DE_genes_list, ]
-  genes_normalized_counts_filter_named <- cbind(row.name = rownames(genes_normalized_counts_filter), genes_normalized_counts_filter)
+  genes_normalized_counts_filter_named <- cbind(Genes = rownames(genes_normalized_counts_filter), genes_normalized_counts_filter)
 
   # Save normalize counts table
   write.table(genes_normalized_counts_filter_named, 
