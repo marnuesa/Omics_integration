@@ -196,9 +196,15 @@ for (time in unique(metadata_batch1$Time)) {
 
   # Get the normalized matrix
   genes_normalized_counts <- counts(dds_genes_norm, normalized=TRUE)
+  genes_normalized_counts_named <- cbind(row.name = rownames(genes_normalized_counts), genes_normalized_counts)
 
   # Save normalize counts table
-  write.table(genes_normalized_counts, file=paste0(path_normalize,"/Table_normalize_counts_T",time,".tsv"),sep="\t",row.names=TRUE,col.names=TRUE)
+  write.table(genes_normalized_counts_named, 
+            file=paste0(path_normalize, "/Table_normalize_counts_T", time, ".tsv"),
+            sep="\t", 
+            row.names=FALSE, 
+            col.names=TRUE,  
+            quote=FALSE)    
   
   # Exploratory analysis and visualization (variance stabilizing transformation)
   vsd_dds <- vst(ddsTxi, blind = FALSE)
@@ -323,8 +329,17 @@ for (time in unique(metadata_batch2$Time)) {
   # Get the normalized matrix
   genes_normalized_counts <- counts(dds_genes_norm, normalized=TRUE)
 
+  # Get the normalized matrix
+  genes_normalized_counts <- counts(dds_genes_norm, normalized=TRUE)
+  genes_normalized_counts_named <- cbind(row.name = rownames(genes_normalized_counts), genes_normalized_counts)
+
   # Save normalize counts table
-  write.table(genes_normalized_counts, file=paste0(path_normalize,"/Table_normalize_counts_batch2_T",time,".tsv"),sep="\t",row.names=TRUE,col.names=TRUE)
+  write.table(genes_normalized_counts_named, 
+            file=paste0(path_normalize, "/Table_normalize_counts_batch2_T", time, ".tsv"),
+            sep="\t", 
+            row.names=FALSE, 
+            col.names=TRUE,  
+            quote=FALSE)    
   
   # Exploratory analysis and visualization (variance stabilizing transformation)
   vsd_dds <- vst(ddsTxi, blind = FALSE)
