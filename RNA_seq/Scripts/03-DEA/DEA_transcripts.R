@@ -437,7 +437,7 @@ for (time in unique(metadata_batch2$Time)) {
 
   # Save normalize counts table
   write.table(genes_normalized_counts_filter_named, 
-            file=paste0(path_normalize_filter, "/Table_normalize_counts_T", time, ".tsv"),
+            file=paste0(path_normalize_filter, "/Table_normalize_counts_Batch2_T", time, ".tsv"),
             sep="\t", 
             row.names=FALSE, 
             col.names=TRUE,  
