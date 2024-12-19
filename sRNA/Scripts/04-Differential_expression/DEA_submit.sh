@@ -27,7 +27,7 @@ source activate group_sRNA
 
 # Paths
 path_table=/home/nuezsal/Omics_integration/sRNA/Results/03-Fusion_count_tables_RF
-path_metadata=/home/nuezsal/Omics_integration/sRNA/Additional_info/metadata_sRNA.csv
+path_metadata=/home/nuezsal/Omics_integration/sRNA/Additional_info/metadata_sRNA.tsv
 path_dea=/home/nuezsal/Omics_integration/sRNA/Results/04-DEA
 path_graph=/home/nuezsal/Omics_integration/sRNA/Results/DESeq_graphs
 alpha=0.05
