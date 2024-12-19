@@ -253,5 +253,6 @@ for (time in unique(metadata$Time)) {
       ggsave(paste0(path_out_vp,"/",stress,"_T",time,".png"), plot = p, width = 8, height = 6, dpi = 300)
     }
   }
+  DE_sRNA_list <- unique(DE_sRNA_list)
   write.table(DE_sRNA_list, file = paste0(path_out,"/DE_seq.txt"), row.names = FALSE, col.names = FALSE, quote = FALSE)
 }
