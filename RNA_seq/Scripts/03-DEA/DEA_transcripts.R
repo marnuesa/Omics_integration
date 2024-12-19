@@ -152,8 +152,6 @@ path_out_vp <- paste(path_graph, '02-Volcano_plots', sep = '/')
 # Create directories if they do not exist
 dir.create(path_raw_out, recursive = TRUE, showWarnings = FALSE)
 dir.create(path_sig_out, recursive = TRUE, showWarnings = FALSE)
-dir.create(path_normalize, recursive = TRUE, showWarnings = FALSE)
-dir.create(path_normalize_filter, recursive = TRUE, showWarnings = FALSE)
 dir.create(path_out_ea, recursive = TRUE, showWarnings = FALSE)
 dir.create(path_out_vp, recursive = TRUE, showWarnings = FALSE)
 
