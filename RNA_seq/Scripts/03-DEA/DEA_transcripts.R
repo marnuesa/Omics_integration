@@ -146,8 +146,6 @@ path_graph <- args$graphs
 # Create output paths
 path_raw_out <- paste(path_out, '01-DEA_raw', specie, project, sep = '/')
 path_sig_out <- paste(path_out, '02-DEA_sig', specie, project, sep = '/')
-path_normalize <- paste(path_out, '03-Table_normalize', specie, project, sep = '/')
-path_normalize_filter <- paste(path_out, '04-Table_normalize_filter', specie, project, sep = '/')
 path_out_ea <- paste(path_graph, '01-PCA_graphs', sep = '/')
 path_out_vp <- paste(path_graph, '02-Volcano_plots', sep = '/')
 
@@ -190,21 +188,6 @@ for (time in unique(metadata_batch1$Time)) {
   # Pre-filtering.
   keep <- rowSums(counts(ddsTxi) > 5) >= 5
   ddsTxi<- ddsTxi[keep,]
-
-  # Perform the median of ratios method of normalization
-  dds_genes_norm <- estimateSizeFactors(ddsTxi)
-
-  # Get the normalized matrix
-  genes_normalized_counts <- counts(dds_genes_norm, normalized=TRUE)
-  genes_normalized_counts_named <- cbind(Genes = rownames(genes_normalized_counts), genes_normalized_counts)
-
-  # Save normalize counts table
-  write.table(genes_normalized_counts_named, 
-            file=paste0(path_normalize, "/Table_normalize_counts_T", time, ".tsv"),
-            sep="\t", 
-            row.names=FALSE, 
-            col.names=TRUE,  
-            quote=FALSE)    
   
   # Exploratory analysis and visualization (variance stabilizing transformation)
   vsd_dds <- vst(ddsTxi, blind = FALSE)
@@ -288,18 +271,6 @@ for (time in unique(metadata_batch1$Time)) {
       ggsave(paste0(path_out_vp,"/",stress,"_T",time,".png"), plot = p, width = 8, height = 6, dpi = 300)
     }
   }
-  # Filter normalize df
-  DE_genes_list <- unique(DE_genes_list)
-  genes_normalized_counts_filter <- genes_normalized_counts[rownames(genes_normalized_counts) %in% DE_genes_list, ]
-  genes_normalized_counts_filter_named <- cbind(Genes = rownames(genes_normalized_counts_filter), genes_normalized_counts_filter)
-
-  # Save normalize counts table
-  write.table(genes_normalized_counts_filter_named, 
-            file=paste0(path_normalize_filter, "/Table_normalize_counts_T", time, ".tsv"),
-            sep="\t", 
-            row.names=FALSE, 
-            col.names=TRUE,  
-            quote=FALSE)    
 }
 
 
@@ -329,24 +300,6 @@ for (time in unique(metadata_batch2$Time)) {
   # Pre-filtering.
   keep <- rowSums(counts(ddsTxi) > 5) >= 2
   ddsTxi<- ddsTxi[keep,]
-
-  # Perform the median of ratios method of normalization
-  dds_genes_norm <- estimateSizeFactors(ddsTxi)
-
-  # Get the normalized matrix
-  genes_normalized_counts <- counts(dds_genes_norm, normalized=TRUE)
-
-  # Get the normalized matrix
-  genes_normalized_counts <- counts(dds_genes_norm, normalized=TRUE)
-  genes_normalized_counts_named <- cbind(Genes = rownames(genes_normalized_counts), genes_normalized_counts)
-
-  # Save normalize counts table
-  write.table(genes_normalized_counts_named, 
-            file=paste0(path_normalize, "/Table_normalize_counts_batch2_T", time, ".tsv"),
-            sep="\t", 
-            row.names=FALSE, 
-            col.names=TRUE,  
-            quote=FALSE)    
   
   # Exploratory analysis and visualization (variance stabilizing transformation)
   vsd_dds <- vst(ddsTxi, blind = FALSE)
@@ -363,7 +316,6 @@ for (time in unique(metadata_batch2$Time)) {
   dds$Group <- relevel(dds$Group, ref=paste0("control_",time))
   dds <- DESeq(dds)
 
-  DE_genes_list <- c()
   ## Obtain results from each contrast
   for(stress in unique(metadata_subproject$Condition)){
     if (stress != "control") {
@@ -432,15 +384,6 @@ for (time in unique(metadata_batch2$Time)) {
   }
   # Filter normalize df
   DE_genes_list <- unique(DE_genes_list)
-  genes_normalized_counts_filter <- genes_normalized_counts[rownames(genes_normalized_counts) %in% DE_genes_list, ]
-  genes_normalized_counts_filter_named <- cbind(Genes = rownames(genes_normalized_counts_filter), genes_normalized_counts_filter)
-
-  # Save normalize counts table
-  write.table(genes_normalized_counts_filter_named, 
-            file=paste0(path_normalize_filter, "/Table_normalize_counts_Batch2_T", time, ".tsv"),
-            sep="\t", 
-            row.names=FALSE, 
-            col.names=TRUE,  
-            quote=FALSE)
+  write.table(DE_genes_list, file =paste0(path_out,"DE_genes.txt"), row.names = FALSE, col.names = FALSE, quote = FALSE)
 }
 
