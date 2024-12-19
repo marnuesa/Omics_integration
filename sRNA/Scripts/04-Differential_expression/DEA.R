@@ -150,7 +150,7 @@ dir.create(path_out_vp, recursive = TRUE, showWarnings = FALSE)
 
 # Create countdata and metadata tables
 countdata <- read.csv(paste0(path_table, '/fusion_abs-outer.csv'), header=TRUE, row.names = "seq",quote = "")
-metadata <- read.table(path_metadata, sep=',', header = TRUE, stringsAsFactors = TRUE,row.names = 1)
+metadata <- read.table(path_metadata, sep='\t', header = TRUE, stringsAsFactors = TRUE,row.names = 1)
 
 # This project have three times, each one will be a subproject which will be analised independiently
 for (time in unique(metadata$Time)) {
