@@ -382,6 +382,6 @@ for (time in unique(metadata_batch2$Time)) {
   }
   # Filter normalize df
   DE_genes_list <- unique(DE_genes_list)
-  write.table(DE_genes_list, file =paste0(path_out,"DE_genes.txt"), row.names = FALSE, col.names = FALSE, quote = FALSE)
+  write.table(DE_genes_list, file =paste0(path_out,"/DE_genes.txt"), row.names = FALSE, col.names = FALSE, quote = FALSE)
 }
 
