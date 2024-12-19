@@ -156,7 +156,7 @@ dir.create(path_out_ea, recursive = TRUE, showWarnings = FALSE)
 dir.create(path_out_vp, recursive = TRUE, showWarnings = FALSE)
 
 # Path and tables
-metadata <- read.table(paste0(path_metadata,"/metadata.txt"), sep="\t", header=TRUE,row.names = 1, stringsAsFactors = TRUE)
+metadata <- read.table(paste0(path_metadata,"/metadata_transcripts.tsv"), sep="\t", header=TRUE,row.names = 1, stringsAsFactors = TRUE)
 annotation_file <- read.table(paste0(path_metadata,"/DHL92_gene_description_v4.txt"), sep='\t', header= FALSE,quote = "")
 colnames(annotation_file) <- c('Gene','Description')
 
