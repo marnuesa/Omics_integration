@@ -28,10 +28,10 @@ path_mirbase=/home/nuezsal/Omics_integration/sRNA/Additional_info/02-Mod_databas
 path_PmiREN=/home/nuezsal/Omics_integration/sRNA/Additional_info/02-Mod_databases/PmiREN
 path_sRNAanno=/home/nuezsal/Omics_integration/sRNA/Additional_info/02-Mod_databases/sRNAanno
 path_ids_table=/home/nuezsal/Omics_integration/sRNA/Additional_info/species_id.csv
-mismatches=0
+mismatches=1
 
 # Ouput paths
-path_out=/home/nuezsal/Omics_integration/sRNA/Results/05-Identification_miRNAs_sinmis
+path_out=/home/nuezsal/Omics_integration/sRNA/Results/05-Identification_miRNAs
 
 # Threads
 num_threads=12
