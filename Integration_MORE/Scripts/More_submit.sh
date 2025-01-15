@@ -60,3 +60,22 @@ srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript normalize_transc
             --annotation $path_annot_trans
             
 echo -e "Gene normalization finish..."
+
+
+
+
+##################### METHYLOME ###########################            
+# Paths
+path_table_met=/home/nuezsal/Omics_integration/Methylome/Results/02-Bismark/04-Methylation_extractor
+path_metadata_met=/home/nuezsal/Omics_integration/Methylome/Additional_info
+path_out_met=/home/nuezsal/Omics_integration/Integration_MORE/Results/03-methylome_normalize
+path_annot_met=/home/nuezsal/Omics_integration/RNA_seq/Results/03-DEA_TH
+
+# Execution 
+srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript normalize_methylome.R \
+            --input $path_table_met \
+            --metadata $path_metadata_met \
+            --output $path_out_met \
+            --annotation $path_annot_met
+            
+echo -e "Gene normalization finish..."
