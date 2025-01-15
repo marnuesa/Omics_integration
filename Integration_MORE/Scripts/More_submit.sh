@@ -61,15 +61,20 @@ srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript normalize_transc
             
 echo -e "Gene normalization finish..."
 
+# Definir rutas de los archivos
+gene_file=/home/nuezsal/Omics_integration/RNA_seq/Additional_info/tx2gene.txt
+gff_file=/home/nuezsal/Omics_integration/RNA_seq/Additional_info/DHL92_v4.gff3
+output_dir=/home/nuezsal/Omics_integration/Integration_MORE/Results/Bed_files
 
-
+# Llamar al script principal con los argumentos
+bash Bed_files_create.sh -g "$gene_file" -f "$gff_file" -o "$output_dir"
 
 ##################### METHYLOME ###########################            
 # Paths
 path_table_met=/home/nuezsal/Omics_integration/Methylome/Results/02-Bismark/04-Methylation_extractor
 path_metadata_met=/home/nuezsal/Omics_integration/Methylome/Additional_info
 path_out_met=/home/nuezsal/Omics_integration/Integration_MORE/Results/03-methylome_normalize
-path_annot_met=/home/nuezsal/Omics_integration/RNA_seq/Results/03-DEA_TH
+path_annot_met=/home/nuezsal/Omics_integration/Integration_MORE/Results/Bed_files
 
 # Execution 
 srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript normalize_methylome.R \
