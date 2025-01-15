@@ -191,7 +191,10 @@ unique_annotations <- unique(combined_annotations)
 
 # Filter normalized counts by annotations
 filtered_counts <- normalized_counts[row.names(normalized_counts) %in% unique_annotations$seq, ]
-merged_table <- merge(filtered_counts, unique_annotations, by.x = "row.names", by.y = "seq")
+filtered_counts_df <- filtered_counts %>%
+  as.data.frame() %>%
+  tibble::rownames_to_column(var = "seq")
+merged_table <- merge(filtered_counts_df, unique_annotations, by.x = "row.names", by.y = "seq")
 
 # Handle duplicates
 duplicates <- duplicated(merged_table$Row.names)
