@@ -120,6 +120,8 @@ path_graph_out <- paste(path_out, '02-Boxplots', sep = '/')
 dir.create(path_table_out, recursive = TRUE, showWarnings = FALSE)
 dir.create(path_graph_out, recursive = TRUE, showWarnings = FALSE)
 
+print("######## Results files created ##########")
+       
 # Load count data and metadata
 DE_genes <- read.table(paste0(path_annot,"/DE_genes.txt"))
 metadata <- read.table(paste0(path_metadata,"/metadata_transcripts.tsv"), 
@@ -164,9 +166,11 @@ boxplot((raw_counts + 1), log = "y",
 dev.off()
 
 # Normalize counts
-dds <- estimateSizeFactors(dds)
+dds <- estimateSizeFactors(dds_Txi)
 normalized_counts <- counts(dds, normalized = TRUE)
 
+print("######## Counts normalized ##########")
+       
 # Normalized count boxplot
 png(paste0(path_graph_out, "/boxplot_normalized_counts.png"), width = 800, height = 600)
 par(las = 2, mar = c(8, 5, 4, 2) + 0.1)
