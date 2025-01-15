@@ -30,7 +30,7 @@ source activate group_sRNA
 path_table_sRNA=/home/nuezsal/Omics_integration/sRNA/Results/03-Fusion_count_tables_RF
 path_metadata_sRNA=/home/nuezsal/Omics_integration/sRNA/Additional_info
 path_out_sRNA=/home/nuezsal/Omics_integration/Integration_MORE/Results/01-sRNA_normalize
-path_annot_sRNA=/home/nuezsal/Omics_integration/sRNA/Results/06-miRNAs_grouped_by_family/Group_miRNAs_sig/cume/Omics_project/01-DEA_results_annot0
+path_annot_sRNA=/home/nuezsal/Omics_integration/sRNA/Results/06-miRNAs_grouped_by_family/Group_miRNAs_sig/cume/Omics_project/01-DEA_results_annot
 
 # Execution 
 srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript normalize_sRNA.R \
