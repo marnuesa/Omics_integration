@@ -166,7 +166,7 @@ boxplot((raw_counts + 1), log = "y",
 dev.off()
 
 # Normalize counts
-dds <- estimateSizeFactors(dds_Txi)
+dds <- estimateSizeFactors(ddsTxi)
 normalized_counts <- counts(dds, normalized = TRUE)
 
 print("######## Counts normalized ##########")
