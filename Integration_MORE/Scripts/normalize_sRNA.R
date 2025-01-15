@@ -172,6 +172,9 @@ dev.off()
 dds <- estimateSizeFactors(dds)
 normalized_counts <- counts(dds, normalized = TRUE)
 
+normalized_counts[is.na(normalized_counts)] <- 0  # Replace NAs with 0
+normalized_counts[normalized_counts == 0] <- 1  # Replace zero values (to avoid log(0))
+
 # Normalized count boxplot
 png(paste0(path_graph_out, "/boxplot_normalized_counts.png"), width = 800, height = 600)
 par(las = 2, mar = c(8, 5, 4, 2) + 0.1)
