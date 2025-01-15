@@ -123,12 +123,15 @@ path_graph_out <- paste(path_out, '02-Boxplots', sep = '/')
 dir.create(path_table_out, recursive = TRUE, showWarnings = FALSE)
 dir.create(path_graph_out, recursive = TRUE, showWarnings = FALSE)
 
+print("######## Results files created ##########")
 
 # Load count data and metadata
 count_data <- read.table(paste0(path_table,"/fusion_abs-outer.csv"), 
                          sep = ",", header = TRUE, row.names = 1)
 metadata <- read.table(paste0(path_metadata,"/metadata_sRNA.tsv"), 
                        sep = "\t", header = TRUE, stringsAsFactors = TRUE)
+
+print("######## Count data loaded ##########")
 
 # Clean and prepare metadata
 metadata$SampleID <- gsub("_Sample", "", metadata$MORE)
@@ -151,6 +154,8 @@ dds <- DESeqDataSetFromMatrix(countData = count_data,
 # Pre-filtering.
 keep <- rowSums(counts(dds) > 5) >= 10
 dds<- dds[keep,]
+
+print("######## Indepences filter done ##########")
 
 # Raw count boxplot
 raw_counts <- counts(dds)
@@ -175,6 +180,8 @@ boxplot((normalized_counts + 1), log = "y",
         main = "Distribution of sRNA Normalized Counts",
         col = metadata$Color)
 dev.off()
+
+print("######## Counts normalized ##########")
 
 # Load and process annotated tables
 annotated_files <- list.files(path_annot, full.names = TRUE)
