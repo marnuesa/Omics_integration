@@ -43,8 +43,6 @@ echo -e "microRNA normalization finish..."
 
 
 
-
-
 ##################### TRANSCRIPTS ###########################            
 # Paths
 path_table_trans=/home/nuezsal/Omics_integration/RNA_seq/Results/02-Salmon
@@ -68,6 +66,8 @@ output_dir=/home/nuezsal/Omics_integration/Integration_MORE/Results/Bed_files
 
 # Llamar al script principal con los argumentos
 bash Bed_files_create.sh -g "$gene_file" -f "$gff_file" -o "$output_dir"
+
+
 
 ##################### METHYLOME ###########################            
 # Paths

@@ -1,30 +1,29 @@
-# Integration Omics with StategRa
-
 ################################################################################
-##                                                                            
-##  Normalization and filter transcripts count tables                 
-##                                                                            
-##  1. Metadata and Counts Processing
-##
-##  This program processes the metadata and counts data from a RNA-seq 
-##  experiment. It normalizes the count data by DESeq2’s median of ratios, 
-##  assigns stress-specific colors 
-##  for visualization.
-##
-##  2. Filter by DE genes
-##
-##  The table with normalize counts is filtered by genes which are 
-##  differential expression in some combination of time and stress. 
-##
-##  3. Data Visualization
-##
-##  The script generates boxplots to visualize the distribution of raw and normalized 
-##  counts, color-coded by stress conditions.
-##                                                                            
-##  Author: Marta Núñez Salvador
-##  Version: 1.0                                          
-##  Date: 20/12/2024                                                          
-##                                                                            
+##                                                                            ##
+##  Methylation Regions Processing and M-Value Calculation                    ##
+##                                                                            ##
+##  1. Metadata and Methylation Data Processing                               ##
+##                                                                            ##
+##  This program processes methylation data and metadata to calculate         ##
+##  M-values for specific genomic regions. It handles methylation data in     ##
+##  CpG and CHH contexts, focusing on upstream regions for CpG and gene       ##
+##  regions for CHH.                                                          ##
+##                                                                            ##
+##  2. Region-Specific Filtering                                              ##
+##                                                                            ##
+##  The methylation data is filtered based on genomic regions (genes and      ##
+##  upstream regions) and context (CpG and CHH).                              ##
+##                                                                            ##
+##  3. M-Value Calculation and Visualization                                  ##
+##                                                                            ##
+##  The script calculates M-values (log2 ratio of methylated to unmethylated  ##
+##  counts) and generates boxplots to visualize methylation patterns across   ##
+##  different conditions.                                                     ##
+##                                                                            ##
+##  Author: Marta Núñez Salvador                                              ##
+##  Version: 1.1                                                              ##
+##  Date: 20/12/2024                                                          ##
+##                                                                            ##
 ################################################################################
 
 # Load necessary libraries
@@ -39,63 +38,48 @@ suppressMessages(library("argparse"))
 #' @return List with the argument values
 
 get_arguments <- function() {
-  
-  # create parser object
-  parser <- ArgumentParser(prog = 'Normalize_transcripts.R',
+  parser <- ArgumentParser(prog = 'Methylation_Mvalue_Calculation.R',
                            description = '
-    This program takes the tables of genes absolute counts and metadata:
-    1. Metadata and Counts Processing
+    This program processes methylation data to calculate M-values for specific
+    genomic regions:
     
-     This program processes the metadata and counts data from RNA-seq
-     experiment. It normalizes the count data by DESeq2’s median of ratios,
-     assigns stress-specific colors
-     for visualization.
+    1. Metadata and Methylation Data Processing
     
-     2. Filter by DE microRNA
+    Processes methylation data and metadata to calculate M-values in CpG and
+    CHH contexts, focusing on upstream regions (CpG) and gene regions (CHH).
     
-     The table with normalize counts is filtered by genes which are differential
-     expression in some combination of time and stress.
+    2. Region-Specific Filtering
     
-     3. Data Visualization
+    Filters methylation data by genomic regions and context.
     
-     The script generates boxplots to visualize the distribution of raw and normalized
-     counts, color-coded by stress conditions',
+    3. Visualization
+    
+    Generates boxplots to visualize M-value distributions across conditions.',
                            formatter_class = 'argparse.RawTextHelpFormatter')
   
   required <- parser$add_argument_group('required arguments')
   
-  # specify our desired options 
-  # by default ArgumentParser will add an help option 
   required$add_argument('-i', '--input',
                         type = 'character',
-                        help = 'RNAseq project directory path.',
+                        help = 'Methylation project directory path.',
                         required = TRUE)
   required$add_argument('-o', '--output',
                         type = 'character',
-                        help = 'Results path',
+                        help = 'Results output path.',
                         required = TRUE)
   required$add_argument('-m', '--metadata',
                         type = 'character',
-                        help = 'path were metadata is save',
+                        help = 'Path to metadata file.',
                         required = TRUE)
   required$add_argument('-a', '--annotations',
                         type = 'character',
-                        help = "path were DE genes are save")
+                        help = 'Path to BED files for genomic regions.',
+                        required = TRUE)
   
-  # Arguments list
   args <- parser$parse_args()
   
-  #  Check for missing arguments
-  expected_arguments <- c('input', 'output', 'metadata','annotations')
-  if (any(sapply(args, is.null))) {
-    empty_args <- names(args[sapply(args, is.null)])
-    error_message <- paste('\n\tError. Unspecified argument:', empty_args, sep = ' ')
-    stop(error_message)
-  }
-  
-  # Check if the input directory exists
   if (!dir.exists(args$input)) {
-    stop('Error. The input directory does not exist.')
+    stop('Error: Input directory does not exist.')
   }
   
   return(args)
