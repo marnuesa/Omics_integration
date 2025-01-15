@@ -194,7 +194,7 @@ filtered_counts <- normalized_counts[row.names(normalized_counts) %in% unique_an
 filtered_counts_df <- filtered_counts %>%
   as.data.frame() %>%
   tibble::rownames_to_column(var = "seq")
-merged_table <- merge(filtered_counts_df, unique_annotations, by.x = "row.names", by.y = "seq")
+merged_table <- merge(filtered_counts_df, unique_annotations, by = "seq")
 
 # Handle duplicates
 duplicates <- duplicated(merged_table$Row.names)
