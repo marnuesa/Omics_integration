@@ -39,8 +39,8 @@ if [[ -z "$gene_file" || -z "$gff_file" || -z "$bed_path" ]]; then
 fi
 
 # Definir rutas de salida
-output_up="$bed_path/00-CMelon_DHL92_v4_upstream.bed"
-output_genes="$bed_path/01-CMelon_DHL92_v4_genes.bed"
+output_up="$bed_path/CMelon_DHL92_v4_upstream.bed"
+output_genes="$bed_path/CMelon_DHL92_v4_genes.bed"
 
 mkdir -p "$bed_path"
 
