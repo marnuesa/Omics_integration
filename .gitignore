@@ -1,9 +1,11 @@
 sRNA/Libraries/
 sRNA/Results/
 sRNA/Results_old/
+sRNA/Libraries_old/
 sRNA/Additional_info/0*
 
 RNA_seq/Libraries/
+RNA_seq/Libraries_old/
 RNA_seq/Results/
 RNA_seq/Results_old/
 RNA_seq/Additional_info/Melon_salmon_ind/
