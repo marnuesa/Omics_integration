@@ -14,6 +14,10 @@
 #   This program execute Salmon pseudo-aligments to quantify each transcript
 #   using a reference genome
 #
+#   Author: Marta Núñez Salvador
+#   Date: 02/10/2024
+#   Version: 1.1 
+#
 ################################################################################
 
 #PATHs

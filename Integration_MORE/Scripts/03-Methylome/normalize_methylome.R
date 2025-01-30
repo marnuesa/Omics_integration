@@ -31,6 +31,7 @@ suppressMessages(library("methylKit"))
 suppressMessages(library(genomation))
 suppressMessages(library(tibble))
 suppressMessages(library("argparse"))
+suppressMessages(library(GenomicRanges))
 
 #' Get the command line arguments
 #' This function parse the command line arguments entered into the program.
@@ -107,25 +108,45 @@ dir.create(path_graph_out, recursive = TRUE, showWarnings = FALSE)
 print("######## Results files created ##########")
 
 files <- dir(path_table,pattern = "CX_report", full.names = TRUE)
+
 metadata <- read.table(paste0(path_metadata,"/metadata_methylome.tsv"), sep = "\t", header = TRUE)
+
 metadata$MORE <- gsub("_Sample", "", metadata$MORE)
+
 # Define colors for each stress condition
 condition_colors <- c(
-  "cold" = "#87CEFA",         # Light blue
-  "drought" = "#FFA07A",      # Salmon
-  "monosporascus" = "#FF69B4",# Hot pink
-  "control" = "#98FB98",      # Light green
-  "shortday" = "#FFD700"      # Gold
+  "C" = "#87CEFA",         # Light blue
+  "D" = "#FFA07A",      # Salmon
+  "MON" = "#FF69B4",# Hot pink
+  "NT" = "#98FB98",      # Light green
+  "SD" = "#FFD700"      # Gold
 )
-metadata$Color <- condition_colors[metadata$Condition]
+
+metadata$Color <- condition_colors[metadata$Stress]
 
 correspondance <- list("genes" = "CpG", "upstream" = "CHH")
-Meth_mvalues <- data.frame()
+
 for (type in c("genes", "upstream")){
+  print("####################")
+  print(type)
+  print("####################")
+  regions <- read.table(paste0(path_annot,"/CMelon_DHL92_v4_",type,".bed"), sep = "\t")
+    
+  regions_GR <- GRanges(
+      seqnames = regions$V1, 
+      ranges = IRanges(start = regions$V2, end = regions$V3),
+      strand = regions$V4,  # Añadir strand
+      gene_id = regions$V5  # Añadir ID del gen como metadato
+    )
+
+  Meth_mvalues <- data.frame()
   for(file in files){
     name <- basename(file)
     first_part <- strsplit(name, "\\.")[[1]][1]
     sample <- metadata[metadata$Sample == first_part, "MORE"]
+    print("####################")
+    print(sample)
+    print("####################")
     # read the files to a methylRawList object: myobj
     myobj=methRead(file,
                    sample.id=sample,
@@ -139,29 +160,27 @@ for (type in c("genes", "upstream")){
     
     myobj_list <- new("methylRawList", list(myobj), treatment = 0) 
     
-    regions <- read.table(paste0(path_annot,"/CMelon_DHL92_v4_",type,".bed"), sep = "\t")
-    
-    library(GenomicRanges)
-    
-    regions_GR <- GRanges(
-      seqnames = regions$V1, 
-      ranges = IRanges(start = regions$V2, end = regions$V3),
-      strand = regions$V4,  # Añadir strand
-      gene_id = regions$V5  # Añadir ID del gen como metadato
-    )
     region_methyl <- regionCounts(myobj_list, regions_GR)
    
     data <- getData(region_methyl[[1]])
+
+    print(head(data))
+
     # Combine chr, start, end, and strand to create the rowname column
     data$rowname <- paste(data$chr, data$start, data$end, ifelse(data$strand == "+", "F", "R"), sep = "_")
     
     # Calculate the 'sample' column as log2((numCs + 1) / (numTs + 1))
     data$sample <- log2((data$numCs + 1) / (data$numTs + 1))
-    
+
+    print("####################")
+    print(head(data))
+
     # Keep only the rowname and sample columns
     final_data <- unique(data[, c("rowname", "sample")])
     colnames(final_data) <- c("Position",sample)
     
+    print("####################")
+    print(head(final_data))
     # Merge this final_data with Meth_mvalues based on the 'rownames'
     if (nrow(Meth_mvalues) == 0) {
       # If Meth_mvalues is empty, just assign final_data to it
@@ -174,12 +193,13 @@ for (type in c("genes", "upstream")){
   
   # Supongamos que 'df' es tu data frame y quieres que la columna 'ID' sea rownames
   Meth_mvalues_bp <- column_to_rownames(Meth_mvalues, var = "Position")
-  
+
+  png(paste0(path_graph_out, "/boxplot_filtered_counts_",type,".png"), width = 800, height = 600)
   boxplot(Meth_mvalues_bp,
           ylab = "M-value", 
           main = "Distribution of M-value in methylated regions",
           col = metadata$Color)
-  png(paste0(path_graph_out, "/boxplot_filtered_counts_",type,".png"), width = 800, height = 600)
+ 
   dev.off()
   
   write.table(file = paste0(path_table_out,"/methylation_normalize_counts_",type,".tsv"),Meth_mvalues, sep = "\t", col.names = TRUE, row.names = FALSE, quote = FALSE)

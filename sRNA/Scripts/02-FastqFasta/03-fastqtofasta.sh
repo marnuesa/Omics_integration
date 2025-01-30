@@ -12,7 +12,9 @@
 #   This program create fasta from fastq.gz because the next 
 #   program needs fasta files
 #
-#
+#  Author: Marta Núñez Salvador
+#   Date: 20/09/2024
+#   Version: 1.1 
 ################################################################################
 # PATHs
 
@@ -34,11 +36,9 @@ sample_list=$( ls ${path_in}/ )
 # Iterate files list
 for sample in $sample_list
 do
-    gunzip "${path_in}/$sample"
-
     # fastqtofasta
     first_part=$(echo $sample | cut -d'.' -f1)
-    sed -n '1~4s/^@/>/p;2~4p' ${path_in}/${sample%.gz} > ${path_out}/${first_part}.fasta
+    zcat "${path_in}/$sample" | sed -n '1~4s/^@/>/p;2~4p' > ${path_out}/${first_part}.fasta
 done
 wait
 exit 0

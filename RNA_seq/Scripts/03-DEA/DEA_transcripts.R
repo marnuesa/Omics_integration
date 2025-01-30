@@ -109,12 +109,15 @@ get_arguments <- function() {
   required$add_argument('-g', '--graphs',
                         type = 'character',
                         help = 'Differential expression analysis graphs output directory path. If it does not exist, it will be created')
+  required$add_argument('-t', '--threshold',
+                        type = 'double',
+                        help = 'Threshold to the LFC of the DEA')
   
   # Arguments list
   args <- parser$parse_args()
   
   #  Check for missing arguments
-  expected_arguments <- c('input', 'output', 'metadata','alpha','specie', 'project','graphs')
+  expected_arguments <- c('input', 'output', 'metadata','alpha','specie', 'project','graphs', 'threshold')
   if (any(sapply(args, is.null))) {
     empty_args <- names(args[sapply(args, is.null)])
     error_message <- paste('\n\tError. Unspecified argument:', empty_args, sep = ' ')
@@ -142,6 +145,7 @@ alpha_value <- args$alpha
 specie <- args$specie
 project <- args$project
 path_graph <- args$graphs
+TH <- args$threshold
 
 # Create output paths
 path_raw_out <- paste(path_out, '01-DEA_raw', specie, project, sep = '/')
@@ -177,7 +181,7 @@ for (time in unique(metadata_batch1$Time)) {
   
   # The tx2gene file was created using the transcriptome file headers.
   tx2gene <- read.table(paste0(path_metadata,"/tx2gene.txt"), sep = "\t", header = FALSE, stringsAsFactors = TRUE)
-  txi <- tximport(files_subproject, type = "salmon", tx2gene = tx2gene, countsFromAbundance = "no") 
+  txi <- tximport(files_subproject, type = "salmon", tx2gene = tx2gene, countsFromAbundance = "no", txOut = FALSE) 
   
   # Let's construct a DESeqDataSet from the txi `object` and sample information in `sampletable`
   ddsTxi <- DESeqDataSetFromTximport(txi,
@@ -206,9 +210,15 @@ for (time in unique(metadata_batch1$Time)) {
   ## Obtain results from each contrast
   for(stress in unique(metadata_subproject$Condition)){
     if (stress != "control") {
-      ### Extract results for the specified comparison (treatment vs. control at the given time point) 
-      res <- results(dds, name=paste0("Group_",stress,"_",time,"_vs_control_",time),lfcThreshold = 0.585, alpha = alpha_value)
+      if (TH == 0){
+        ### Extract results for the specified comparison (treatment vs. control at the given time point) 
+        res <- results(dds, name=paste0("Group_",stress,"_",time,"_vs_control_",time), alpha = alpha_value)
+      }
       
+      else {
+        ### Extract results for the specified comparison (treatment vs. control at the given time point) 
+        res <- results(dds, name=paste0("Group_",stress,"_",time,"_vs_control_",time),lfcThreshold = TH, alpha = alpha_value)
+      }
       ### Perform LFC shrinkage to stabilize the estimates, especially for genes with low counts or high variability.
       shrunk <- lfcShrink(dds, coef=paste0("Group_",stress,"_",time,"_vs_control_",time), res=res)
       
@@ -224,15 +234,25 @@ for (time in unique(metadata_batch1$Time)) {
       
       ### Save table
       write.csv(res_tb,paste0(path_raw_out,"/",stress,"_T",time,"_dea_raw.csv"),row.names = FALSE,quote = FALSE)
-      
+
       #### Extract significant sequences and save it
       sig <- res_tb %>%
         dplyr::filter(padj < alpha_value)
       write.csv(sig,paste0(path_sig_out,"/",stress,"_T",time,"_dea_sig.csv"),row.names = FALSE,quote = FALSE)
 
+      ### Sorting table for FDR value 
+      sig_order <- sig[order(sig$padj, decreasing = FALSE), ]
+
+      ### Select first 1000 row or all of them
+      n_row <- min(200, nrow(sig_order))
+      top_row <- sig_order[1:n_row, ]
+
       ### save DE genes IDs
-      DE_genes_list <- c(DE_genes_list,sig$seq)
+      DE_genes_list <- c(DE_genes_list,top_row$seq)
       
+      ### Delete rows with NA
+      res_tb <- na.omit(res_tb)
+
       ### Create a volcano plot
       res_tb$expression_type <- "No differentially expressed"
       res_tb$expression_type[res_tb$padj < alpha_value & res_tb$Shrunkenlog2FoldChange > 0] <- "UP-regulated"
@@ -250,8 +270,9 @@ for (time in unique(metadata_batch1$Time)) {
         pull(label)
       names(labels) <- counts$expression_type
       
-      # Calculate limit x
+      # Calculate limit x and y 
       maxlfc <- max(abs(res_tb$Shrunkenlog2FoldChange))
+      maxpadj <- max(-log10(res_tb$padj), na.rm = TRUE)
       
       #### VP
       p <- ggplot(data = res_tb, aes(x = Shrunkenlog2FoldChange, y = -log10(padj), col = expression_type)) + 
@@ -265,6 +286,7 @@ for (time in unique(metadata_batch1$Time)) {
              x = "Log2 Fold Change", 
              y = "-Log10 (P-valor ajustado)") +
         scale_x_continuous(limits = c((-maxlfc - 0.5),(maxlfc + 0.5))) +
+        scale_y_continuous(limits = c(0,(maxpadj + 0.5))) +
         theme_bw()
       ggsave(paste0(path_out_vp,"/",stress,"_T",time,".png"), plot = p, width = 8, height = 6, dpi = 300)
     }
@@ -289,14 +311,14 @@ for (time in unique(metadata_batch2$Time)) {
   
   # The tx2gene file was created using the transcriptome file headers.
   tx2gene <- read.table(paste0(path_metadata,"/tx2gene.txt"), sep = "\t", header = FALSE, stringsAsFactors = TRUE)
-  txi <- tximport(files_subproject, type = "salmon", tx2gene = tx2gene, countsFromAbundance = "no") 
+  txi <- tximport(files_subproject, type = "salmon", tx2gene = tx2gene, countsFromAbundance = "no", txOut = FALSE) 
   
   # Let's construct a DESeqDataSet from the txi `object` and sample information in `sampletable`
   ddsTxi <- DESeqDataSetFromTximport(txi,
                                      colData = metadata_subproject,
                                      design = ~Group)
   # Pre-filtering.
-  keep <- rowSums(counts(ddsTxi) > 5) >= 2
+  keep <- rowSums(counts(ddsTxi) > 5) >= 3
   ddsTxi<- ddsTxi[keep,]
   
   # Exploratory analysis and visualization (variance stabilizing transformation)
@@ -317,8 +339,15 @@ for (time in unique(metadata_batch2$Time)) {
   ## Obtain results from each contrast
   for(stress in unique(metadata_subproject$Condition)){
     if (stress != "control") {
-      ### Extract results for the specified comparison (treatment vs. control at the given time point) 
-      res <- results(dds, name=paste0("Group_",stress,"_",time,"_vs_control_",time),lfcThreshold = 0.585, alpha = alpha_value)
+      if (TH == 0){
+        ### Extract results for the specified comparison (treatment vs. control at the given time point) 
+        res <- results(dds, name=paste0("Group_",stress,"_",time,"_vs_control_",time), alpha = alpha_value)
+      }
+      
+      else {
+        ### Extract results for the specified comparison (treatment vs. control at the given time point) 
+        res <- results(dds, name=paste0("Group_",stress,"_",time,"_vs_control_",time),lfcThreshold = TH, alpha = alpha_value)
+      }
       
       ### Perform LFC shrinkage to stabilize the estimates, especially for genes with low counts or high variability.
       shrunk <- lfcShrink(dds, coef=paste0("Group_",stress,"_",time,"_vs_control_",time), res=res)
@@ -336,14 +365,24 @@ for (time in unique(metadata_batch2$Time)) {
       ### Save table
       write.csv(res_tb,paste0(path_raw_out,"/",stress,"_T",time,"_dea_raw.csv"),row.names = FALSE,quote = FALSE)
       
-      #### Extract significant sequences and save it
+      ### Extract significant sequences and save it
       sig <- res_tb %>%
         dplyr::filter(padj < alpha_value)
       write.csv(sig,paste0(path_sig_out,"/",stress,"_T",time,"_dea_sig.csv"),row.names = FALSE,quote = FALSE)
 
+      ### Sorting table for FDR value 
+      sig_order <- sig[order(sig$padj, decreasing = FALSE), ]
+
+      ### Select first 1000 row or all of them
+      n_row <- min(200, nrow(sig_order))
+      top_row <- sig_order[1:n_row, ]
+
       ### save DE genes IDs
-      DE_genes_list <- c(DE_genes_list,sig$seq)
+      DE_genes_list <- c(DE_genes_list,top_row$seq)
     
+      ### Delete rows with NA
+      res_tb <- na.omit(res_tb)
+
       ### Create a volcano plot
       res_tb$expression_type <- "No differentially expressed"
       res_tb$expression_type[res_tb$padj < alpha_value & res_tb$Shrunkenlog2FoldChange > 0] <- "UP-regulated"
@@ -363,7 +402,8 @@ for (time in unique(metadata_batch2$Time)) {
       
       # Calculate limit x
       maxlfc <- max(abs(res_tb$Shrunkenlog2FoldChange))
-      
+      maxpadj <- max(-log10(res_tb$padj), na.rm = TRUE)
+
       #### VP
       p <- ggplot(data = res_tb, aes(x = Shrunkenlog2FoldChange, y = -log10(padj), col = expression_type)) + 
         geom_point() + 
@@ -376,12 +416,13 @@ for (time in unique(metadata_batch2$Time)) {
              x = "Log2 Fold Change", 
              y = "-Log10 (P-valor ajustado)") +
         scale_x_continuous(limits = c((-maxlfc - 0.5),(maxlfc + 0.5))) +
+        scale_y_continuous(limits = c(0,(maxpadj + 0.5))) +
         theme_bw()
       ggsave(paste0(path_out_vp,"/",stress,"_T",time,".png"), plot = p, width = 8, height = 6, dpi = 300)
     }
   }
   # Filter normalize df
   DE_genes_list <- unique(DE_genes_list)
-  write.table(DE_genes_list, file =paste0(path_out,"/DE_genes.txt"), row.names = FALSE, col.names = FALSE, quote = FALSE)
+  write.table(DE_genes_list, file =paste0(path_out,"/DE_genes_200.txt"), row.names = FALSE, col.names = FALSE, quote = FALSE)
 }
 

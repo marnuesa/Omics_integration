@@ -30,12 +30,11 @@
 #   - 3prime: A 1000 bp region downstream of the gene end 
 #   
 #   The third part, use a GTF of lncRNA in Cucumis melo to generate
-#   a bed file with three features od lncRNA:
+#   a bed file with three features of lncRNA:
 #
-#   - lncRNA: A region that starts where the precursor aligns and ends 
-#   at the sum of the start position plus its length
-#   - 5primelncRNA: A 1000 bp region upstream of the precursor start
-#   - 3primelncRNA: A 1000 bp region downstream of the gene end 
+#   - lncRNA: Since the start position to the end position in the GTF file
+#   - 5primelncRNA: A 1000 bp region upstream of lncRNA
+#   - 3primelncRNA: A 1000 bp region downstream of lncRNA
 #   
 #   At the end, the script add a column to all the files indicating the type of 
 #   feature it is.

@@ -14,8 +14,8 @@
 #
 #   This program executes the Group_miRNAs_by_family.r program.
 # 
-#   Author: Antonio Gonzalez Sanchez
-#   Date: 12/20/2023
+#   Author: Marta Núñez Salvador
+#   Date: 23/09/2024
 #   Version: 2.0 
 #
 #******************************************************************************
@@ -24,6 +24,7 @@
 module load anaconda
 source activate group_sRNA
 
+############################## With 1 mismatch #################################
 # Paths
 path_in_dea=/home/nuezsal/Omics_integration/sRNA/Results/04-DEA
 path_in_annot=/home/nuezsal/Omics_integration/sRNA/Results/05-Identification_miRNAs
@@ -33,10 +34,26 @@ path_out=/home/nuezsal/Omics_integration/sRNA/Results/06-miRNAs_grouped_by_famil
 data_type=mature
 
 # Execution 
-Rscript Group_miRNAs_by_family.r \
+srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript Group_miRNAs_by_family.r \
 	--dea $path_in_dea \
 	--annotation $path_in_annot \
 	--type $data_type \
 	--output $path_out
     
+############################## With 0 mismatch #################################
+# Paths
+path_in_dea=/home/nuezsal/Omics_integration/sRNA/Results/04-DEA
+path_in_annot=/home/nuezsal/Omics_integration/sRNA/Results/05-Identification_miRNAs_simm
+path_out=/home/nuezsal/Omics_integration/sRNA/Results/06-miRNAs_grouped_by_family_simm
+
+# Other variables
+data_type=mature
+
+# Execution 
+srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive  Rscript Group_miRNAs_by_family.r \
+	--dea $path_in_dea \
+	--annotation $path_in_annot \
+	--type $data_type \
+	--output $path_out
+
 exit 0

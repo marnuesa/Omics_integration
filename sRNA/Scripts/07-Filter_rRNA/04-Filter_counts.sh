@@ -18,8 +18,8 @@
 #   libraries, also calculating the averages of both types of counts in
 #   the different replicates of each condition for the sequences analysed.
 #
-#   Author: Antonio Gonzalez Sanchez
-#   Date: 20/09/2023
+#   Author: Marta Núñez Salvador
+#   Date: 20/10/2024
 #   Version: 1.1 
 #
 #******************************************************************************

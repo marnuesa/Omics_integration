@@ -12,6 +12,10 @@
 #   This script make the reverse complementary sequence of T3 sRNA because
 #   this fastq are the R2 libraries
 #
+#   Author: Marta Núñez Salvador
+#   Date: 18/09/2024
+#   Version: 1.1 
+#
 ################################################################################
 
 #MODULE

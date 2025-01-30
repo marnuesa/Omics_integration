@@ -11,6 +11,9 @@
 #   This script execute fastqc to do a post-trimming quality control with
 #   sRNA Clean Data
 #
+#   Author: Marta Núñez Salvador
+#   Date: 19/09/2024
+#   Version: 1.1 
 ################################################################################
 
 #MODULE

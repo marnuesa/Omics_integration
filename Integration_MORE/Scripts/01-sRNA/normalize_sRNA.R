@@ -131,10 +131,23 @@ count_data <- read.table(paste0(path_table,"/fusion_abs-outer.csv"),
 metadata <- read.table(paste0(path_metadata,"/metadata_sRNA.tsv"), 
                        sep = "\t", header = TRUE, stringsAsFactors = TRUE)
 
-print("######## Count data loaded ##########")
+print(head(count_data))
+# Ensure that the names match
+matching_columns <- metadata$Sample  # First column of metadata
 
-# Clean and prepare metadata
-metadata$SampleID <- gsub("_Sample", "", metadata$MORE)
+# Create a vector of new names based on the MORE column
+new_names <- metadata$MORE[match(colnames(count_data), matching_columns)]
+
+# Check for matches; if none, keep the original column name
+colnames(count_data) <- new_names
+
+print("######## Count data header ##########")
+print(head(count_data))
+
+print("######## Metadata header ##########")
+print(head(metadata))
+
+print("######## Count data loaded ##########")
 
 # Define colors for each stress condition
 condition_colors <- c(
@@ -172,9 +185,6 @@ dev.off()
 dds <- estimateSizeFactors(dds)
 normalized_counts <- counts(dds, normalized = TRUE)
 
-normalized_counts[is.na(normalized_counts)] <- 0  # Replace NAs with 0
-normalized_counts[normalized_counts == 0] <- 1  # Replace zero values (to avoid log(0))
-
 # Normalized count boxplot
 png(paste0(path_graph_out, "/boxplot_normalized_counts.png"), width = 800, height = 600)
 par(las = 2, mar = c(8, 5, 4, 2) + 0.1)
@@ -205,17 +215,37 @@ filtered_counts_df <- filtered_counts %>%
   as.data.frame() %>%
   tibble::rownames_to_column(var = "seq")
 merged_table <- merge(filtered_counts_df, unique_annotations, by = "seq")
-
 # Handle duplicates
-duplicates <- duplicated(merged_table$Row.names)
+duplicates <- duplicated(merged_table$seq)
 duplicate_rows <- merged_table[duplicates, ]
-filtered_table <- merged_table[!merged_table$Row.names %in% duplicate_rows$Row.names, ]
+filtered_table <- merged_table[!merged_table$seq %in% duplicate_rows$seq, ]
+write.table(file = paste0(path_table_out,"/sRNA_normalize_counts_sequences.tsv"),filtered_table,sep = "\t",col.names = TRUE, row.names = FALSE, quote = FALSE)
+
+seq_micro <- filtered_table[,c("seq","general_annot")]
+write.table(file = paste0(path_table_out,"/sRNA_normalize_counts_equivalences.tsv"),seq_micro,sep = "\t",col.names = TRUE, row.names = FALSE, quote = FALSE)
+
+# Open a connection to write the FASTA file
+fasta_file <- file(paste0(path_table_out,"/sRNA_sequences.fasta"), open = "w")
+
+# Loop through each row of the table and write in FASTA format
+apply(seq_micro, 1, function(row) {
+  # Write the header with '>'
+  writeLines(paste0(">", row["general_annot"]), fasta_file)
+  # Write the sequence
+  writeLines(row["seq"], fasta_file)
+})
+
+# Close the file
+close(fasta_file)
+
 
 # Summarize counts by annotation
 final_table <- filtered_table[, -1] %>%
   group_by_at(ncol(.)) %>%
   summarise(across(everything(), sum)) %>%
   column_to_rownames(var = "general_annot")
+
+print("######### Last plot ##############")
 
 # Boxplot for filtered and summarized counts
 png(paste0(path_graph_out, "/boxplot_filtered_counts.png"), width = 800, height = 600)
@@ -227,5 +257,5 @@ boxplot((final_table + 1), log = "y",
 dev.off()
 
 # Save normalize count table
-summed_table_final$miRNAs <- row.names(final_table)
+final_table$miRNAs <- row.names(final_table)
 write.table(file = paste0(path_table_out,"/sRNA_normalize_counts.tsv"),final_table,sep = "\t",col.names = TRUE, row.names = FALSE, quote = FALSE)

@@ -12,6 +12,10 @@
 #   This program create a Salmon index using the Melon genome v4 of Cucurbit 
 #   genomic web v2.0
 #
+#   Author: Marta Núñez Salvador
+#   Date: 02/10/2024
+#   Version: 1.1 
+#
 ################################################################################
 
 # MODULES

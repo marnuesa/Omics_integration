@@ -701,7 +701,7 @@ def filter_by_rnacentral(library_list: list, Rnacentral_dir: str,
             n2 = len([line for line in unalign if line.strip()[0] == '>'])
         finally:
             unalign.close()
-
+        print(n1,n2,library)
         # Get the percentage of sequences that have aligned with the database.
         try:
             total = n1 + n2

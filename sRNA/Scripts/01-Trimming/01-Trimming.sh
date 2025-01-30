@@ -20,6 +20,9 @@
 #       Output directory path
 #       Path to the file with Illumina adapters.
 #
+#   Author: Marta Núñez Salvador
+#   Date: 19/09/2024
+#   Version: 1.1 
 ################################################################################
 
 # MODULE

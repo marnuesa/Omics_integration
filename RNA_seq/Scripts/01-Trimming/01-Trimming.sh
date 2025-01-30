@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --ntasks=3               # Number of task
-#SBATCH --cpus-per-task=2              # Number of cpus
+#SBATCH --ntasks=20               # Number of task
+#SBATCH --cpus-per-task=4              # Number of cpus
 #SBATCH -t 1-00:00:00       # Runtime in minutes.
 #SBATCH --qos short         # The QoS to submit the job.
 #SBATCH --mem-per-cpu=3G           # Memory per cpu in G (see also --mem-per-cpu)
@@ -16,6 +16,10 @@
 #   Arguments:
 #       Fastq.gz file path
 #       Output directory path
+#
+#   Author: Marta Núñez Salvador
+#   Date: 01/10/2024
+#   Version: 1.1 
 #
 ################################################################################
 
@@ -52,6 +56,8 @@ do
 
 done
 wait
+
+rm fast*
 
 # Create directories to each pair of samples
 cd $path_out

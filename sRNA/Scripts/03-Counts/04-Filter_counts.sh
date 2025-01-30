@@ -18,15 +18,15 @@
 #   libraries, also calculating the averages of both types of counts in
 #   the different replicates of each condition for the sequences analysed.
 #
-#   Author: Antonio Gonzalez Sanchez
-#   Date: 20/09/2023
+#   Author: Marta Núñez Salvador
+#   Date: 20/09/2024
 #   Version: 1.1 
 #
 #******************************************************************************
 
 # Modules
 module load anaconda
-source activate sRNA
+source activate group_sRNA
 
 # Paths
 path_lib='/home/nuezsal/Omics_integration/sRNA/Libraries/02-Clean_data_fasta'

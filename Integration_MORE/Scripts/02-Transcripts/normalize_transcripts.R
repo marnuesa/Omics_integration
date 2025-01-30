@@ -32,6 +32,7 @@ suppressMessages(library(tximport))
 suppressMessages(library(dplyr))
 suppressMessages(library(tidyverse))
 suppressMessages(library("argparse"))
+suppressMessages(library(tibble))
 
 #' Get the command line arguments
 #' This function parse the command line arguments entered into the program.
@@ -125,9 +126,7 @@ print("######## Results files created ##########")
 # Load count data and metadata
 DE_genes <- read.table(paste0(path_annot,"/DE_genes.txt"))
 metadata <- read.table(paste0(path_metadata,"/metadata_transcripts.tsv"), 
-                       sep = "\t", header = TRUE, stringsAsFactors = TRUE)
-# Clean and prepare metadata
-metadata$SampleID <- gsub("_Sample", "", metadata$MORE)
+                       sep = "\t", header = TRUE, row.names = 7,stringsAsFactors = TRUE)
 
 # Define colors for each stress condition
 condition_colors <- c(
@@ -140,8 +139,9 @@ condition_colors <- c(
 metadata$Color <- condition_colors[metadata$Condition]
 
 files <- file.path(path_table, metadata$Sample, "quant.sf")
-names(files) <- row.names(metadata)
 
+names(files) <- row.names(metadata)
+print(files)
 # The tx2gene file was created using the transcriptome file headers.
 tx2gene <- read.table(paste0(path_metadata,"/tx2gene.txt"), sep = "\t", header = FALSE, stringsAsFactors = TRUE)
 txi <- tximport(files, type = "salmon", tx2gene = tx2gene, countsFromAbundance = "no") 
@@ -157,11 +157,13 @@ ddsTxi<- ddsTxi[keep,]
 # Raw count boxplot
 raw_counts <- counts(ddsTxi)
 
+head(raw_counts)
+
 png(paste0(path_graph_out, "/boxplot_raw_counts.png"), width = 800, height = 600)
 par(las = 2, mar = c(8, 5, 4, 2) + 0.1)
 boxplot((raw_counts + 1), log = "y",
         ylab = "Log10(Normalized Counts + 1)", 
-        main = "Distribution of sRNA Raw Counts",
+        main = "Distribution of transcripts Raw Counts",
         col = metadata$Color)
 dev.off()
 
@@ -176,7 +178,7 @@ png(paste0(path_graph_out, "/boxplot_normalized_counts.png"), width = 800, heigh
 par(las = 2, mar = c(8, 5, 4, 2) + 0.1)
 boxplot((normalized_counts + 1), log = "y",
         ylab = "Log10(Normalized Counts + 1)", 
-        main = "Distribution of sRNA Normalized Counts",
+        main = "Distribution of transcripts Normalized Counts",
         col = metadata$Color)
 dev.off()
 
@@ -185,12 +187,13 @@ normalized_counts_filter <- normalized_counts[row.names(normalized_counts) %in% 
 # Boxplot for filtered and summarized counts
 png(paste0(path_graph_out, "/boxplot_filtered_counts.png"), width = 800, height = 600)
 par(las = 2, mar = c(8, 5, 4, 2) + 0.1)
-boxplot((final_table + 1), log = "y",
+boxplot((normalized_counts_filter + 1), log = "y",
         ylab = "Log10(Normalized Counts + 1)", 
-        main = "Distribution of sRNA Filtered Counts",
+        main = "Distribution of transcripts Filtered Counts",
         col = metadata$Color)
 dev.off()
 
 # Save normalize count table
-normalized_counts_filter$genes <- row.names(normalized_counts_filter)
+normalized_counts_filter <- as.data.frame(normalized_counts_filter) %>%
+  rownames_to_column(var = "genes")
 write.table(file = paste0(path_table_out,"/Genes_normalize_counts.tsv"),normalized_counts_filter,sep = "\t",col.names = TRUE, row.names = FALSE, quote = FALSE)

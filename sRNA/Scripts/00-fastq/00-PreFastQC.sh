@@ -12,6 +12,9 @@
 #   This script execute fastqc to do a preliminar quality control with
 #   Raw data
 #
+#   Author: Marta Núñez Salvador
+#   Date: 19/09/2024
+#   Version: 1.1 
 ################################################################################
 
 #MODULE

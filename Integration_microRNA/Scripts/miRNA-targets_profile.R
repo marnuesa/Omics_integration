@@ -119,12 +119,14 @@ path_out_analysis1 <- paste(path_out, '01-Analysis1', sep = '/')
 path_out_analysis2 <- paste(path_out, '02-Analysis2', sep = '/')
 path_out_analysis3 <- paste(path_out, '03-Analysis3', sep = '/')
 path_out_logs <- paste(path_out, '04-Logs', sep = '/')
+path_out_network <- paste(path_out, 'Network_files', sep = '/')
 
 # Create directories if they do not exist
 dir.create(path_out_analysis1 , recursive = TRUE, showWarnings = FALSE)
 dir.create(path_out_analysis2, recursive = TRUE, showWarnings = FALSE)
 dir.create(path_out_analysis3, recursive = TRUE, showWarnings = FALSE)
 dir.create(path_out_logs, recursive = TRUE, showWarnings = FALSE)
+dir.create(path_out_network, recursive = TRUE, showWarnings = FALSE)
 
 ################################## Read tables #################################
 
@@ -163,7 +165,7 @@ for(stress in names(microRNA_raw)){
   dataframes_trans[[stress]] <- tablas_trans
 }
 
-############################ Analysis 1 ########################################
+############################ Analysis 1  ########################################
 
 # Extract microRNA sequences for stress
 miRNAs <- list()
@@ -189,7 +191,7 @@ for(miRNA in names(miRNAs)){
   plots <- list()
   # Iterate stresses of a microRNA
   for (stress in names(miRNAs_list)){
-  miRNAs_stress <- miRNAs_list[[stress]]
+    miRNAs_stress <- miRNAs_list[[stress]]
     
     # Create a dataframe for save a family of microRNA sequences expression profile through time
     df_expression <- data.frame()
@@ -223,7 +225,7 @@ for(miRNA in names(miRNAs)){
         df_expression <- rbind(df_expression, row)
         
         # Save valid microRNA 
-        row_valid <- data.frame(ID = paste0("seq",i), seq=sequence, microRNA = miRNA, stress = stress, Type = "Valid", stringsAsFactors = FALSE )
+        row_valid <- data.frame(ID = paste0("seq",i), seq=sequence, microRNA = miRNA, stress = stress, Type = "Valid",stringsAsFactors = FALSE )
         micro_summary <- rbind(micro_summary, row_valid) 
       }
       
@@ -274,18 +276,18 @@ for(miRNA in names(miRNAs)){
         guides(color = guide_legend(order = 1, title = miRNA)) +
         ggtitle(toupper(stress))
 
-	# Divide the plot space into legend and graph
-	p_no_legend <- p + theme(legend.position = "none")
-	legend <- get_legend(p)
-	combined_plot <- plot_grid(p_no_legend, legend, ncol = 2, rel_widths = c(2, 1))
+        # Divide the plot space into legend and graph
+        p_no_legend <- p + theme(legend.position = "none")
+        legend <- get_legend(p)
+        combined_plot <- plot_grid(p_no_legend, legend, ncol = 2, rel_widths = c(2, 1))
       
         plots[[stress]] <- combined_plot 
     }
   }
   if(length(plots) > 0){
     final_plot <- grid.arrange(grobs = plots, ncol = 1)
-  # Create and save plot with all stresses
-  ggsave(plot = final_plot,filename = paste0(path_out_analysis1,"/Expression_profile_",miRNA,".svg"),
+    # Create and save plot with all stresses
+    ggsave(plot = final_plot,filename = paste0(path_out_analysis1,"/Expression_profile_",miRNA,".svg"),
          width = 30, height = 22, dpi = 300,bg = "white")
   }
   else{
@@ -294,7 +296,7 @@ for(miRNA in names(miRNAs)){
 }
 
 # Save sequence table
-  write.table(micro_summary,paste0(path_out_logs,"/Summary_table_microRNAs.tsv"), sep='\t', col.names = TRUE, row.names = FALSE)
+write.table(micro_summary,paste0(path_out_logs,"/Summary_table_microRNAs.tsv"), sep='\t', col.names = TRUE, row.names = FALSE)
 
 ################################ Analysis 2 ####################################
 
@@ -410,7 +412,6 @@ for(mirna in names(general_miRNAs)){
             
             # Add row
             df_expression_gene <- rbind(df_expression_gene, row)
-            
           }
           # Only the genes which have not NA's are valids
           if(!any(apply(df_expression_gene,1,is.na))){
@@ -473,19 +474,18 @@ for(mirna in names(general_miRNAs)){
                    width = 20, height = 7, dpi = 300,bg = "white")
             
             # Create row of correlation matrix only with lfc
-	    df_long_complete_sig <- df_long_complete[df_long_complete$significance == "Significativo",]
+	          df_long_complete_sig <- df_long_complete[df_long_complete$significance == "Significativo",]
             lfc_row_gene <- df_long_complete_sig[df_long_complete_sig$shape_group == "Gene", c("LFC","time", "stress")]
             colnames(lfc_row_gene) <- c("LFC_gene", "time","stress")
             lfc_row_micro <- df_long_complete_sig[df_long_complete_sig$shape_group == "microRNA", c("LFC","time", "stress")]
             colnames(lfc_row_micro) <- c("LFC_micro", "time","stress")
             lfc_row <- merge(lfc_row_gene, lfc_row_micro, by = c("time","stress"))
             
-            # Save the row only if bpth LFC are higher than 0.5
-            for (i in 1:nrow(lfc_row)) {
-              if ((abs(lfc_row$LFC_gene[i]) >= 0.5) & (abs(lfc_row$LFC_micro[i]) >= 0.5)) {
-                # Agregar la fila a la tabla de correlación
-                correlation_table <- rbind(correlation_table, lfc_row[i, ])
-              }
+            if (nrow(lfc_row) != 0){
+              lfc_row$microRNA <- mirna
+              lfc_row$Gene <- gene
+              # Agregar la fila a la tabla de correlación
+              correlation_table <- rbind(correlation_table, lfc_row)     
             }
           } 
           
@@ -519,59 +519,6 @@ correlation_table$LFC_micro_jitter <- jitter(correlation_table$LFC_micro)
 cor_spearman <- cor.test(correlation_table$LFC_gene_jitter, correlation_table$LFC_micro_jitter, method = "spearman")
 
 # Calcula el valor máximo absoluto para ambos ejes
-max_abs_x <- max(abs(correlation_table$LFC_gene), na.rm = TRUE)
-max_abs_y <- max(abs(correlation_table$LFC_micro), na.rm = TRUE)
-
-p <- plot_ly(correlation_table, x = ~LFC_gene, y = ~LFC_micro,
-             text = ~paste("microRNA: ", microRNA, '<br>Gene:', Gene, '<br>Time:', time),
-             color = ~stress,
-             type = 'scatter',
-             mode = 'markers') %>%
-  layout(
-    title = list(
-      text = 'microRNA-mRNA TARGETS CORRELATION DOTPLOT',   # Título del gráfico
-      font = list(size = 22)         # Tamaño de la fuente del título
-    ),
-    xaxis = list(
-      title = 'Log Fold Change (Gene)',  # Título del eje X
-      titlefont = list(size = 18),        # Tamaño de la fuente del título del eje X
-      tickfont = list(size = 14)          # Tamaño de la fuente de las marcas del eje X
-    ),
-    yaxis = list(
-      title = 'Log Fold Change (microRNA)',  # Título del eje Y
-      titlefont = list(size = 18),            # Tamaño de la fuente del título del eje Y
-      tickfont = list(size = 14)              # Tamaño de la fuente de las marcas del eje Y
-    ),
-    legend = list(
-      font = list(size = 18)  # Tamaño de la fuente de la leyenda
-    )
-  )
-
-# Extract the Spearman correlation coeficient
-spearman_coefficient <- cor_spearman$estimate
-spearman_p <- cor_spearman$p.value
-
-# Añade la anotación a la gráfica
-p <- p %>% layout(
-  annotations = list(
-    x = 4,  # Coordenada x para la anotación
-    y = 10,  # Coordenada y para la anotación
-    text = paste("Correlación Spearman:", round(spearman_coefficient, digits = 4), '<br>p-value:', round(spearman_p, digits = 10)),  # Texto de la anotación
-    showarrow = FALSE,  # Ocultar la flecha
-    xref = "x",  # Referencia de la coordenada x
-    yref = "y",  # Referencia de la coordenada y
-    xanchor = 'left',  # Alineación horizontal del texto
-    yanchor = 'bottom',  # Alineación vertical del texto
-    font = list(size = 18)
-  ),
-  xaxis = list(range = c(-(max_abs_y + 0.5), (max_abs_y + 0.5))),  # Configura el rango del eje x
-  yaxis = list(range = c(-(max_abs_y + 0.5), (max_abs_y +0.5)))   # Configura el rango del eje y
-)
-
-# Save the plot as HTML file
-htmlwidgets::saveWidget(p, paste0(path_out_analysis2,"/Correlation_dotplot.html"), selfcontained = TRUE)
-
-# Calcula el valor máximo absoluto para ambos ejes
 max_abs_x <- max(abs(correlation_table$LFC_micro), na.rm = TRUE) +0.5
 max_abs_y <- max(abs(correlation_table$LFC_gene), na.rm = TRUE) + 0.5
 
@@ -602,7 +549,7 @@ correlation_plot <- ggplot(correlation_table, aes(x = LFC_micro, y = LFC_gene, c
     legend.position = "top"                                    # Colocar la leyenda en la parte superior
   )
 
-ggsave("/home/marnuesa/Documentos/Omics_integration/Results/Integration_microRNA/Network_files/CORRELATION_PLOT.png", 
+ggsave(paste0(path_out_network,"/CORRELATION_PLOT.png"), 
        plot = correlation_plot, width = 10, height = 10, bg = "white")
 
 ############################### Analysis 3 #####################################

@@ -246,13 +246,15 @@ for (time in unique(metadata$Time)) {
                            labels = labels) +
         labs(title = paste0("Differential Gene Expression in Time ", time, " under ", stress, " stress"), 
              x = "Log2 Fold Change", 
-             y = "-Log10 (P-valor ajustado)") +
+             y = "-Log10 (FDR)") +
         scale_x_continuous(limits = c((-maxlfc - 0.5),(maxlfc + 0.5))) +
         scale_y_continuous(limits = c(0,(maxpvalue + 0.5))) +  
         theme_bw()
       ggsave(paste0(path_out_vp,"/",stress,"_T",time,".png"), plot = p, width = 8, height = 6, dpi = 300)
     }
   }
+  
+  # Save sequences DE to further analysis
   DE_sRNA_list <- unique(DE_sRNA_list)
   write.table(DE_sRNA_list, file = paste0(path_out,"/DE_seq.txt"), row.names = FALSE, col.names = FALSE, quote = FALSE)
 }

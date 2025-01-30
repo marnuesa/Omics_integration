@@ -25,14 +25,14 @@
 module load anaconda
 source activate group_sRNA
 
+################################# With TH ######################################
 # Paths
 path_in=/home/nuezsal/Omics_integration/RNA_seq/Results/02-Salmon
 path_metadata=/home/nuezsal/Omics_integration/RNA_seq/Additional_info
 path_dea=/home/nuezsal/Omics_integration/RNA_seq/Results/03-DEA_TH
 path_graph=/home/nuezsal/Omics_integration/RNA_seq/Results/DESeq_graphs_TH
 alpha=0.05
-
-
+TH=0.585
 
 
 # Execution 
@@ -43,4 +43,23 @@ srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript DEA_transcripts.
             --alpha $alpha \
             --specie "cume" \
             --project "Omics_project" \
-            --graphs $path_graph
+            --graphs $path_graph \
+            --threshold $TH
+
+################################# Without TH ######################################
+# Paths
+path_dea=/home/nuezsal/Omics_integration/RNA_seq/Results/03-DEA
+path_graph=/home/nuezsal/Omics_integration/RNA_seq/Results/DESeq_graphs
+TH=0
+
+
+# Execution 
+srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript DEA_transcripts.R \
+            --input $path_in \
+            --metadata $path_metadata \
+            --output $path_dea \
+            --alpha $alpha \
+            --specie "cume" \
+            --project "Omics_project" \
+            --graphs $path_graph \
+            --threshold $TH

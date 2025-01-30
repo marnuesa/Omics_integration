@@ -1,6 +1,6 @@
 #!/bin/bash
-#SBATCH --ntasks=15               # Number of task
-#SBATCH --cpus-per-task=2              # Number of cpus
+#SBATCH --ntasks=10               # Number of task
+#SBATCH --cpus-per-task=6              # Number of cpus
 #SBATCH -t 1-00:00:00       # Runtime in minutes.
 #SBATCH --qos short         # The QoS to submit the job.
 #SBATCH --mem-per-cpu=2G           # Memory per cpu in G (see also --mem-per-cpu)
@@ -10,8 +10,12 @@
 ################################################################################
 #                       00-QC_posttrim.sh
 #
-#   This script execute fastqc to do a preliminar quality control with
+#   This script execute fastqc to+ do a preliminar quality control with
 #   Clean data
+#
+#   Author: Marta Núñez Salvador
+#   Date: 01/10/2024
+#   Version: 1.1 
 #
 ################################################################################
 
@@ -25,7 +29,7 @@ path_out='/home/nuezsal/Omics_integration/RNA_seq/Results/00-QC/QC_posttrim'
 # Create output fields
 if [ ! -d "$path_out" ]; then
     echo "The output field does not exist. Creating..."
-    mkdir "$path_out"
+    mkdir -p "$path_out"
     echo "Successfully created field."
 else
     echo "Output field already exist."
