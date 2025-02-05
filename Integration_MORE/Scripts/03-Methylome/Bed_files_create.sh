@@ -107,17 +107,17 @@ cut -f 2 "$gene_file" | while read -r gene_id; do
         start_gene=$start
         end_gene=$end
         # Define upstream region (2kb before the start codon)
-        start_upstream=$((start > 2000 ? start - 2000 : 1))
-        end_upstream=$((start - 1))
+        start_upstream=$(($start > 2000 ? $start - 2000 : 1))
+        end_upstream=$(($start - 1))
       elif [ "$types" == "five_prime_UTR" ]; then
         # Adjust upstream region if a 5' UTR exists
         end_upstream=$end
-        start_gene=$((end_upstream + 1))
+        start_gene=$(($end_upstream + 1))
       elif [ "$types" == "three_prime_UTR" ] && [ "$three_prime_UTR_processed" == false ]; then
         # Adjust gene end if a 3' UTR exists
         three_prime_UTR_processed=true
         start_downstream=$start
-        end_gene=$((start_downstream - 1))
+        end_gene=$(($start_downstream - 1))
       fi
     else  # If the gene is on the reverse strand
       five_prime_UTR_processed=false
@@ -127,26 +127,26 @@ cut -f 2 "$gene_file" | while read -r gene_id; do
         start_gene=$start
         end_gene=$end
         # Define upstream region (2kb after the end codon for reverse strand)
-        start_upstream=$((end + 1))
-        end_upstream=$((end + 2000))
+        start_upstream=$(($end + 1))
+        end_upstream=$(($end + 2000))
       elif [ "$types" == "five_prime_UTR" ] && [ "$five_prime_UTR_processed" == false ]; then
         # Adjust upstream region if a 5' UTR exists
         five_prime_UTR_processed=true
         start_upstream=$start
-        end_gene=$((start_upstream - 1))
+        end_gene=$(($start_upstream - 1))
       elif [ "$types" == "three_prime_UTR" ]; then
         # Adjust gene start if a 3' UTR exists
         end_downstream=$end
-        start_gene=$((end_downstream + 1))
+        start_gene=$(($end_downstream + 1))
       fi
     fi
 
     # Write the regions to BED files when processing the last line
     if [ "$line_num" -eq "$lines" ]; then
       # Write upstream region to the upstream BED file (0-based indexing)
-      echo -e "$chr\t$((start_upstream - 1))\t$((end_upstream - 1))\t$strand\t$gene_id" >> "$output_up"
+      echo -e "$chr\t$(($start_upstream - 1))\t$(($end_upstream - 1))\t$strand\t$gene_id" >> "$output_up"
       # Write gene region to the gene BED file (0-based indexing)
-      echo -e "$chr\t$((start_gene - 1))\t$((end_gene - 1))\t$strand\t$gene_id" >> "$output_genes"
+      echo -e "$chr\t$(($start_gene - 1))\t$(($end_gene - 1))\t$strand\t$gene_id" >> "$output_genes"
     fi
   done
 done
@@ -155,3 +155,10 @@ echo "...Feature extraction completed..."
 
 # Remove temporary file
 rm "temp_gene.gff3"
+
+cat /home/nuezsal/Omics_integration/Integration_methylome/Results/02-Total_features_DMRs/*.bed > "$bed_path/merged_files.bed"
+bedtools intersect -a $output_up -b "$bed_path/merged_files.bed" -wa > "$bed_path/CMelon_DHL92_v4_upstream_filter.bed"
+bedtools intersect -a $output_genes -b "$bed_path/merged_files.bed" -wa > "$bed_path/CMelon_DHL92_v4_genes_filter.bed"
+
+sort "$bed_path/CMelon_DHL92_v4_upstream_filter.bed" | uniq > "$bed_path/CMelon_DHL92_v4_upstream_filter_uniq.bed"
+sort "$bed_path/CMelon_DHL92_v4_genes_filter.bed" | uniq > "$bed_path/CMelon_DHL92_v4_genes_filter_uniq.bed"
