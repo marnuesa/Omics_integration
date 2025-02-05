@@ -83,7 +83,7 @@ cut -f 2 "$gene_file" | while read -r gene_id; do
 		    		if [ $start -gt 2000 ]; then
 					start_upstream=$(($start - 2000))
 				else
-					start_upstream=0
+					start_upstream=1
 				
 				fi
 				# End of upstream region
@@ -144,7 +144,7 @@ cut -f 2 "$gene_file" | while read -r gene_id; do
 		    		if [ $start -gt 2000 ]; then
 					start_downstream=$(($start - 2000))
 				else
-					start_downstream=0
+					start_downstream=1
 				fi
 				
 				# End of down-stream region
@@ -178,9 +178,9 @@ cut -f 2 "$gene_file" | while read -r gene_id; do
 		
 		if [ "$line_num" -eq "$lines" ]; then
 			# Write gene at the files
-			echo -e "$chr\t$start_upstream\t$end_upstream\t$gene_id" >> "$output_up"
-			echo -e "$chr\t$start_downstream\t$end_downstream\t$gene_id" >> "$output_down"
-			echo -e "$chr\t$start_gene\t$end_gene\t$gene_id" >> "$output_genes"
+			echo -e "$chr\t$(($start_upstream - 1))\t$(($end_upstream - 1))\t$gene_id" >> "$output_up"
+			echo -e "$chr\t$(($start_downstream - 1))\t$(($end_downstream - 1))\t$gene_id" >> "$output_down"
+			echo -e "$chr\t$(($start_gene - 1))\t$(($end_gene - 1))\t$gene_id" >> "$output_genes"
 		
 		fi
 	done
@@ -227,23 +227,23 @@ do
 		length=$(expr length "$seq")
 		end_forward=$((start + $length))
 		
-		echo -e "$chr\t$start_forward\t$end_forward\t$microRNA" >> "$output_microRNA"
+		echo -e "$chr\t$(($start_forward - 1))\t$(($end_forward - 1))\t$microRNA" >> "$output_microRNA"
 		
 		# Create variables to 5' elements
 		end_5=$(($start_forward - 1))
 		if (($start_forward > 1000)); then
 			start_5=$(($start_forward - 1000))
 		else
-			start_5=0
+			start_5=1
 		fi
 		
-		echo -e "$chr\t$start_5\t$end_5\t$microRNA" >> "$output_5prime"
+		echo -e "$chr\t$(($start_5 - 1))\t$(($end_5 - 1))\t$microRNA" >> "$output_5prime"
 		
 		# Create variables to 3' elements
 		start_3=$(($end_forward + 1))
 		end_3=$(($end_forward + 1000))
 		
-		echo -e "$chr\t$start_3\t$end_3\t$microRNA" >> "$output_3prime"
+		echo -e "$chr\t$(($start_3 - 1))\t$(($end_3 - 1))\t$microRNA" >> "$output_3prime"
 	
 	elif [ "$flag" == 16 ]; then
 	
@@ -252,24 +252,24 @@ do
 		start_reverse=$(($start - length))
 		end_reverse=$start
 		
-		echo -e "$chr\t$start_reverse\t$end_reverse\t$microRNA" >> "$output_microRNA"
+		echo -e "$chr\t$(($start_reverse - 1))\t$(($end_reverse - 1))\t$microRNA" >> "$output_microRNA"
 		
 		# Create variables to 5' elements
 		start_5=$(($end_reverse + 1000))
 		end_5=$(($end_reverse + 1))
 		
-		echo -e "$chr\t$end_5\t$start_5\t$microRNA" >> "$output_5prime"
+		echo -e "$chr\t$(($end_5 - 1))\t$(($start_5 - 1))\t$microRNA" >> "$output_5prime"
 		
 		# Create variables to 3' elements
 		end_3=$(($start_reverse - 1))
 		if (($start_reverse > 1000)); then
 			start_3=$(($start_reverse - 1000))
 		else
-			start_3=0
+			start_3=1
 		fi
 		
 		
-		echo -e "$chr\t$start_3\t$end_3\t$microRNA" >> "$output_3prime"
+		echo -e "$chr\t$(($start_3 - 1))\t$(($end_3 - 1))\t$microRNA" >> "$output_3prime"
 	fi
 done
 
@@ -296,26 +296,26 @@ awk -F '\t' '{print NR, $1, $3, $4, $5, $7, $9}' "$gtf_file_lnc" | while read li
 		if [ "$types" == "transcript" ]; then
 			
 			# Extract the gene ID from the gene_name field
-		    	lnc_id=$(echo "$lnc_name" | awk -F'[;]' '{print $1}' | awk -F' ' '{print $2}'| tr -d '"')	  		
-			echo -e "$chr\t$start\t$end\t$lnc_id" >> "$output_file"
+		    lnc_id=$(echo "$lnc_name" | awk -F'[;]' '{print $1}' | awk -F' ' '{print $2}'| tr -d '"')	  		
+			echo -e "$chr\t$(($start - 1))\t$(($end - 1))\t$lnc_id" >> "$output_file"
 			
 			# Extract upstream regions
 			if (($start > 1000)); then
 				start_up=$(($start - 1000))
 			else
-				start_up=0
+				start_up=1
 			fi
 			
 			if (($start > 1)); then
 				end_up=$(($start - 1))		
-				echo -e "$chr\t$start_up\t$end_up\t$lnc_id" >> "$prime5_file"
+				echo -e "$chr\t$(($start_up - 1))\t$(($end_up - 1))\t$lnc_id" >> "$prime5_file"
 			fi
 			# Extract downstream regions
 			start_down=$(($end + 1))
 			end_down=$(($end + 1000))
 			
 			
-			echo -e "$chr\t$start_down\t$end_down\t$lnc_id" >> "$prime3_file"		
+			echo -e "$chr\t$(($start_down - 1))\t$(($end_down - 1))\t$lnc_id" >> "$prime3_file"		
 		fi
 			
 	else
@@ -323,24 +323,24 @@ awk -F '\t' '{print NR, $1, $3, $4, $5, $7, $9}' "$gtf_file_lnc" | while read li
 			
 			# Extract the gene ID from the gene_name field
 		    	lnc_id=$(echo "$lnc_name" | awk -F'[;]' '{print $1}' | awk -F' ' '{print $2}'| tr -d '"')	  		
-			echo -e "$chr\t$start\t$end\t$lnc_id" >> "$output_file"
+			echo -e "$chr\t$(($start - 1))\t$(($end - 1))\t$lnc_id" >> "$output_file"
 			
 			# Extract upstream regions
 			start_up=$(($end + 1))
 			end_up=$(($end + 1000))
 			
-			echo -e "$chr\t$start_up\t$end_up\t$lnc_id" >> "$prime5_file"
+			echo -e "$chr\t$(($start_up - 1))\t$(($end_up - 1))\t$lnc_id" >> "$prime5_file"
 			
 			# Extract downstream regions
 			if (($start > 1000)); then
 				start_down=$(($start - 1000))
 			else
-				start_down=0
+				start_down=1
 			fi
 			
 			if (($start > 1)); then
 				end_down=$(($start - 1))
-				echo -e "$chr\t$start_down\t$end_down\t$lnc_id" >> "$prime3_file"	
+				echo -e "$chr\t$(($start_down - 1))\t$(($end_down - 1))\t$lnc_id" >> "$prime3_file"	
 			fi	
 		fi
 	

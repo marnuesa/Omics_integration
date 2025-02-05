@@ -36,7 +36,7 @@ mkdir -p "$path_out"
 for file in "$path_tsv"/*duplicates_removed.tsv
 do
     name_file=$(basename "$file")
-    awk -F'\t' 'NR==1 {OFS="\t"; print $1, $2, $3, $16, "difference"} NR>1 {OFS="\t"; print $1, $2, $3, $16, $11 - $8}' $file | tail -n +2 > "${path_in}/${name_file%.tsv}.bed"
+    awk -F'\t' 'NR==1 {OFS="\t"; print $1, $2, $3, $16, "difference"} NR>1 {OFS="\t"; print $1, $2-1, $3-1, $16, $11 - $8}' $file | tail -n +2 > "${path_in}/${name_file%.tsv}.bed"
 done
 
 # Iterate over .bed files in path_in
