@@ -165,7 +165,7 @@ dds <- DESeqDataSetFromMatrix(countData = count_data,
                               design = ~ Group)
 
 # Pre-filtering.
-keep <- rowSums(counts(dds) > 5) >= 10
+keep <- rowSums(counts(dds) > 5) >= 20
 dds<- dds[keep,]
 
 print("######## Indepences filter done ##########")
@@ -237,6 +237,14 @@ apply(seq_micro, 1, function(row) {
 
 # Close the file
 close(fasta_file)
+
+# filtered_table <- data.frame(filtered_table, row.names = NULL)
+
+# # Create IDs with microRNA and sequence
+# filtered_table$ID <- paste0(filtered_table$general_annot, "-", filtered_table$seq)
+# final_table <- filtered_table %>%
+#   select(-general_annot, -seq) %>%
+#   column_to_rownames(var = "ID")
 
 
 # Summarize counts by annotation
