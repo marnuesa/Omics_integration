@@ -130,7 +130,7 @@ for (type in c("genes", "upstream")){
   print("####################")
   print(type)
   print("####################")
-  regions <- read.table(paste0(path_annot,"/CMelon_DHL92_v4_",type,".bed"), sep = "\t")
+  regions <- read.table(paste0(path_annot,"/CMelon_DHL92_v4_",type,"_filter_uniq.bed"), sep = "\t")
     
   regions_GR <- GRanges(
       seqnames = regions$V1, 
@@ -204,5 +204,3 @@ for (type in c("genes", "upstream")){
   
   write.table(file = paste0(path_table_out,"/methylation_normalize_counts_",type,".tsv"),Meth_mvalues, sep = "\t", col.names = TRUE, row.names = FALSE, quote = FALSE)
 }
-
-

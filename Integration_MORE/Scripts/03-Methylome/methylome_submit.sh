@@ -28,12 +28,12 @@ source activate group_sRNA
 ##################### METHYLOME ###########################            
 
 # Definir rutas de los archivos
-# gene_file=/home/nuezsal/Omics_integration/RNA_seq/Additional_info/tx2gene.txt
-# gff_file=/home/nuezsal/Omics_integration/RNA_seq/Additional_info/DHL92_v4.gff3
-# output_dir=/home/nuezsal/Omics_integration/Integration_MORE/Results/Bed_files
+gene_file=/home/nuezsal/Omics_integration/RNA_seq/Additional_info/tx2gene.txt
+gff_file=/home/nuezsal/Omics_integration/RNA_seq/Additional_info/DHL92_v4.gff3
+output_dir=/home/nuezsal/Omics_integration/Integration_MORE/Results/Bed_files
 
-# # Llamar al script principal con los argumentos
-# bash Bed_files_create.sh -g "$gene_file" -f "$gff_file" -o "$output_dir"
+# Llamar al script principal con los argumentos
+bash Bed_files_create.sh -g "$gene_file" -f "$gff_file" -o "$output_dir"
 
 # Paths
 path_table_met=/home/nuezsal/Omics_integration/Methylome/Results/02-Bismark/04-Methylation_extractor
