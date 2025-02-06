@@ -47,6 +47,8 @@ suppressMessages(library(svglite))
 suppressMessages(library("cowplot"))
 suppressMessages(library("plotly"))
 suppressMessages(library(htmlwidgets))
+suppressMessages(library("ComplexHeatmap"))
+suppressMessages(library("circlize"))
 
 ################################## FUNCTIONS ###################################
 
@@ -184,6 +186,8 @@ for(stress in names(dataframes_micro_sig)){
 # Datraframe to save microRNA
 micro_summary <- data.frame()
 
+patron = 0
+total = 0
 # Iterate microRNAs
 for(miRNA in names(miRNAs)){
   miRNAs_list <- miRNAs[[miRNA]]
@@ -282,6 +286,20 @@ for(miRNA in names(miRNAs)){
         combined_plot <- plot_grid(p_no_legend, legend, ncol = 2, rel_widths = c(2, 1))
       
         plots[[stress]] <- combined_plot 
+
+        # Calculate % of sequences which follow the same patron for each time
+        expression_summary <- df_long %>%
+          group_by(time) %>%
+          summarise(neg_count = sum(LFC < 0), 
+                    pos_count = sum(LFC > 0),
+                    patron = pmax(neg_count, pos_count))
+
+        total = total + nrow(df_long)
+        patron = patron + sum(expression_summary$patron)
+
+        # Save sequence table
+        write.table(expression_summary,paste0(path_out_logs,"/Summary_",miRNA,"_",stress,".tsv"), sep='\t', col.names = TRUE, row.names = FALSE)
+
     }
   }
   if(length(plots) > 0){
@@ -294,6 +312,12 @@ for(miRNA in names(miRNAs)){
     print(paste(miRNA, "has not valid sequence in any stress"))
   }
 }
+
+proportion = patron / total * 100
+
+print("#############Percentage of sequences qith the same expression################")
+print(proportion)
+print("##############################################################################")
 
 # Save sequence table
 write.table(micro_summary,paste0(path_out_logs,"/Summary_table_microRNAs.tsv"), sep='\t', col.names = TRUE, row.names = FALSE)
@@ -327,7 +351,7 @@ for(mirna in miRNAs_common){
       df_time_mirna <- df_time[df_time$general_annot == mirna,]
       
       if(nrow(df_time_mirna) != 0 ){
-        # Select the microRNA with high baseMean at each time
+        # Select the sequence with high baseMean at each time
         seq <- df_time_mirna[df_time_mirna$baseMean == max(df_time_mirna$baseMean),]
         
         if( stress == "drought"){
@@ -551,6 +575,216 @@ correlation_plot <- ggplot(correlation_table, aes(x = LFC_micro, y = LFC_gene, c
 
 ggsave(paste0(path_out_network,"/CORRELATION_PLOT.png"), 
        plot = correlation_plot, width = 10, height = 10, bg = "white")
+
+########################## HEATMAP AND NETWORK #################################
+print("Generating Network...")
+# Extract the time information from the column
+correlation_table$time <- gsub(".*_", "", correlation_table$time)
+
+# Filter rows where LFC_gene and LFC_micro have opposite signs
+correlation_table_filt <- correlation_table %>%
+  filter((LFC_gene > 0 & LFC_micro < 0) | (LFC_gene < 0 & LFC_micro > 0))
+
+# Create the edges table with the count of each unique miRNA-Gene combination
+edge_table <- correlation_table_filt %>%
+  group_by(microRNA, Gene) %>%
+  summarise(count = n(), .groups = 'drop')
+
+# Rename columns to match edge list format
+colnames(edge_table) <- c("target", "source", "weight")
+
+# Save the edges table to a file
+write.table(edge_table, 
+            paste0(path_out_network,"/Edge_table.tsv"), 
+            sep = "\t", col.names = TRUE, row.names = FALSE, quote = FALSE)
+
+# Create the nodes table for genes
+genes <- unique(correlation_table_filt$Gene)
+table_genes <- data.frame()
+for (gene in genes){
+  n <- 0
+  for (condition in names(dataframes_trans)){
+    tables <- dataframes_trans[[condition]]
+    for (i in seq_along(tables)){
+      table <- tables[[i]]
+      if (gene %in% table$seq){
+        if (table$padj[table$seq == gene] < 0.05){
+          n <- n + 1
+        }
+      }
+    }
+  }
+  row <- data.frame(id= gene, score = n, group = "gene")
+  table_genes <- rbind(table_genes,row)
+}
+
+# Create the nodes table for microRNAs
+microRNA <- unique(correlation_table_filt$microRNA)
+table_micro <- data.frame()
+for (micro in microRNA){
+  n <- 0
+  for (condition in names(dataframes_micro_sig)){
+    tables <- dataframes_micro_sig[[condition]]
+    for (i in seq_along(tables)){
+      table <- tables[[i]]
+      if (micro %in% table$general_annot){
+        if (any(table$padj[table$general_annot == micro] < 0.05)){
+          n <- n + 1
+        }
+      }
+    }
+  }
+  row <- data.frame(id= micro, score = n, group = "microRNA")
+  table_micro <- rbind(table_micro,row)
+}
+
+# Combine gene and microRNA node tables
+nodes_table <- rbind(table_genes, table_micro)
+
+# Save the nodes table to a file
+write.table(nodes_table, 
+            paste0(path_out_network,"/Nodes_table.tsv"), 
+            sep = "\t", col.names = TRUE, row.names = FALSE, quote = FALSE)
+            
+
+print("Generating heatmap...")
+
+############## microRNA Processing ##############
+# Select relevant columns for microRNA
+micro_table <- correlation_table_filt[, c("time", "stress", "LFC_micro", "microRNA")]
+
+# Remove duplicate rows
+micro_table_uniq <- micro_table %>% distinct()
+
+# Combine "stress" and "time" into a single column "stress_time"
+micro_table_uniq <- micro_table_uniq %>%
+  unite("stress_time", stress, time, sep = "_")
+
+# Select the row with the highest absolute LFC_micro per microRNA and stress_time
+micro_table_uniq <- micro_table_uniq %>%
+  group_by(microRNA, stress_time) %>%
+  slice(which.max(abs(LFC_micro))) %>%
+  ungroup()
+
+# Define stress conditions and time points
+stresses <- unique(correlation_table_filt$stress)
+times <-  unique(correlation_table_filt$time)
+mirnas <- unique(micro_table_uniq$microRNA)
+
+# Create an empty dataframe to store microRNA matrix
+matrix <- data.frame()
+
+# Iterate over each microRNA to populate the matrix
+for (mirna in mirnas) {
+  lfc_table <- micro_table_uniq[micro_table_uniq$microRNA == mirna, ]
+  row <- data.frame(matrix(0, nrow = 1, ncol = length(stresses) * length(times)))
+  colnames(row) <- c(outer(stresses, times, paste, sep = "_"))
+  
+  for (time in times) {
+    for (stress in stresses) {
+      name <- paste0(stress, "_", time)
+      row[[name]] <- ifelse(name %in% lfc_table$stress_time, as.numeric(lfc_table[lfc_table$stress_time == name, "LFC_micro"]), 0)
+    }
+  }
+  rownames(row) <- mirna
+  matrix <- rbind(matrix, row)
+}
+
+############## Gene Processing ##############
+# Select relevant columns for genes
+gene_table <- correlation_table_filt[, c("time", "stress", "LFC_gene", "Gene")]
+
+gene_table_uniq <- gene_table %>% distinct()
+
+gene_table_uniq <- gene_table_uniq %>%
+  unite("stress_time", stress, time, sep = "_")
+
+gene_table_uniq <- gene_table_uniq %>%
+  group_by(Gene, stress_time) %>%
+  slice(which.max(abs(LFC_gene))) %>%
+  ungroup()
+
+# Define unique genes
+genes <- unique(gene_table_uniq$Gene)
+
+# Create an empty dataframe to store gene matrix
+matrix_2 <- data.frame()
+
+# Iterate over each gene to populate the matrix
+for (gene in genes) {
+  lfc_table <- gene_table_uniq[gene_table_uniq$Gene == gene, ]
+  row <- data.frame(matrix(0, nrow = 1, ncol = length(stresses) * length(times)))
+  colnames(row) <- c(outer(stresses, times, paste, sep = "_"))
+  
+  for (time in times) {
+    for (stress in stresses) {
+      name <- paste0(stress, "_", time)
+      row[[name]] <- ifelse(name %in% lfc_table$stress_time, as.numeric(lfc_table[lfc_table$stress_time == name, "LFC_gene"]), 0)
+    }
+  }
+  rownames(row) <- gene
+  matrix_2 <- rbind(matrix_2, row)
+}
+
+############## Annotation Tables ##############
+# Create annotation table for microRNA
+annotation_microRNA <- data.frame(row.names = rownames(matrix), microRNA = rownames(matrix))
+annotation_microRNA <- annotation_microRNA %>%
+  mutate(microRNA = ifelse(microRNA %in% c("miR156", "miR157"), "miR156-miR157", microRNA))
+
+# Load target annotation
+annotation_microRNA[["target"]] <- rownames(annotation_microRNA)
+annotation_gene <- merge(annotation_microRNA, edge_table, by = "target")
+annotation_gene <- annotation_gene[, c("microRNA", "source")]
+annotation_gene <- annotation_gene %>% distinct()
+rownames(annotation_gene) <- annotation_gene$source
+colnames(annotation_gene) <- c("microRNA", "other")
+colnames(annotation_microRNA) <- c("microRNA", "other")
+annotation_table <- rbind(annotation_gene, annotation_microRNA)
+
+############## Heatmap Construction ##############
+# Combine microRNA and gene matrices
+HM_matrix <- rbind(matrix, matrix_2)
+HM_matrix <- as.matrix(HM_matrix)
+
+# Define row order
+rownames_order <- c("miR164", "miR319", "miR166", "miR157", "miR156",
+                    "miR396", "miR398", "miR408", "MELO3C017185", "MELO3C007121", "MELO3C002754",
+                    "MELO3C016092", "MELO3C007078", "MELO3C017245",
+                    "MELO3C007656", "MELO3C009159", "MELO3C022680", "MELO3C016781",
+                    "MELO3C015374", "MELO3C008424", "MELO3C027302")
+
+# Order columns and rows
+HM_matrix <- HM_matrix[, order(colnames(HM_matrix))]
+HM_matrix <- HM_matrix[match(rownames_order, rownames(HM_matrix)), ]
+annotation_table <- annotation_table[match(rownames_order, rownames(annotation_table)), ]
+
+# Define color function
+col_fun <- colorRamp2(c(-3, 0, 3), c("blue", "grey", "red"))
+
+# Define microRNA annotation colors
+microRNA_annot_colors <- c("miR156-miR157" = "#FF7F00", "miR319" = "#FFFF32",
+                           "miR166" = "#32FF00", "miR396" = "#A5EDFF", "miR164" = "#CCBFFF",
+                           "miR408" = "#654CFF", "miR398" = "#E51932")
+
+# Create row annotation
+annotation_row <- rowAnnotation(microRNA = annotation_table$microRNA, col = list(microRNA = microRNA_annot_colors))
+HM_matrix_filtrada <- HM_matrix[, colSums(HM_matrix != 0) > 0]
+
+heat <- Heatmap(HM_matrix_filtrada, rect_gp = gpar(col = "white", lwd = 0.5),
+                col = col_fun, right_annotation = annotation_row, 
+                column_names_rot = 45, column_names_gp = gpar(fontsize = 16),
+                row_names_gp = gpar(fontsize = 16),
+                column_labels = c("Cold T1","Cold T2","Cold T3","Drought T3",
+                                  "Monosporascus T2","ShortDay T2","ShortDay T3"),
+                row_split = row_group,
+                gap = unit(2, "mm"),
+                row_title = c("Genes","microRNA" ),
+                cluster_rows = FALSE, cluster_columns = FALSE)
+
+svg(paste0(path_out_network,"/Heatmap.svg"), width = 17, height = 10)
+heat
+dev.off()
 
 ############################### Analysis 3 #####################################
 
