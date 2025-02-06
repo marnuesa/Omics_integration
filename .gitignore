@@ -9,6 +9,7 @@ RNA_seq/Libraries_old/
 RNA_seq/Results/
 RNA_seq/Results_old/
 RNA_seq/Additional_info/Melon_salmon_ind/
+RNA_seq/Additional_info/org.CMelo.eg.db/
 
 Methylome/Libraries/
 Methylome/Results
@@ -33,3 +34,4 @@ Integration_MORE/Results_old/
 *.txt
 *.gtf
 *.sam
+*.bed
