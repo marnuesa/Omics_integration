@@ -136,7 +136,7 @@ for(estres in names(dataframes_transcritos)){
                          universe = Gene_list_universe,
                          OrgDb = org.CMelo.eg.db,
                          keyType = 'GID',
-                         ont = "BP",
+                         ont = "MF",
                          minGSSize = 10,
                          maxGSSize = 500,
                          pAdjustMethod = "BH",
@@ -176,7 +176,7 @@ for(estres in names(dataframes_transcritos)){
                            universe = Gene_list_universe,
                            OrgDb = org.CMelo.eg.db,
                            keyType = 'SYMBOL',
-                           ont = "BP",
+                           ont = "MF",
                            minGSSize = 10,
                            maxGSSize = 500,
                            pAdjustMethod = "BH",
@@ -210,61 +210,6 @@ for(estres in names(dataframes_transcritos)){
       }
   }
 }
-
-
-
-upset_up <- final_table_up %>%
-  select(ID, Estres) %>%
-  distinct() %>%
-  mutate(Presence = 1) %>%
-  pivot_wider(names_from = Estres, values_from = Presence, values_fill = list(Presence = 0))
-
-upset_up <- upset_up %>%
-  select(ID, sort(colnames(upset_up)[-1]))
-
-stresses = colnames(upset_up)[-1]
-# transfrom in a boolean matrix
-upset_up[stresses] = upset_up[stresses] == 1
-
-stresses <- sort(stresses, decreasing = TRUE)
-
-plot_upset_up <- upset(upset_up, stresses, name='stresses', width_ratio=0.1, height_ratio=1,sort_sets = FALSE,
-                    base_annotations=list('Intersection size'=intersection_size(
-                      text=list(vjust=-0.1, hjust=-0.1,angle=45, color="grey"))),
-                    themes=upset_modify_themes(
-                      list(
-                        'main_bar' = theme(text = element_text(size = 20)),         # Tamaño de texto en la barra principal
-                        'sets' = theme(text = element_text(size = 20)),             # Tamaño de texto en las etiquetas de conjuntos
-                        'intersections_matrix' = theme(text = element_text(size = 15)), # Tamaño de texto en la matriz de intersecciones
-                        'intersection_sizes' = theme(text = element_text(size = 20)),   # Tamaño de texto en tamaños de intersección
-                        'sets_sizes' = theme(text = element_text(size = 20))             # Tamaño de texto en tamaños de conjuntos
-                        
-                      )
-                    ))
-
-
-id_down <- upset_down %>%
-  rowwise() %>%
-  filter(sum(c_across(-ID)) == 3) %>%
-  pull(ID)
-
-table_down <- unique(final_table_down[final_table_down$ID %in% id_down, c("ID","Description")])
-
-id_up <- upset_up %>%
-  rowwise() %>%
-  filter(sum(c_across(-ID)) == 3) %>%
-  pull(ID)
-
-table_up <- unique(final_table_up[final_table_up$ID %in% id_up, c("ID","Description")])
-
-write.table(table_up, file = paste0(output_path_common,'/common_BP_up.txt'), sep = "\t", quote = F, 
-            row.names = F, col.names = T) 
-write.table(table_down, file = paste0(output_path_common,'/common_BP_down.txt'), sep = "\t", quote = F, 
-            row.names = F, col.names = T) 
-
-
-ggsave(output_path_common,'/upset_down_plot.png', plot = plot_upset_down, width = 15, height = 10)
-ggsave(output_path_common,'/upset_up_plot.png', plot = plot_upset_up, width = 15, height = 10)
 
 ####################### UPSET PLOT FOR UP-REGULATED GENES ######################
 # Prepare data for the upset plot
@@ -315,7 +260,7 @@ id_up <- upset_up %>%
 table_up <- unique(final_table_up[final_table_up$ID %in% id_up, c("ID", "Description")])
 
 # Save tables of common biological processes
-write.table(table_up, file = paste0(output_path_common, '/common_BP_up.txt'), sep = "\t", quote = F, 
+write.table(table_up, file = paste0(output_path_common, '/common_MF_up.txt'), sep = "\t", quote = F, 
             row.names = F, col.names = T) 
 
 ####################### UPSET PLOT FOR DOWN-REGULATED GENES ######################
@@ -362,6 +307,6 @@ id_down <- upset_down %>%
 table_down <- unique(final_table_down[final_table_down$ID %in% id_down, c("ID", "Description")])
 
 # Save tables of common biological processes
-write.table(table_down, file = paste0(output_path_common, '/common_BP_down.txt'), sep = "\t", quote = F, 
+write.table(table_down, file = paste0(output_path_common, '/common_MF_down.txt'), sep = "\t", quote = F, 
             row.names = F, col.names = T) 
 

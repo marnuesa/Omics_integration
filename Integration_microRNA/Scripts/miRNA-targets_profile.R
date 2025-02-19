@@ -29,7 +29,8 @@
 # ----------------------------------------------------------
 # - Analysis 1: Diversity of microRNA sequences between stresses
 # - Analysis 2: miRNA profile with high Basemean represents their miRNA family
-# and is graphicated with each one of their targets profile.
+# and is graphicated with each one of their targets profile. It generation a correlation
+# plot, a heatmap and the edge and node tables to create a network.
 # - Analysis 3: Select only the microRNAs that have a different profile that
 # their family and and graphicated with each one of their targets profile.
 
@@ -38,7 +39,6 @@ rm(list = ls())
 ################################# Libraries ####################################
 suppressMessages(library(tidyverse))
 suppressMessages(library(ggplot2))
-suppressMessages(library(dplyr))
 suppressMessages(library(tidyr))
 suppressMessages(library(stringr))
 suppressMessages(library(gridExtra))
@@ -49,6 +49,9 @@ suppressMessages(library("plotly"))
 suppressMessages(library(htmlwidgets))
 suppressMessages(library("ComplexHeatmap"))
 suppressMessages(library("circlize"))
+suppressMessages(library(dplyr))
+suppressMessages(library(clusterProfiler))
+suppressMessages(library(org.CMelo.eg.db))
 
 ################################## FUNCTIONS ###################################
 
@@ -246,8 +249,8 @@ for(miRNA in names(miRNAs)){
         pivot_longer(cols = starts_with("LFC_T"), names_to = "time", values_to = "LFC") %>%
         pivot_longer(cols = starts_with("Padj_T"), names_to = "time_padj", values_to = "Padj") %>%
         filter(str_sub(time, 5) == str_sub(time_padj, 6)) %>%
-        select(-time_padj)
-      
+        dplyr::select(-time_padj)
+
       # Create a new column for significance
       df_long$significance <- ifelse(df_long$Padj < 0.05, "Significative", "No Significative")
       
@@ -298,7 +301,7 @@ for(miRNA in names(miRNAs)){
         patron = patron + sum(expression_summary$patron)
 
         # Save sequence table
-        write.table(expression_summary,paste0(path_out_logs,"/Summary_",miRNA,"_",stress,".tsv"), sep='\t', col.names = TRUE, row.names = FALSE)
+        write.table(expression_summary,paste0(path_out_logs,"/Summary_",miRNA,"_",stress,".tsv"), sep='\t', col.names = TRUE, row.names = FALSE,quote=FALSE)
 
     }
   }
@@ -320,7 +323,7 @@ print(proportion)
 print("##############################################################################")
 
 # Save sequence table
-write.table(micro_summary,paste0(path_out_logs,"/Summary_table_microRNAs.tsv"), sep='\t', col.names = TRUE, row.names = FALSE)
+write.table(micro_summary,paste0(path_out_logs,"/Summary_table_microRNAs.tsv"), sep='\t', col.names = TRUE, row.names = FALSE,quote=FALSE)
 
 ################################ Analysis 2 ####################################
 
@@ -415,7 +418,7 @@ for(mirna in names(general_miRNAs)){
         pivot_longer(cols = starts_with("LFC_T"), names_to = "time", values_to = "LFC") %>%
         pivot_longer(cols = starts_with("Padj_T"), names_to = "time_padj", values_to = "Padj") %>%
         filter(str_sub(time, 5) == str_sub(time_padj, 6)) %>%
-        select(-time_padj)
+        dplyr::select(-time_padj)
       
       # Create the tables to the targets
       if (length(lista_targets[[mirna]]) > 0 ){
@@ -449,7 +452,7 @@ for(mirna in names(general_miRNAs)){
               pivot_longer(cols = starts_with("LFC_T"), names_to = "time", values_to = "LFC") %>%
               pivot_longer(cols = starts_with("Padj_T"), names_to = "time_padj", values_to = "Padj") %>%
               filter(str_sub(time, 5) == str_sub(time_padj, 6)) %>%
-              select(-time_padj)
+              dplyr::select(-time_padj)
             
             df_long_complete <- rbind(df_long, df_long_gene)
             
@@ -535,14 +538,14 @@ for(mirna in names(general_miRNAs)){
 
 print("Claculating the correlation...")
 
-write.table(correlation_table,paste0(path_out_analysis2,"/Correlation_table.txt"))
+write.table(correlation_table,paste0(path_out_analysis2,"/Correlation_table.tsv"), row.names= FALSE, col.names = TRUE, quote= FALSE)
 
 # Calculate the correlation to a No normal data distribution
 correlation_table$LFC_gene_jitter <- jitter(correlation_table$LFC_gene)
 correlation_table$LFC_micro_jitter <- jitter(correlation_table$LFC_micro)
 cor_spearman <- cor.test(correlation_table$LFC_gene_jitter, correlation_table$LFC_micro_jitter, method = "spearman")
 
-# Calcula el valor máximo absoluto para ambos ejes
+# Clculate the max malue to the axes
 max_abs_x <- max(abs(correlation_table$LFC_micro), na.rm = TRUE) +0.5
 max_abs_y <- max(abs(correlation_table$LFC_gene), na.rm = TRUE) + 0.5
 
@@ -646,9 +649,33 @@ write.table(nodes_table,
             paste0(path_out_network,"/Nodes_table.tsv"), 
             sep = "\t", col.names = TRUE, row.names = FALSE, quote = FALSE)
             
+# Group Go
+genes <- annotation_table$gene
+ggo <- groupGO(gene = table_genes$id,
+                         OrgDb =org.CMelo.eg.db,
+                         keyType = "GID",
+                         ont      = "MF",
+                         level    = 3)
+results <- ggo@result
+results <- results[results$Count != 0, ]
+# Save the Go terms table to a file
+write.table(results, 
+            paste0(path_out_network,"/GO_terms_MF_3.tsv"), 
+            sep = "\t", col.names = TRUE, row.names = FALSE, quote = FALSE)
+
+ggo <- groupGO(gene = table_genes$id,
+                         OrgDb =org.CMelo.eg.db,
+                         keyType = "GID",
+                         ont      = "BP",
+                         level    = 3)
+results <- ggo@result
+results <- results[results$Count != 0, ]
+# Save the Go terms table to a file
+write.table(results, 
+            paste0(path_out_network,"/GO_terms_BP_3.tsv"), 
+            sep = "\t", col.names = TRUE, row.names = FALSE, quote = FALSE)
 
 print("Generating heatmap...")
-
 ############## microRNA Processing ##############
 # Select relevant columns for microRNA
 micro_table <- correlation_table_filt[, c("time", "stress", "LFC_micro", "microRNA")]
@@ -663,7 +690,7 @@ micro_table_uniq <- micro_table_uniq %>%
 # Select the row with the highest absolute LFC_micro per microRNA and stress_time
 micro_table_uniq <- micro_table_uniq %>%
   group_by(microRNA, stress_time) %>%
-  slice(which.max(abs(LFC_micro))) %>%
+  dplyr::slice(which.max(abs(LFC_micro))) %>%
   ungroup()
 
 # Define stress conditions and time points
@@ -701,7 +728,7 @@ gene_table_uniq <- gene_table_uniq %>%
 
 gene_table_uniq <- gene_table_uniq %>%
   group_by(Gene, stress_time) %>%
-  slice(which.max(abs(LFC_gene))) %>%
+  dplyr::slice(which.max(abs(LFC_gene))) %>%
   ungroup()
 
 # Define unique genes
@@ -842,7 +869,7 @@ for(mirna in names(miRNA_diff)){
         pivot_longer(cols = starts_with("LFC_T"), names_to = "time", values_to = "LFC") %>%
         pivot_longer(cols = starts_with("Padj_T"), names_to = "time_padj", values_to = "Padj") %>%
         filter(str_sub(time, 5) == str_sub(time_padj, 6)) %>%
-        select(-time_padj)
+        dplyr::select(-time_padj)
       
       # Create the tables to the targets
       if (length(lista_targets[[mirna]]) > 0 ){
@@ -877,7 +904,7 @@ for(mirna in names(miRNA_diff)){
               pivot_longer(cols = starts_with("LFC_T"), names_to = "time", values_to = "LFC") %>%
               pivot_longer(cols = starts_with("Padj_T"), names_to = "time_padj", values_to = "Padj") %>%
               filter(str_sub(time, 5) == str_sub(time_padj, 6)) %>%
-              select(-time_padj)
+              dplyr::select(-time_padj)
             
             df_long_complete <- rbind(df_long, df_long_gene)
             
