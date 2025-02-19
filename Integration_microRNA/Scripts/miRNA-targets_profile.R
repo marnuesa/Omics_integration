@@ -761,6 +761,7 @@ annotation_table <- annotation_table[match(rownames_order, rownames(annotation_t
 
 # Define color function
 col_fun <- colorRamp2(c(-3, 0, 3), c("blue", "grey", "red"))
+col_fun(seq(-1, 1))
 
 # Define microRNA annotation colors
 microRNA_annot_colors <- c("miR156-miR157" = "#FF7F00", "miR319" = "#FFFF32",
@@ -769,6 +770,9 @@ microRNA_annot_colors <- c("miR156-miR157" = "#FF7F00", "miR319" = "#FFFF32",
 
 # Create row annotation
 annotation_row <- rowAnnotation(microRNA = annotation_table$microRNA, col = list(microRNA = microRNA_annot_colors))
+
+row_group <- ifelse(grepl("^miR", rownames_order), "miR", "MELO")
+
 HM_matrix_filtrada <- HM_matrix[, colSums(HM_matrix != 0) > 0]
 
 heat <- Heatmap(HM_matrix_filtrada, rect_gp = gpar(col = "white", lwd = 0.5),
