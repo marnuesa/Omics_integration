@@ -165,6 +165,14 @@ annotation_file <- read.table(paste0(path_metadata,"/DHL92_gene_description_v4.t
 colnames(annotation_file) <- c('Gene','Description')
 
 ############################# BATCH1 ####################################
+# Definir colores fijos para cada tipo de condición
+color_dict <- c(
+  "cold" = "#f8766d",        
+  "control" = "#a3a500",     
+  "drought" = "#00bf7d",     
+  "shortday" = "#e76bf3",    
+  "monosporascus" = "#00b0f6" 
+)
 
 metadata_batch1 <- metadata[metadata$Batch == 1,]
 files <- file.path(path_in, row.names(metadata_batch1), "quant.sf")
@@ -195,8 +203,18 @@ for (time in unique(metadata_batch1$Time)) {
   vsd_dds <- vst(ddsTxi, blind = FALSE)
   vsd_dds_counts <- assay(vsd_dds)
   
+  # obtain the unique groups
+  groups <- unique(colData(vsd_dds)$Group)
+
+  # Extract names
+  base_groups <- unique(sub("_\\d+", "", groups))
+
+  # Asign colors to groups
+  palette_colors <- setNames(color_dict[base_groups], groups)
+
   ## Create and save Principal Component Analysis
-  PCA <- plotPCA(vsd_dds, intgroup = c("Group"))
+  PCA <- plotPCA(vsd_dds, intgroup = c("Group"))+
+  scale_color_manual(values = palette_colors)
   ggsave(paste0(path_out_ea,"/PCA_time",time,".png"), plot = PCA, width = 8, height = 6, dpi = 300)
   
   # Differential expression analysis
@@ -326,7 +344,8 @@ for (time in unique(metadata_batch2$Time)) {
   vsd_dds_counts <- assay(vsd_dds)
   
   ## Create and save Principal Component Analysis
-  PCA <- plotPCA(vsd_dds, intgroup = c("Group"))
+  PCA <- plotPCA(vsd_dds, intgroup = c("Group")) + 
+  scale_color_manual(values = c("cold_3" = "#f8766d", "control_3" = "#a3a500"))
   ggsave(paste0(path_out_ea,"/PCA_time",time,"batch2.png"), plot = PCA, width = 8, height = 6, dpi = 300)
   
   # Differential expression analysis
