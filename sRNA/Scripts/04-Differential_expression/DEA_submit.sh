@@ -33,8 +33,6 @@ path_graph=/home/nuezsal/Omics_integration/sRNA/Results/DESeq_graphs
 alpha=0.05
 
 
-
-
 # Execution 
 srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript DEA.R \
             --input $path_table \
