@@ -167,11 +167,11 @@ colnames(annotation_file) <- c('Gene','Description')
 ############################# BATCH1 ####################################
 # Definir colores fijos para cada tipo de condición
 color_dict <- c(
-  "cold" = "#1E90FF",        
-  "control" = "#CDC9C9",     
-  "drought" = "#EECFA1",     
-  "shortday" = "#0F0F0F",    
-  "monosporascus" = "#98FB98" 
+  "cold" = "#36608d",        
+  "control" = "#440154",     
+  "drought" = "#f3a582",     
+  "shortday" = "#fde724",    
+  "monosporascus" = "#8fd448" 
 )
 
 metadata_batch1 <- metadata[metadata$Batch == 1,]
@@ -215,7 +215,7 @@ for (time in unique(metadata_batch1$Time)) {
   ## Create and save Principal Component Analysis
   PCA <- plotPCA(vsd_dds, intgroup = c("Group"))+
   scale_color_manual(values = palette_colors) +
-  theme_classic()
+  theme_bw()
   ggsave(paste0(path_out_ea,"/PCA_time",time,".png"), plot = PCA, width = 8, height = 6, dpi = 300)
   
   # Differential expression analysis
@@ -347,7 +347,7 @@ for (time in unique(metadata_batch2$Time)) {
   ## Create and save Principal Component Analysis
   PCA <- plotPCA(vsd_dds, intgroup = c("Group")) + 
   scale_color_manual(values = c("cold_3" = "#f8766d", "control_3" = "#a3a500")) +
-  theme_classic()
+  theme_bw()
   ggsave(paste0(path_out_ea,"/PCA_time",time,"batch2.png"), plot = PCA, width = 8, height = 6, dpi = 300)
   
   # Differential expression analysis
