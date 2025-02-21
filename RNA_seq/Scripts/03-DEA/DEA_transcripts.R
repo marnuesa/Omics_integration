@@ -168,8 +168,8 @@ colnames(annotation_file) <- c('Gene','Description')
 # Definir colores fijos para cada tipo de condición
 color_dict <- c(
   "cold" = "#36608d",        
-  "control" = "#440154",     
-  "drought" = "#268a8d",     
+  "control" = "#0F0F0F",     
+  "drought" = "#440154",     
   "shortday" = "#fde724",    
   "monosporascus" = "#8fd448" 
 )
@@ -346,7 +346,7 @@ for (time in unique(metadata_batch2$Time)) {
   
   ## Create and save Principal Component Analysis
   PCA <- plotPCA(vsd_dds, intgroup = c("Group")) + 
-  scale_color_manual(values = c("cold_3" = "#36608d", "control_3" = "#440154")) +
+  scale_color_manual(values = c("cold_3" = "#36608d", "control_3" = "#0F0F0F")) +
   theme_bw()
   ggsave(paste0(path_out_ea,"/PCA_time",time,"batch2.png"), plot = PCA, width = 8, height = 6, dpi = 300)
   
