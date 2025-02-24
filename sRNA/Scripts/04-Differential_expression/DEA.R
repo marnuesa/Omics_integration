@@ -152,6 +152,15 @@ dir.create(path_out_vp, recursive = TRUE, showWarnings = FALSE)
 countdata <- read.csv(paste0(path_table, '/fusion_abs-outer.csv'), header=TRUE, row.names = "seq",quote = "")
 metadata <- read.table(path_metadata, sep='\t', header = TRUE, stringsAsFactors = TRUE,row.names = 1)
 
+# Define fix colors
+color_dict <- c(
+  "cold" = "#f8766d",        
+  "control" = "#a3a500",     
+  "drought" = "#00bf7d",     
+  "shortday" = "#e76bf3",    
+  "monosporascus" = "#00b0f6" 
+)
+
 # This project have three times, each one will be a subproject which will be analised independiently
 for (time in unique(metadata$Time)) {
   
@@ -174,8 +183,20 @@ for (time in unique(metadata$Time)) {
   vsd_dds <- vst(dds_matrix, blind = FALSE)
   vsd_dds_counts <- assay(vsd_dds)
   
+   # obtain the unique groups
+  groups <- unique(colData(vsd_dds)$Group)
+
+  # Extract names
+  base_groups <- unique(sub("_\\d+", "", groups))
+
+  # Asign colors to groups
+  palette_colors <- setNames(color_dict[base_groups], groups)
+
   ## Create and save Principal Component Analysis
-  PCA <- plotPCA(vsd_dds, intgroup = c("Group"))
+  PCA <- plotPCA(vsd_dds, intgroup = c("Group"))+
+  scale_color_manual(values = palette_colors) +
+  theme_bw()
+  
   ggsave(paste0(path_out_ea,"/PCA_time",time,".png"), plot = PCA, width = 8, height = 6, dpi = 300)
   
   # Differential expression analysis
