@@ -60,7 +60,7 @@ for file in "$path_in"/*.bed; do
 		name_out=$(echo "$file_name_without_ext" | rev | cut -d'_' -f1 | rev)
 
 		# Find intersections with current B file and write to the output
-		bedtools intersect -wa -wb -a $unmatched_file -b $b_file >> "$path_out/${name_file%.bed}_annotation.bed"
+		bedtools intersect -wa -wb -a $unmatched_file -b $b_file | awk '!seen[$1,$2,$3]++' >> "$path_out/${name_file%.bed}_annotation.bed"
 		    
 		# Update unmatched file to exclude already matched regions
 		unmatched_tmp="$path_out/unmatched_tmp.bed"
