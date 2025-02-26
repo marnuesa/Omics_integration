@@ -34,6 +34,6 @@ output_path="/home/nuezsal/Omics_integration/Summary"
 # Execution
 srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript Counts_dea.R \
   --methylome_path $methylome_path \
-  --microRNA_path $microRNA_path \
+  --microrna_path $microRNA_path \
   --rnaseq_path $rnaseq_path \
   --output_path $output_path
