@@ -42,6 +42,7 @@ get_arguments <- function() {
   return(args)
 }
 
+print(args)
 # Save output arguments in variables
 output_path <- args$output_path
 
