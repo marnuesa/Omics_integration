@@ -157,6 +157,6 @@ df_rnaseq_counts <- df_rnaseq %>%
   summarise(Count = n(), .groups = 'drop')
 
 
-write.table(df_methylome,file = paste0(path_out,"/summary_methylome.tsv"),sep = "\t",col.names = TRUE,row.names = FALSE,quote = FALSE)
-write.table(df_microrna_counts,file = paste0(path_out,"/summary_microRNA.tsv"),sep = "\t",col.names = TRUE,row.names = FALSE,quote = FALSE)
-write.table(df_rnaseq_counts,file = paste0(path_out,"/summary_transcripts.tsv"),sep = "\t",col.names = TRUE,row.names = FALSE,quote = FALSE)
+write.table(df_methylome,file = paste0(output_path,"/summary_methylome.tsv"),sep = "\t",col.names = TRUE,row.names = FALSE,quote = FALSE)
+write.table(df_microrna_counts,file = paste0(output_path,"/summary_microRNA.tsv"),sep = "\t",col.names = TRUE,row.names = FALSE,quote = FALSE)
+write.table(df_rnaseq_counts,file = paste0(output_path,"/summary_transcripts.tsv"),sep = "\t",col.names = TRUE,row.names = FALSE,quote = FALSE)
