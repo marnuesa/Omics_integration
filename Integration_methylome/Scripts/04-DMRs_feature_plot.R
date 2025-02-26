@@ -164,6 +164,38 @@ for (stress in stresses){
 
 write.table(final_table,file=paste0(path_out,"/Proportions_table.tsv"), sep = "\t", row.names = FALSE, col.names = TRUE)
 
+df_long <- final_table %>%
+      pivot_longer(cols = starts_with("Proportion"), 
+                   names_to = "Type", 
+                   values_to = "Proportion") %>%
+      mutate(Type = gsub("Proportion_", "", Type))
+
+for(feature in unique(df_long$Feature)){
+  plots <- list()
+  table_filt_1 <- df_long[df_long$Feature == feature ,]
+  max_prop <- max(table_filt_1$Proportion)
+  if (max_prop > 0.005){
+    for(type in c("Hypo", "Hyper")){
+      table_filt_2 <- table_filt_1[table_filt_1$Meth_type == type,]
+      # Graficar
+      plot <- ggplot(data = as.data.frame(table_filt_2), mapping = aes(x = Stress, y = Proportion, fill = Stress, alpha = Time)) +
+        geom_bar(stat = "identity", position = "dodge") +
+        facet_wrap(~ Type, scales = "free_y") +
+        scale_alpha_manual(values = c(0.4, 0.7, 1)) +
+        scale_y_continuous(limits = c(0, max_prop)) +
+        labs(title = paste0("Proporciones de Metilación en ",feature, " y ", type), y = "Proporción", x = "Estrés") +
+        theme_minimal() +
+        theme(legend.position = "bottom")
+      plots[[type]] <- plot
+    }
+    # Combinar ambos gráficos
+    combined_plot <- grid.arrange(plots[["Hypo"]], plots[["Hyper"]], ncol = 1) 
+    ggsave(paste0(path_out,"/",feature,"_proportion.png"), 
+           plot = combined_plot, width = 20, height = 15,bg =" white") 
+  }
+  
+}
+
 print("Creating the graphs...")
 
 # Replace NA per 0 
