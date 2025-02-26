@@ -42,7 +42,10 @@ get_arguments <- function() {
   return(args)
 }
 
-print(args)
+################################# MAIN #########################################
+# Get program arguments
+args <- get_arguments()
+
 # Save output arguments in variables
 output_path <- args$output_path
 
