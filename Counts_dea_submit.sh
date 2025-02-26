@@ -29,7 +29,7 @@ source activate group_sRNA
 methylome_path="/home/nuezsal/Omics_integration/Methylome/Results/04-DMRs_plots"
 microRNA_path="/home/nuezsal/Omics_integration/sRNA/Results/06-miRNAs_grouped_by_family/Group_miRNAs_sig/cume/Omics_project/01-DEA_results_annot"
 rnaseq_path="/home/nuezsal/Omics_integration/RNA_seq/Results/03-DEA_TH/02-DEA_sig/cume/Omics_project"
-output_path="/home/marnuesa/Documentos/Omics_integration/Summary"
+output_path="/home/nuezsal/Omics_integration/Summary"
 
 # Execution
 srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript Counts_dea.R \
