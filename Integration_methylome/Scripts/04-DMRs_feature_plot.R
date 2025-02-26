@@ -214,7 +214,7 @@ for(feature in unique(df_wide$Feature)){
 
 print("Creating the global graphs...")
 
-table_new <- table_final[,-c(2,4,6,8)]
+table_new <- final_table[,-c(2,4,6,8)]
 df_sum <- table_new %>%
   group_by(Feature, Stress, Time) %>%
   summarise(
