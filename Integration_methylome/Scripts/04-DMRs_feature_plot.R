@@ -161,7 +161,7 @@ for (stress in stresses){
         final_table <- rbind(final_table, merged_proportions)
   }
 }
-
+final_table[is.na(table)] <- 0
 write.table(final_table,file=paste0(path_out,"/Proportions_table.tsv"), sep = "\t", row.names = FALSE, col.names = TRUE)
 
 df_long <- final_table %>%
