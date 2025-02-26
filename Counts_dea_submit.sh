@@ -23,7 +23,7 @@
 
 # Load necessary modules
 module load anaconda
-source activate group_sRNA
+conda activate group_sRNA
 
 # Paths
 methylome_path="/home/nuezsal/Omics_integration/Methylome/Results/04-DMRs_plots"
