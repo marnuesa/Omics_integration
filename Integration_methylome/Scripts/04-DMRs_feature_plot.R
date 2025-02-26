@@ -198,11 +198,31 @@ for(feature in unique(df_long$Feature)){
 
 print("Creating the graphs...")
 
-# Replace NA per 0 
-final_table <- replace(final_table, is.na(final_table), 0)
+table_new <- table_final[,-c(2,4,6,8)]
+df_sum <- table_new %>%
+  group_by(Feature, Stress, Time) %>%
+  summarise(
+    Count_CG = sum(Count_CG),
+    Count_CHG = sum(Count_CHG),
+    Count_CHH = sum(Count_CHH),
+    .groups = "drop"  # Eliminar el agrupamiento después de la operación
+  )
+
+df_proportion <- df_sum %>%
+  group_by(Stress, Time) %>%
+  mutate(
+    total_CG = sum(Count_CG),
+    total_CHG = sum(Count_CHG),
+    total_CHH = sum(Count_CHH),
+    Proportion_CG = Count_CG / total_CG,
+    Proportion_CHG = Count_CHG / total_CHG,
+    Proportion_CHH = Count_CHH / total_CHH
+  ) %>%
+  ungroup() %>%
+  dplyr::select(Feature, Count_CG, Count_CHG, Count_CHH, Stress, Time, Proportion_CG, Proportion_CHG, Proportion_CHH)
 
 # Create a long format of the data for plotting
-final_long <- final_table %>%
+final_long <- df_proportion %>%
   pivot_longer(cols = starts_with("Proportion_"), names_to = "Context", 
                values_to = "Proportion") %>%
   mutate(Context = gsub("Proportion_", "", Context)) %>%
@@ -225,7 +245,7 @@ for (stress in unique(final_long$Stress)) {
 
   ggplot(plot_data, aes(x = Proportion, y = Time, fill = Feature)) +
     geom_bar(stat = "identity", position = "stack") +
-    facet_wrap(~ Context + Meth_type , scales = "free_y", ncol = 1, strip.position = "left",) +
+    facet_wrap(~ Context , scales = "free_y", ncol = 1, strip.position = "left",) +
     labs(title = paste("Distribution of DMRs in", stress_correspondence[[stress]]),
          x = "" ,
          y = "",
