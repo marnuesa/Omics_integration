@@ -44,7 +44,7 @@ suppressMessages(library(dplyr))
 suppressMessages(library(ggplot2))
 suppressMessages(library(tidyr))
 suppressMessages(library(argparse))
-
+suppressMessages(library(gridExtra))
 ################################## FUNCTIONS ###################################
 
 # Define a function to modify the methylation type
