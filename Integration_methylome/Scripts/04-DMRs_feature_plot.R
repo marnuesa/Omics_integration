@@ -113,6 +113,16 @@ args <- get_arguments()
 path_in <- args$input
 path_out <- args$output
 
+# Create output paths
+path_out_feature <- paste(path_out, '01-Feature', sep = '/')
+path_out_global <- paste(path_out, '02-Global', sep = '/')
+path_out_pie <- paste(path_out, '03-Pie', sep = '/')
+
+# Create directories if they do not exist
+dir.create(path_out_feature , recursive = TRUE, showWarnings = FALSE)
+dir.create(path_out_global, recursive = TRUE, showWarnings = FALSE)
+dir.create(path_out_pie, recursive = TRUE, showWarnings = FALSE)
+
 print("The arguments are correct, the analysis will start now...")
 
 # Analysis of methylation profiles across various stress conditions and time points
@@ -168,7 +178,7 @@ for (stress in stresses){
 }
 
 final_table[is.na(final_table)] <- 0
-write.table(final_table,file=paste0(path_out,"/Proportions_table.tsv"), sep = "\t", row.names = FALSE, col.names = TRUE)
+write.table(final_table,file=paste0(path_out_global,"/Proportions_table.tsv"), sep = "\t", row.names = FALSE, col.names = TRUE)
 
 print("Creating the specific feature graphs...")
 
@@ -219,7 +229,7 @@ for(feature in unique(df_wide$Feature)){
       theme(legend.position = "bottom")
 
     # Save plot
-    ggsave(paste0(path_out,"/",feature,"_proportion.png"), 
+    ggsave(paste0(path_out_feature,"/",feature,"_proportion.png"), 
            plot = plot, width = 20, height = 15,bg =" white") 
   }
 }
@@ -308,7 +318,7 @@ for (stress in unique(final_long$Stress)) {
                                  "unknown_region"="Unknown"))
 
   # Save plot
-  ggsave(plot = last_plot(), filename = paste0(path_out, "/Feature_analysis_",stress,".svg"), height = 10, width = 17, )
+  ggsave(plot = last_plot(), filename = paste0(path_out_global, "/Feature_analysis_",stress,".svg"), height = 10, width = 17, )
 }
 
 ############################################## Context PIE CHARTS #####################################################
@@ -374,7 +384,7 @@ legend_manual <- legendGrob(
 pie_charts_wo_legend <- lapply(pie_charts, function(g) g + theme(legend.position = "none"))
 
 # Save the final image with multiple pie charts and a legend
-png(paste0(path_out,"/distribution_context.png"), 
+png(paste0(path_out_pie,"/distribution_context.png"), 
     width = 10, height = 6, units = "in", res = 300)
 
 # Arrange the pie charts in a grid and add the legend at the bottom
