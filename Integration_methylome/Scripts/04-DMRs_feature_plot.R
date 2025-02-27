@@ -45,6 +45,8 @@ suppressMessages(library(ggplot2))
 suppressMessages(library(tidyr))
 suppressMessages(library(argparse))
 suppressMessages(library(gridExtra))
+suppressMessages(library(cowplot))
+suppressMessages(library(scales))
 ################################## FUNCTIONS ###################################
 
 # Define a function to modify the methylation type
@@ -116,12 +118,15 @@ print("The arguments are correct, the analysis will start now...")
 # Analysis of methylation profiles across various stress conditions and time points
 times <- c("T1","T2","T3")
 stresses <- c("C","D","MON","SD")
+
+# Initialize final results table
 final_table <- data.frame()
 for (stress in stresses){
   for (time in times) {
     
         print(paste("The", stress, "-", time, "file is being analyzed..."))
     
+        # Read input files for each methylation context
         CG_file <- read.table(paste0(path_in,"/",time,"-",stress,"_DMRs_Bins_CG_genes.bed"),
                               sep = '\t', header = FALSE)
         colnames(CG_file) <- c("Chr", "Start", "End", "Methylation_type", "Proportion_diff", "ID", "Feature")
@@ -161,37 +166,42 @@ for (stress in stresses){
         final_table <- rbind(final_table, merged_proportions)
   }
 }
-print("Creating the specific feature graphs...")
 
 final_table[is.na(final_table)] <- 0
 write.table(final_table,file=paste0(path_out,"/Proportions_table.tsv"), sep = "\t", row.names = FALSE, col.names = TRUE)
 
+print("Creating the specific feature graphs...")
+
+# Data transformation for visualization
 df_long <- final_table %>%
       pivot_longer(cols = starts_with("Proportion"), 
                    names_to = "Type", 
                    values_to = "Proportion") %>%
       mutate(Type = gsub("Proportion_", "", Type))
 
-df <- df_long  %>%
-  dplyr::select(-Count_CG,-Count_CHG,-Count_CHH)  # Elimina la columna Meth_type
+# Delete not necessary columns
+df_long_filter <- df_long  %>%
+  dplyr::select(-Count_CG,-Count_CHG,-Count_CHH) 
 
-# Ahora, vamos a crear dos columnas separadas para `Proportion` según el valor de `Type`
-df_wide <- df %>%
+# Create two columns for proportion which depend on meth type
+df_wide <- df_long_filter %>%
   pivot_wider(
-    names_from = Meth_type,   # La columna que define las categorías (Hypo, Hyper)
-    values_from = Proportion,  # Los valores que se van a colocar en las nuevas columnas
-    names_prefix = "Proportion_"  # Para evitar nombres duplicados
+    names_from = Meth_type,   
+    values_from = Proportion, 
+    names_prefix = "Proportion_" 
   )
 
+# Generate bar plots for features with significant methylation changes divide by meth type
 for(feature in unique(df_wide$Feature)){
-  plots <- list()
-  table_filt_1 <- df_long[df_long$Feature == feature ,]
-  max_prop <- max(table_filt_1$Proportion)
+  filtered_data <- df_long[df_long$Feature == feature ,]
+  max_prop <- max(filtered_data$Proportion)
   if (max_prop > 0.005){
-    # Graficar
-    table_filt_2 <-  df_wide[ df_wide$Feature == feature ,]
-    table_filt_2$Proportion_Hypo <- -(table_filt_2$Proportion_Hypo)
-    plot <- ggplot(data = table_filt_2, mapping = aes(y = Stress, alpha = Time)) +
+    # Filter
+    filtered_wide <-  df_wide[df_wide$Feature == feature ,]
+    filtered_wide$Proportion_Hypo <- -(filtered_wide$Proportion_Hypo)
+
+    # Plotting
+    plot <- ggplot(data = filtered_wide, mapping = aes(y = Stress, alpha = Time)) +
       geom_col(aes(x = Proportion_Hyper, fill = Stress), position = "dodge") +
       geom_col(aes(x = Proportion_Hypo, fill = Stress), position = "dodge") +
       facet_wrap(~ Type, ncol = 1, scales = "free_y") +
@@ -207,6 +217,8 @@ for(feature in unique(df_wide$Feature)){
       labs(title = paste0("Proporciones de Metilación (Hyper vs Hyppo) in ", feature), x = "Proporción", y = "Estrés") +
       theme_minimal() +
       theme(legend.position = "bottom")
+
+    # Save plot
     ggsave(paste0(path_out,"/",feature,"_proportion.png"), 
            plot = plot, width = 20, height = 15,bg =" white") 
   }
@@ -214,7 +226,10 @@ for(feature in unique(df_wide$Feature)){
 
 print("Creating the global graphs...")
 
+# Delete not necessary columns
 table_new <- final_table[,-c(2,4,6,8)]
+
+# Summarize the counts of different methylation contexts (CG, CHG, CHH) by stress level
 df_sum <- table_new %>%
   group_by(Feature, Stress, Time) %>%
   summarise(
@@ -224,6 +239,7 @@ df_sum <- table_new %>%
     .groups = "drop"  # Eliminar el agrupamiento después de la operación
   )
 
+# Calculate new proportions
 df_proportion <- df_sum %>%
   group_by(Stress, Time) %>%
   mutate(
@@ -244,6 +260,7 @@ final_long <- df_proportion %>%
   mutate(Context = gsub("Proportion_", "", Context)) %>%
   select(-contains("Count"))
 
+# Generate adecuate labels
 final_long$Feature <- factor(final_long$Feature, levels = c("upstream","genes",
                                                             "5prime", "precursors",
                                                             "5primelncRNA", "lncRNA",
@@ -258,7 +275,7 @@ for (stress in unique(final_long$Stress)) {
   
   print(paste("Creating", stress, "plot"))
   plot_data <- final_long %>% filter(Stress == stress)
-
+  # Per feature plot
   ggplot(plot_data, aes(x = Proportion, y = Time, fill = Feature)) +
     geom_bar(stat = "identity", position = "stack") +
     facet_wrap(~ Context , scales = "free_y", ncol = 1, strip.position = "left",) +
@@ -289,8 +306,81 @@ for (stress in unique(final_long$Stress)) {
                                  "downstream"="Gene downstream","3prime"="MicroRNA downstream", 
                                  "3primelncRNA"="lncRNA_downstream","retrotransposons"="Retrotransposon",
                                  "unknown_region"="Unknown"))
-  
+
+  # Save plot
   ggsave(plot = last_plot(), filename = paste0(path_out, "/Feature_analysis_",stress,".svg"), height = 10, width = 17, )
 }
 
-##################################################################################################################
+############################################## Context PIE CHARTS #####################################################
+print("Creating the pie charts...")
+# Convert the summarized data to a new long format for easier plotting pie chart
+df_pie_long <- df_sum %>%
+  pivot_longer(cols = starts_with("Count_"), names_to = "Context", values_to = "Count") %>%
+  mutate(Context = gsub("Count_", "", Context))  # Remove "Count_" prefix from context names
+
+# Compute the total counts per stress level
+summary_counts <- df_pie_long %>%
+  group_by(Stress) %>%
+  summarise(total_counts = sum(Count))
+
+# Merge total counts with the original data and compute percentages
+df_pie_final <- df_pie_long %>%
+  left_join(summary_counts, by = "Stress") %>%
+  group_by(Stress) %>%
+  mutate(percentage = Count / sum(Count))
+
+# Create pie charts for each stress level
+pie_charts <- list()
+stress_levels <- unique(df_pie_final$Stress)
+
+for (level in stress_levels) {
+  # Filter data for the current stress level
+  df_filtered <- df_pie_final %>% filter(Stress == level)
+  
+  # Ensure the Context variable is treated as a factor
+  df_pie_final$Context <- factor(df_pie_final$Context)
+  
+  # Create a pie chart
+  p <- ggplot(df_filtered, aes(x = "", y = percentage, fill = Context)) +
+    geom_bar(stat = "identity", width = 1, color = "white", size = 1) +  # Add white border to segments
+    coord_polar("y", start = 0) +  # Convert to a pie chart
+    scale_fill_manual(values = c("CG" = "#cb7eff", "CHG" = "#946eff", "CHH" = "#5d5dff")) +  # Custom colors
+    labs(title = paste0(level, " - Total DMRs: ", unique(df_filtered$total_counts)), 
+         fill = "Context") +
+    theme_void() +  # Remove background and gridlines
+    geom_text(aes(label = percent(percentage, accuracy = 0.1)),  # Format percentages
+              position = position_stack(vjust = 0.5),
+              color = "black",  # Black text for readability
+              size = 3) +
+    theme(legend.position = "bottom")  # Move legend to the bottom
+  
+  # Store the plot in a list
+  pie_charts[[level]] <- p
+}
+
+# Define colors and labels for the legend
+colors <- c("#cb7eff", "#946eff", "#5d5dff")  # Defined colors
+contexts <- c("CG", "CHG", "CHH")  # Methylation contexts
+
+# Create a legend as a graphical object
+legend_manual <- legendGrob(
+  labels = contexts, 
+  pch = 15,  # Square symbols for legend
+  gp = gpar(col = colors, fill = colors, fontsize = 12),
+  ncol = length(contexts)  # Arrange in a single row (horizontal legend)
+)
+
+# Remove legends from individual pie charts
+pie_charts_wo_legend <- lapply(pie_charts, function(g) g + theme(legend.position = "none"))
+
+# Save the final image with multiple pie charts and a legend
+png(paste0(path_out,"/distribution_context.png"), 
+    width = 10, height = 6, units = "in", res = 300)
+
+# Arrange the pie charts in a grid and add the legend at the bottom
+grid.arrange(do.call(arrangeGrob, c(pie_charts_wo_legend, ncol = 2, nrow = 2)), 
+             legend_manual, 
+             nrow = 2, heights = c(10, 1))
+
+# Close the graphical device
+dev.off()
