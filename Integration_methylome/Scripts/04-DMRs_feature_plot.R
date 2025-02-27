@@ -47,6 +47,7 @@ suppressMessages(library(argparse))
 suppressMessages(library(gridExtra))
 suppressMessages(library(cowplot))
 suppressMessages(library(scales))
+suppressMessages(library(grid))
 ################################## FUNCTIONS ###################################
 
 # Define a function to modify the methylation type
