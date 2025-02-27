@@ -31,7 +31,7 @@ path_in=/home/nuezsal/Omics_integration/RNA_seq/Results/02-Salmon
 path_metadata=/home/nuezsal/Omics_integration/RNA_seq/Additional_info
 path_dea=/home/nuezsal/Omics_integration/RNA_seq/Results/03-DEA_TH
 path_graph=/home/nuezsal/Omics_integration/RNA_seq/Results/DESeq_graphs_TH
-alpha=0.1
+alpha=0.05
 TH=0.585
 
 
