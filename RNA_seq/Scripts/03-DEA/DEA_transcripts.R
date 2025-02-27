@@ -263,7 +263,7 @@ for (time in unique(metadata_batch1$Time)) {
       sig_order <- sig[order(sig$padj, decreasing = FALSE), ]
 
       ### Select first 1000 row or all of them
-      n_row <- min(200, nrow(sig_order))
+      n_row <- min(1000, nrow(sig_order))
       top_row <- sig_order[1:n_row, ]
 
       ### save DE genes IDs
@@ -444,6 +444,6 @@ for (time in unique(metadata_batch2$Time)) {
   }
   # Filter normalize df
   DE_genes_list <- unique(DE_genes_list)
-  write.table(DE_genes_list, file =paste0(path_out,"/DE_genes_200.txt"), row.names = FALSE, col.names = FALSE, quote = FALSE)
+  write.table(DE_genes_list, file =paste0(path_out,"/DE_genes.txt"), row.names = FALSE, col.names = FALSE, quote = FALSE)
 }
 
