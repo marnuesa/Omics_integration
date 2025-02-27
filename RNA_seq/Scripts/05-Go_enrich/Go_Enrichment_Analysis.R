@@ -146,13 +146,13 @@ for(estres in names(dataframes_transcritos)){
                          readable = TRUE,
                          pool = FALSE)
         print("##############ego")
-        print(upEGO@result)
+        print(upEGO@result[,c(1,2)])
         if(nrow(upEGO@result) != 0) {
           # Use the simplify function to reduce redundancy of enriched GO terms.
           upSimGO = simplify(upEGO, cutoff = 0.7, by = "p.adjust", select_fun = min, measure = "Wang",
                              semData = NULL)
-          print("##############ego")
-          print(upSimGO@result)
+          print("##############simego")
+          print(upSimGO@result[,c(1,2)])
           if (nrow(upSimGO@result) != 0){
             # Plot analysis
             # up
