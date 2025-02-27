@@ -132,11 +132,12 @@ for(estres in names(dataframes_transcritos)){
       # GO enrichment analysis
       Gene_list_universe = unique(Anotation_file$Gene)
       if(length(upreg) > 10){
+        print(upreg)
         upEGO = enrichGO(gene = upreg,
                          universe = Gene_list_universe,
                          OrgDb = org.CMelo.eg.db,
                          keyType = 'GID',
-                         ont = "MF",
+                         ont = "BP",
                          minGSSize = 10,
                          maxGSSize = 500,
                          pAdjustMethod = "BH",
@@ -144,12 +145,14 @@ for(estres in names(dataframes_transcritos)){
                          #qvalueCutoff = 0.05,
                          readable = TRUE,
                          pool = FALSE)
-        
-        
+        print("##############ego")
+        print(upEGO@result)
         if(nrow(upEGO@result) != 0) {
           # Use the simplify function to reduce redundancy of enriched GO terms.
           upSimGO = simplify(upEGO, cutoff = 0.7, by = "p.adjust", select_fun = min, measure = "Wang",
                              semData = NULL)
+          print("##############ego")
+          print(upSimGO@result)
           if (nrow(upSimGO@result) != 0){
             # Plot analysis
             # up
@@ -176,7 +179,7 @@ for(estres in names(dataframes_transcritos)){
                            universe = Gene_list_universe,
                            OrgDb = org.CMelo.eg.db,
                            keyType = 'SYMBOL',
-                           ont = "MF",
+                           ont = "BP",
                            minGSSize = 10,
                            maxGSSize = 500,
                            pAdjustMethod = "BH",
@@ -260,7 +263,7 @@ id_up <- upset_up %>%
 table_up <- unique(final_table_up[final_table_up$ID %in% id_up, c("ID", "Description")])
 
 # Save tables of common biological processes
-write.table(table_up, file = paste0(output_path_common, '/common_MF_up.txt'), sep = "\t", quote = F, 
+write.table(table_up, file = paste0(output_path_common, '/common_BP_up.txt'), sep = "\t", quote = F, 
             row.names = F, col.names = T) 
 
 ####################### UPSET PLOT FOR DOWN-REGULATED GENES ######################
@@ -307,6 +310,6 @@ id_down <- upset_down %>%
 table_down <- unique(final_table_down[final_table_down$ID %in% id_down, c("ID", "Description")])
 
 # Save tables of common biological processes
-write.table(table_down, file = paste0(output_path_common, '/common_MF_down.txt'), sep = "\t", quote = F, 
+write.table(table_down, file = paste0(output_path_common, '/common_BP_down.txt'), sep = "\t", quote = F, 
             row.names = F, col.names = T) 
 
