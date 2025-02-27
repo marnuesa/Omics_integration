@@ -236,7 +236,7 @@ for (time in unique(metadata_batch1$Time)) {
       
       else {
         ### Extract results for the specified comparison (treatment vs. control at the given time point) 
-        res <- results(dds, name=paste0("Group_",stress,"_",time,"_vs_control_",time),lfcThreshold = 0.585, alpha = alpha_value)
+        res <- results(dds, name=paste0("Group_",stress,"_",time,"_vs_control_",time),lfcThreshold = TH, alpha = alpha_value)
       }
       ### Perform LFC shrinkage to stabilize the estimates, especially for genes with low counts or high variability.
       shrunk <- lfcShrink(dds, coef=paste0("Group_",stress,"_",time,"_vs_control_",time), res=res)
@@ -337,7 +337,7 @@ for (time in unique(metadata_batch2$Time)) {
                                      colData = metadata_subproject,
                                      design = ~Group)
   # Pre-filtering.
-  keep <- rowSums(counts(ddsTxi) > 5) >= 3
+  keep <- rowSums(counts(ddsTxi) > 5) >= 2
   ddsTxi<- ddsTxi[keep,]
   
   # Exploratory analysis and visualization (variance stabilizing transformation)
@@ -367,7 +367,7 @@ for (time in unique(metadata_batch2$Time)) {
       
       else {
         ### Extract results for the specified comparison (treatment vs. control at the given time point) 
-        res <- results(dds, name=paste0("Group_",stress,"_",time,"_vs_control_",time),lfcThreshold = 0.585, alpha = alpha_value)
+        res <- results(dds, name=paste0("Group_",stress,"_",time,"_vs_control_",time),lfcThreshold = TH, alpha = alpha_value)
       }
       
       ### Perform LFC shrinkage to stabilize the estimates, especially for genes with low counts or high variability.
