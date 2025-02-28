@@ -23,7 +23,7 @@
 
 # Modules
 module load anaconda
-source activate group_sRNA
+source activate OI_env
 
 ################################# With TH ######################################
 # Paths
