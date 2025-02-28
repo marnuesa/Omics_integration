@@ -259,8 +259,15 @@ for (time in unique(metadata_batch1$Time)) {
         dplyr::filter(padj < alpha_value)
       write.csv(sig,paste0(path_sig_out,"/",stress,"_T",time,"_dea_sig.csv"),row.names = FALSE,quote = FALSE)
 
+      ### Sorting table for FDR value 
+      sig_order <- sig[order(sig$padj, decreasing = FALSE), ]
+
+      ### Select first 1000 row or all of them
+      n_row <- min(1000, nrow(sig_order))
+      top_row <- sig_order[1:n_row, ]
+
       ### save DE genes IDs
-      DE_genes_list <- c(DE_genes_list,sig$seq)
+      DE_genes_list <- c(DE_genes_list,top_row$seq)
       
       ### Delete rows with NA
       res_tb <- na.omit(res_tb)
@@ -384,8 +391,15 @@ for (time in unique(metadata_batch2$Time)) {
         dplyr::filter(padj < alpha_value)
       write.csv(sig,paste0(path_sig_out,"/",stress,"_T",time,"_dea_sig.csv"),row.names = FALSE,quote = FALSE)
 
+      ### Sorting table for FDR value 
+      sig_order <- sig[order(sig$padj, decreasing = FALSE), ]
+
+      ### Select first 1000 row or all of them
+      n_row <- min(1000, nrow(sig_order))
+      top_row <- sig_order[1:n_row, ]
+
       ### save DE genes IDs
-      DE_genes_list <- c(DE_genes_list,sig$seq)
+      DE_genes_list <- c(DE_genes_list,top_row$seq)
     
       ### Delete rows with NA
       res_tb <- na.omit(res_tb)
