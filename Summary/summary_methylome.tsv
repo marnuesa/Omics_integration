@@ -1,0 +1,73 @@
+Context	Time	Value	MethylatedType	Stress
+CG	T1	5654	HyperMethylated	Cold
+CG	T1	13229	HypoMethylated	Cold
+CHG	T1	3462	HyperMethylated	Cold
+CHG	T1	8505	HypoMethylated	Cold
+CHH	T1	52449	HyperMethylated	Cold
+CHH	T1	39163	HypoMethylated	Cold
+CG	T2	5683	HyperMethylated	Cold
+CG	T2	24274	HypoMethylated	Cold
+CHG	T2	3949	HyperMethylated	Cold
+CHG	T2	15805	HypoMethylated	Cold
+CHH	T2	49591	HyperMethylated	Cold
+CHH	T2	34354	HypoMethylated	Cold
+CG	T3	5096	HyperMethylated	Cold
+CG	T3	17012	HypoMethylated	Cold
+CHG	T3	2729	HyperMethylated	Cold
+CHG	T3	6284	HypoMethylated	Cold
+CHH	T3	5013	HyperMethylated	Cold
+CHH	T3	120224	HypoMethylated	Cold
+CG	T1	3911	HyperMethylated	Drought
+CG	T1	7820	HypoMethylated	Drought
+CHG	T1	907	HyperMethylated	Drought
+CHG	T1	1725	HypoMethylated	Drought
+CHH	T1	34427	HyperMethylated	Drought
+CHH	T1	46461	HypoMethylated	Drought
+CG	T2	2459	HyperMethylated	Drought
+CG	T2	2489	HypoMethylated	Drought
+CHG	T2	594	HyperMethylated	Drought
+CHG	T2	608	HypoMethylated	Drought
+CHH	T2	44523	HyperMethylated	Drought
+CHH	T2	28858	HypoMethylated	Drought
+CG	T3	13310	HyperMethylated	Drought
+CG	T3	3257	HypoMethylated	Drought
+CHG	T3	5842	HyperMethylated	Drought
+CHG	T3	2500	HypoMethylated	Drought
+CHH	T3	54872	HyperMethylated	Drought
+CHH	T3	36437	HypoMethylated	Drought
+CG	T1	12227	HyperMethylated	Monosporascus
+CG	T1	5652	HypoMethylated	Monosporascus
+CHG	T1	5412	HyperMethylated	Monosporascus
+CHG	T1	2563	HypoMethylated	Monosporascus
+CHH	T1	48708	HyperMethylated	Monosporascus
+CHH	T1	33151	HypoMethylated	Monosporascus
+CG	T2	7437	HyperMethylated	Monosporascus
+CG	T2	12119	HypoMethylated	Monosporascus
+CHG	T2	4968	HyperMethylated	Monosporascus
+CHG	T2	6346	HypoMethylated	Monosporascus
+CHH	T2	21315	HyperMethylated	Monosporascus
+CHH	T2	55102	HypoMethylated	Monosporascus
+CG	T3	7972	HyperMethylated	Monosporascus
+CG	T3	4715	HypoMethylated	Monosporascus
+CHG	T3	3904	HyperMethylated	Monosporascus
+CHG	T3	2667	HypoMethylated	Monosporascus
+CHH	T3	31243	HyperMethylated	Monosporascus
+CHH	T3	58976	HypoMethylated	Monosporascus
+CG	T1	11295	HyperMethylated	Short Day
+CG	T1	2306	HypoMethylated	Short Day
+CHG	T1	4483	HyperMethylated	Short Day
+CHG	T1	932	HypoMethylated	Short Day
+CHH	T1	62684	HyperMethylated	Short Day
+CHH	T1	25415	HypoMethylated	Short Day
+CG	T2	3705	HyperMethylated	Short Day
+CG	T2	5491	HypoMethylated	Short Day
+CHG	T2	1257	HyperMethylated	Short Day
+CHG	T2	1193	HypoMethylated	Short Day
+CHH	T2	42401	HyperMethylated	Short Day
+CHH	T2	33666	HypoMethylated	Short Day
+CG	T3	11045	HyperMethylated	Short Day
+CG	T3	5023	HypoMethylated	Short Day
+CHG	T3	6039	HyperMethylated	Short Day
+CHG	T3	3218	HypoMethylated	Short Day
+CHH	T3	21478	HyperMethylated	Short Day
+CHH	T3	80464	HypoMethylated	Short Day
