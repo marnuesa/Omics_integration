@@ -345,11 +345,11 @@ pie_charts <- list()
 stress_levels <- unique(df_pie_final$Stress)
 
 for (level in stress_levels) {
-  # Filter data for the current stress level
-  df_filtered <- df_pie_final %>% filter(Stress == level)
-  
   # Ensure the Context variable is treated as a factor
   df_pie_final$Context <- factor(df_pie_final$Context)
+  
+  # Filter data for the current stress level
+  df_filtered <- df_pie_final %>% filter(Stress == level)
   
   # Create a pie chart
   p <- ggplot(df_filtered, aes(x = "", y = percentage, fill = Context)) +
@@ -363,7 +363,7 @@ for (level in stress_levels) {
               position = position_stack(vjust = 0.5),
               color = "black",  # Black text for readability
               size = 3) +
-    theme(legend.position = "bottom")  # Move legend to the bottom
+    theme(legend.position = "none")  # Move legend to the bottom
   
   # Store the plot in a list
   pie_charts[[level]] <- p
@@ -381,15 +381,12 @@ legend_manual <- legendGrob(
   ncol = length(contexts)  # Arrange in a single row (horizontal legend)
 )
 
-# Remove legends from individual pie charts
-pie_charts_wo_legend <- lapply(pie_charts, function(g) g + theme(legend.position = "none"))
-
 # Save the final image with multiple pie charts and a legend
 png(paste0(path_out_pie,"/distribution_context.png"), 
     width = 10, height = 6, units = "in", res = 300)
 
 # Arrange the pie charts in a grid and add the legend at the bottom
-grid.arrange(do.call(arrangeGrob, c(pie_charts_wo_legend, ncol = 2, nrow = 2)), 
+grid.arrange(do.call(arrangeGrob, c(pie_charts, ncol = 2, nrow = 2)), 
              legend_manual, 
              nrow = 2, heights = c(10, 1))
 
