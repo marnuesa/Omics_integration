@@ -336,9 +336,12 @@ summary_counts <- df_pie_long %>%
 
 # Merge total counts with the original data and compute percentages
 df_pie_final <- df_pie_long %>%
+  select(-Time,-Feature) %>%
+  group_by(Stress,Context) %>%
+  mutate(Count=sum(Count)) %>%
+  unique() %>%
   left_join(summary_counts, by = "Stress") %>%
-  group_by(Stress) %>%
-  mutate(percentage = Count / sum(Count))
+  mutate(percentage = Count / total_counts) 
 
 # Create pie charts for each stress level
 pie_charts <- list()
