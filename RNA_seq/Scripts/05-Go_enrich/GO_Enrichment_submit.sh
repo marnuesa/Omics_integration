@@ -23,7 +23,7 @@
 
 # Load necessary modules
 module load anaconda
-source activate group_sRNA
+source activate GO_enrich
 
 # Paths
 transcripts_path="/home/nuezsal/Omics_integration/RNA_seq/Results/03-DEA_TH/02-DEA_sig/cume/Omics_project"
