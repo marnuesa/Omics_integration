@@ -4,7 +4,7 @@
 #SBATCH --ntasks=4									# Run on one mode. 
 #SBATCH --cpus-per-task=24								# Number of tasks = cpus. 
 #SBATCH --time=06-00:00:00								# Time limit days-hrs:min:sec.
-#SBATCH --mem=200gb								# Job memory request.
+#SBATCH --mem-per-cpu=7gb								# Job memory request.
 
 
 ####### MODULES
@@ -15,6 +15,7 @@ WD="/home/nuezsal/Omics_integration/Methylome"
 F="$WD/Scripts/02-Bismark/Functions.sh"
 
 ####### DIRECTORY
+mkdir -p $WD/Results/02-Bismark
 mkdir -p $WD/Results/02-Bismark/02-Alignment
 mkdir -p $WD/Results/02-Bismark/03-Deduplication
 mkdir -p $WD/Results/02-Bismark/04-Methylation_extractor
@@ -27,7 +28,7 @@ echo -e "\n\n--------------------------------------------------"
 echo -e "--------------- GENOME PREPARATION ---------------"
 echo -e "--------------------------------------------------\n"
 
-srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive $F task_Genome_preparation $WD/Results/02-Bismark
+#srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive $F task_Genome_preparation $WD/Results/02-Bismark
 
 #### BISMARK: ALIGNMENT
 echo -e "\n\n--------------------------------------------------"
