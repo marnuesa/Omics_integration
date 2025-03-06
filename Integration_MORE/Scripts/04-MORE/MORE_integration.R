@@ -157,9 +157,10 @@ df_association_methylome_upstream<- do.call(rbind, new_rows)
 df_gene_positions <- df_association_methylome_upstream %>%
   mutate(
     Strand = ifelse(Strand == "+", "F", "R"),
-    Positions = paste(Chr, Start, End, Strand, sep = "_")
+    Positions = paste(Chr, Start, End, Strand, sep = "_"),
+    gene = ID
   ) %>%
-  dplyr::select(ID,Positions)
+  dplyr::select(gene,Positions)
 
 # Metadata to design MLR
 metadata_meth <- read.table(paste0(metadata_path,"/metadata/metadata_methylome.tsv"), sep = "\t",header = TRUE)
@@ -195,7 +196,7 @@ for (group in unique(metadata_global$Group)){
     transcripts_table_fil <- transcripts_table[, row.names(edesign)]
     microRNA_table_fil <- microRNA_table[, row.names(edesign)]
     methylome_upstream_table_fil <- methylome_upstream_table[, row.names(edesign)]
-    methylome_upstream_table_fil <- methylome_upstream_table_fil[row.names(methylome_upstream_table_fil) %in% association_methylome_upstream$Positions, ]
+    methylome_upstream_table_fil <- methylome_upstream_table_fil[row.names(methylome_upstream_table_fil) %in% df_gene_positions$Positions, ]
     
     associations <- list("miRNA-seq" = association_micro,
                          "methylome-upstream" = df_gene_positions)
