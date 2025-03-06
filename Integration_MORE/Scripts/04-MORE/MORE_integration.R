@@ -239,7 +239,6 @@ for (group in unique(metadata_global$Group)){
         else {
           print("✅ MORE execute correctly")
           if (length(as.data.frame(SimMLR$GlobalSummary$GoodnessOfFit)) > 1) {
-            print(as.data.frame(SimMLR$GlobalSummary$GoodnessOfFit))
             # Get the results per condition
             MOREregulations <- RegulationPerCondition(SimMLR, filterR2 = 0.9)
           
@@ -247,11 +246,10 @@ for (group in unique(metadata_global$Group)){
             if (nrow(MOREregulations_opposite) != 0) {
               MOREregulations_opposite$Stress <- paste0(stress, "_T", time)
               colnames(MOREregulations_opposite) <- c("Gene", "Regulator", "Omic","Area", "Representative", "Coef.stress", "Coef.control", "Stress")
-              print(head(MOREregulations_opposite))
+              
               # Add LFC and padj
               df_DEA_values <- DE_genes[,c("seq","Shrunkenlog2FoldChange","padj")]
               MOREregulations_opposite_des <- merge(merge(MOREregulations_opposite,gene_description, by="Gene"),df_DEA_values, by.x = "Gene",by.y="seq")
-              print(head(MOREregulations_opposite_des))
             }   
           }
         }
