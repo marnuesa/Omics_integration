@@ -26,7 +26,6 @@ module load anaconda
 source activate group_sRNA
 
 # Paths
-go_files="/home/nuezsal/Omics_integration/RNA_seq/Results/Enrich_GO_BP/01-Tables"
 metadata_path="/home/nuezsal/Omics_integration/Integration_MORE/Additional_info"
 methylome_associations_file="/home/nuezsal/Omics_integration/Integration_MORE/Results/Bed_files/CMelon_DHL92_v4_upstream_filter_uniq.bed"
 microRNA_associations_file="/home/nuezsal/Omics_integration/Integration_microRNA/Additional_info/Targets_orthologues.txt"
@@ -38,7 +37,6 @@ output_path="/home/nuezsal/Omics_integration/Integration_MORE/Results/04-MORE"
 
 # Execution
 srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript MORE_integration.R \
-  --go_files $go_files \
   --metadata $metadata_path \
   --methylome_associations $methylome_associations_file \
   --microRNA_associations $microRNA_associations_file \
