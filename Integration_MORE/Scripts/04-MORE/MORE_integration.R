@@ -30,6 +30,7 @@ suppressMessages(library(argparse))
 suppressMessages(library(tibble))
 suppressMessages(library(MORE))
 suppressMessages(library(dplyr))
+suppressMessages(library(library(tidyr))
 suppressMessages(library(clusterProfiler))
 suppressMessages(library(org.CMelo.eg.db))
 ################################## FUNCTIONS ###################################
@@ -263,3 +264,23 @@ MORE_final_sort <- MORE_final %>%
   arrange(Coef.stress)
 
 write.table(MORE_final_sort, file = paste0(output_path,"/Regulators_global.tsv"),sep = "\t", col.names = TRUE,row.names = FALSE,quote = FALSE)
+
+# Summarize number of genes with potencial regulators for condition
+MORE_final_summary <- MORE_final_sort %>%
+  mutate(
+    Stress = sub("_.*", "", Stress),  
+    Time = sub(".*_", "", Stress),     
+    Regulator = Omic                  
+  ) %>%
+  group_by(Stress, Time, Regulator) %>% 
+  summarise(
+    n_genes = n(),     
+    IDs = if_else(Regulator == "miRNA-seq", 
+                  paste(Gene, Regulator, sep = "-"),
+                  Gene) %>% 
+      paste(collapse = ", ")
+  ) %>%
+  ungroup()
+
+write.table(MORE_final_summary, file = paste0(output_path,"/Regulators_summary.tsv"),sep = "\t", col.names = TRUE,row.names = FALSE,quote = FALSE)
+
