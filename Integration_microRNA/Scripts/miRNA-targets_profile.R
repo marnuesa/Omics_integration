@@ -220,9 +220,7 @@ for(miRNA in names(miRNAs)){
       
       # Change NA in padj to 1
       for (col in names(row)) {
-        if (startsWith(col, "Padj")) {
           row[[col]][is.na(row[[col]])] <- 1
-        }
       }
       
       # If sequence has not information in some time, it is invalid
