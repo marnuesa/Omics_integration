@@ -187,8 +187,8 @@ for(stress in names(dataframes_micro_sig)){
 }
 
 # Datraframe to save microRNA
-micro_summary <- data.frame()
-
+micro_summary_plot <- data.frame()
+micro_summary_table <- data.frame()
 patron = 0
 total = 0
 # Iterate microRNAs
@@ -201,8 +201,8 @@ for(miRNA in names(miRNAs)){
     miRNAs_stress <- miRNAs_list[[stress]]
     
     # Create a dataframe for save a family of microRNA sequences expression profile through time
-    df_expression <- data.frame()
-    
+    df_expression_plot <- data.frame()
+	  
     # Iterate sequences of a microRNA family
     for(i in 1:length(miRNAs_stress)){
       sequence <- miRNAs_stress[[i]]
@@ -220,14 +220,16 @@ for(miRNA in names(miRNAs)){
       
       # Change NA in padj to 1
       for (col in names(row)) {
+        if (startsWith(col, "Padj")) {
           row[[col]][is.na(row[[col]])] <- 1
+        }
       }
-      
+	    
       # If sequence has not information in some time, it is invalid
       if(!any(is.na(row))){
         
         # Add row to the final dataframe 
-        df_expression <- rbind(df_expression, row)
+        df_expression_plot <- rbind(df_expression_plot, row)
         
         # Save valid microRNA 
         row_valid <- data.frame(ID = paste0("seq",i), seq=sequence, microRNA = miRNA, stress = stress, Type = "Valid",stringsAsFactors = FALSE )
@@ -239,11 +241,15 @@ for(miRNA in names(miRNAs)){
         row_invalid <- data.frame(ID = paste0("seq",i), seq=sequence, microRNA = miRNA,stress = stress, Type = "Invalid", stringsAsFactors = FALSE )
         micro_summary <- rbind(micro_summary, row_invalid) 
       }
+    	# Add all the sequences to the final table without filter
+    	row$miRNA <- miRNA
+    	row$Stress <- stress
+    	micro_summary_table <- rbind(micro_summary_table, row)    
     }
-    
-    if(length(df_expression) != 0){
+
+    if(length(df_expression_plot) != 0){
       # Change dataframe to long dataframe to do the graph
-      df_long <- df_expression %>%
+      df_long <- df_expression_plot %>%
         pivot_longer(cols = starts_with("LFC_T"), names_to = "time", values_to = "LFC") %>%
         pivot_longer(cols = starts_with("Padj_T"), names_to = "time_padj", values_to = "Padj") %>%
         filter(str_sub(time, 5) == str_sub(time_padj, 6)) %>%
@@ -287,20 +293,6 @@ for(miRNA in names(miRNAs)){
         combined_plot <- plot_grid(p_no_legend, legend, ncol = 2, rel_widths = c(2, 1))
       
         plots[[stress]] <- combined_plot 
-
-        # Calculate % of sequences which follow the same patron for each time
-        expression_summary <- df_long %>%
-          group_by(time) %>%
-          summarise(neg_count = sum(LFC < 0), 
-                    pos_count = sum(LFC > 0),
-                    patron = pmax(neg_count, pos_count))
-
-        total = total + nrow(df_long)
-        patron = patron + sum(expression_summary$patron)
-
-        # Save sequence table
-        write.table(expression_summary,paste0(path_out_logs,"/Summary_",miRNA,"_",stress,".tsv"), sep='\t', col.names = TRUE, row.names = FALSE,quote=FALSE)
-
     }
   }
   if(length(plots) > 0){
@@ -313,15 +305,23 @@ for(miRNA in names(miRNAs)){
     print(paste(miRNA, "has not valid sequence in any stress"))
   }
 }
+# Select only the significative sequences
+summary_long <- micro_summary_table %>%
+  pivot_longer(cols = starts_with("LFC_T"), names_to = "time", values_to = "LFC") %>%
+  pivot_longer(cols = starts_with("Padj_T"), names_to = "time_padj", values_to = "Padj") %>%
+  filter(str_sub(time, 5) == str_sub(time_padj, 6)) %>%
+  dplyr::select(-time_padj)
 
-proportion = patron / total * 100
+summary_long_filt <- summary_long[summary_long$Padj < 0.05,]
 
-print("#############Percentage of sequences qith the same expression################")
-print(proportion)
-print("##############################################################################")
+# Calculate % of significative sequences which follow the same patron for each time
+expression_summary <- summary_long_filt %>%
+  group_by(time,Stress,miRNA) %>%
+  summarise(neg_count = sum(LFC < 0), 
+            pos_count = sum(LFC > 0))	
 
 # Save sequence table
-write.table(micro_summary,paste0(path_out_logs,"/Summary_table_microRNAs.tsv"), sep='\t', col.names = TRUE, row.names = FALSE,quote=FALSE)
+write.table(expression_summary,paste0(path_out_logs,"/Summary_table_microRNAs.tsv"), sep='\t', col.names = TRUE, row.names = FALSE,quote=FALSE)
 
 ################################ Analysis 2 ####################################
 
