@@ -238,6 +238,7 @@ for (group in unique(metadata_global$Group)){
         else {
           print("✅ MORE execute correctly")
           if (length(as.data.frame(SimMLR$GlobalSummary$GoodnessOfFit)) > 1) {
+            print(as.data.frame(SimMLR$GlobalSummary$GoodnessOfFit))
             # Get the results per condition
             MOREregulations <- RegulationPerCondition(SimMLR, filterR2 = 0.9)
           
