@@ -233,13 +233,13 @@ for(miRNA in names(miRNAs)){
         
         # Save valid microRNA 
         row_valid <- data.frame(ID = paste0("seq",i), seq=sequence, microRNA = miRNA, stress = stress, Type = "Valid",stringsAsFactors = FALSE )
-        micro_summary <- rbind(micro_summary, row_valid) 
+        micro_summary_plot <- rbind(micro_summary_plot, row_valid) 
       }
       
       else{
         # Save invalid microRNA 
         row_invalid <- data.frame(ID = paste0("seq",i), seq=sequence, microRNA = miRNA,stress = stress, Type = "Invalid", stringsAsFactors = FALSE )
-        micro_summary <- rbind(micro_summary, row_invalid) 
+        micro_summary_plot <- rbind(micro_summary_plot, row_invalid) 
       }
     	# Add all the sequences to the final table without filter
     	row$miRNA <- miRNA
