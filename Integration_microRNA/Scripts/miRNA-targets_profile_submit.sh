@@ -38,6 +38,3 @@ srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript miRNA-targets_pr
             --transcripts $path_transcripts \
             --output $path_out \
             --additional $path_ai 
-
-
-
