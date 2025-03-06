@@ -44,8 +44,6 @@ get_arguments <- function() {
   
   required <- parser$add_argument_group('required arguments')
   
-  required$add_argument('-g', '--go_files', type = 'character',
-                        help = 'Path to the Gene Ontology (GO) files.', required = TRUE)
   required$add_argument('-m', '--metadata', type = 'character',
                         help = 'Path to the metadata file.', required = TRUE)
   required$add_argument('-ma', '--methylome_associations', type = 'character',
@@ -66,7 +64,7 @@ get_arguments <- function() {
   args <- parser$parse_args()
   
   # Check if input files exist
-  input_files <- c(args$go_files, args$metadata, args$methylome_associations,
+  input_files <- c(args$metadata, args$methylome_associations,
                    args$microRNA_associations, args$input_transcripts,
                    args$input_microRNA, args$input_methylome,args$input_DEG)
   
@@ -85,7 +83,6 @@ get_arguments <- function() {
 args <- get_arguments()
 
 # Save the arguments in variables
-go_files <- args$go_files
 metadata_path <- args$metadata
 methylome_associations_file <- args$methylome_associations
 microRNA_associations_file <- args$microRNA_associations
