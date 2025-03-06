@@ -216,13 +216,13 @@ for (group in unique(metadata_global$Group)){
       genes <- unique(DE_genes$seq)
       transcripts_table_filt_DE <- transcripts_table_fil[rownames(transcripts_table_fil) %in% genes, ]
       
-      if (nrow(transcripts_table_DE) > 1) {
+      if (nrow(transcripts_table_filt_DE) > 1) {
         #####################################
         print(group)
         #####################################
         ## Execute MORE
         SimMLR = more(
-          targetData = transcripts_table_DE,
+          targetData = transcripts_table_filt_DE,
           associations = associations,
           regulatoryData = regulatoryData,
           condition = edesign,
