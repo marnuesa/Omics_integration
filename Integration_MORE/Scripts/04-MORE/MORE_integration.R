@@ -216,7 +216,7 @@ for (group in unique(metadata_global$Group)){
         print(group)
         #####################################
         ## Execute MORE
-        SimMLR = more(
+        SimMLR <- tryCatch({more(
           targetData = transcripts_table_filt_DE,
           associations = associations,
           regulatoryData = regulatoryData,
@@ -228,21 +228,29 @@ for (group in unique(metadata_global$Group)){
           interactions = TRUE,
           minVariation = 0,
           correlation = 0.7,
-          method  = 'MLR'
-        )
-        
-        if (length(as.data.frame(SimMLR$GlobalSummary$GoodnessOfFit)) > 1) {
-          # Get the results per condition
-          MOREregulations <- RegulationPerCondition(SimMLR, filterR2 = 0.9)
+          method  = 'MLR')}, 
+                           error = function(e) {
+                             message("⚠️ Error en more(): ", e$message)  
+                             return(NULL)})
+        if (is.null(SimMLR)) {
+          print("❌ Error happened...")
+          } 
+        else {
+          print("✅ MORE execute correctly")
+          if (length(as.data.frame(SimMLR$GlobalSummary$GoodnessOfFit)) > 1) {
+            # Get the results per condition
+            MOREregulations <- RegulationPerCondition(SimMLR, filterR2 = 0.9)
           
-          MOREregulations_opposite <- MOREregulations[MOREregulations[, 6] < 0 & MOREregulations[, 7] >= 0, ]
-          if (nrow(MOREregulations_opposite) != 0) {
-            MOREregulations_opposite$Stress <- paste0(stress, "_T", time)
-            colnames(MOREregulations_opposite) <- c("Gene", "Regulator", "Omic","Area", "Representative", "Coef.stress", "Coef.control", "Stress")
+            MOREregulations_opposite <- MOREregulations[MOREregulations[, 6] < 0 & MOREregulations[, 7] >= 0, ]
+            if (nrow(MOREregulations_opposite) != 0) {
+              MOREregulations_opposite$Stress <- paste0(stress, "_T", time)
+              colnames(MOREregulations_opposite) <- c("Gene", "Regulator", "Omic","Area", "Representative", "Coef.stress", "Coef.control", "Stress")
             
-            # Add LFC and padj
-            df_DEA_values <- DE_genes[,c("seq","Shrunkenlog2FoldChange","padj")]
-            MOREregulations_opposite_des <- merge(df_DEA_values,merge(MOREregulations_opposite,gene_description, by="Gene"), by.x="seq", by.y = "Gene")
+              # Add LFC and padj
+              df_DEA_values <- DE_genes[,c("seq","Shrunkenlog2FoldChange","padj")]
+              MOREregulations_opposite_des <- merge(df_DEA_values,merge(MOREregulations_opposite,gene_description, by="Gene"), by.x="seq", by.y = "Gene")
+        
+            }   
           }
         }
       }
