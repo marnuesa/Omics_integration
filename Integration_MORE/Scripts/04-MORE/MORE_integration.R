@@ -210,7 +210,6 @@ for (group in unique(metadata_global$Group)){
       DE_genes <- read.table(file,sep = ",", quote = "",header = TRUE)
       genes <- unique(DE_genes$seq)
       transcripts_table_filt_DE <- transcripts_table_fil[rownames(transcripts_table_fil) %in% genes, ]
-      print(transcripts_table_filt_DE)
       if (nrow(transcripts_table_filt_DE) > 1) {
         #####################################
         print(group)
