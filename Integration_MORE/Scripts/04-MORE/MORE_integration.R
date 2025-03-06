@@ -30,7 +30,7 @@ suppressMessages(library(argparse))
 suppressMessages(library(tibble))
 suppressMessages(library(MORE))
 suppressMessages(library(dplyr))
-suppressMessages(library(library(tidyr))
+suppressMessages(library(tidyr))
 suppressMessages(library(clusterProfiler))
 suppressMessages(library(org.CMelo.eg.db))
 ################################## FUNCTIONS ###################################
