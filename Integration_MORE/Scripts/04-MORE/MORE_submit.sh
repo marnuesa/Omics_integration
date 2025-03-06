@@ -32,7 +32,7 @@ microRNA_associations_file="/home/nuezsal/Omics_integration/Integration_microRNA
 input_transcripts_file="/home/nuezsal/Omics_integration/Integration_MORE/Results/02-transcripts_normalize/01-Tables/Genes_normalize_counts.tsv"
 input_microRNA_file="/home/nuezsal/Omics_integration/Integration_MORE/Results/01-sRNA_normalize/01-Tables/sRNA_normalize_counts.tsv"
 input_methylome_file="/home/nuezsal/Omics_integration/Integration_MORE/Results/03-methylome_normalize/01-Tables/methylation_normalize_counts_upstream.tsv"
-DEG_path="/home/nuezsal/Omics_integration/RNA_seq/Results/03-DEA/02-DEA_sig/cume/Omics_project"
+DEG_path="/home/nuezsal/Omics_integration/RNA_seq/Results/03-DEA_TH/02-DEA_sig/cume/Omics_project"
 output_path="/home/nuezsal/Omics_integration/Integration_MORE/Results/04-MORE"
 
 # Execution
