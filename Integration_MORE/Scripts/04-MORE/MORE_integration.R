@@ -159,7 +159,7 @@ df_gene_positions <- df_association_methylome_upstream %>%
     Strand = ifelse(Strand == "+", "F", "R"),
     Positions = paste(Chr, Start, End, Strand, sep = "_")
   ) %>%
-  dplyr::select(Positions, ID)
+  dplyr::select(ID,Positions)
 
 # Metadata to design MLR
 metadata_meth <- read.table(paste0(metadata_path,"/metadata/metadata_methylome.tsv"), sep = "\t",header = TRUE)
