@@ -108,7 +108,7 @@ colnames(gene_description) <- c('Gene','Description')
 ## microRNA - Genes
 association_micro <- read.table(microRNA_associations_file,header = TRUE)
 association_micro <- association_micro[,c("gene","microRNA")]
-
+print(head(association_micro)) 
 ## Methylome - genes
 association_methylome_upstream <- read.table(methylome_associations_file,header = FALSE)
 colnames(association_methylome_upstream) <- c("Chr", "Start","End","Strand","ID")
@@ -160,15 +160,20 @@ df_gene_positions <- df_association_methylome_upstream %>%
   ) %>%
   dplyr::select(Positions, ID)
 
+print(head(df_gene_positions))
+
 # Metadata to design MLR
 metadata_meth <- read.table(paste0(metadata_path,"/metadata/metadata_methylome.tsv"), sep = "\t",header = TRUE)
 metadata_micro <- read.table(paste0(metadata_path,"/metadata/metadata_sRNA.tsv"), sep = "\t",header = TRUE)
 metadata_trans <- read.table(paste0(metadata_path,"/metadata/metadata_transcripts.tsv"), sep = "\t",header = TRUE)
+print(head(metadata_meth))
+print(head(metadata_micro))
+print(head(metadata_trans))
 
 # Common samples of the three df
 valores_comunes <- Reduce(intersect, list(metadata_micro$MORE, metadata_trans$MORE, metadata_meth$MORE))
 metadata_global <- metadata_trans[metadata_trans$MORE %in% valores_comunes,]
-
+print(head(metadata_global))
 # Execute MORE to each stress condition and the respective control
 MORE_final <- data.frame()
 for (group in unique(metadata_global$Group)){
@@ -197,7 +202,7 @@ for (group in unique(metadata_global$Group)){
     methylome_upstream_table_fil <- methylome_upstream_table_fil[row.names(methylome_upstream_table_fil) %in% association_methylome_upstream$Positions, ]
     
     associations <- list("miRNA-seq" = association_micro,
-                         "methylome-upstream" = association_methylome_upstream)
+                         "methylome-upstream" = df_gene_positions)
     
     regulatoryData <- list("miRNA-seq" = microRNA_table_fil,
                            "methylome-upstream" = methylome_upstream_table_fil)
