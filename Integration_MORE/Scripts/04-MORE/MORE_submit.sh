@@ -3,8 +3,8 @@
 #SBATCH --job-name=more # Job name to show with squeue
 #SBATCH --output=more_%j.out      # Output file
 #SBATCH --ntasks=1                              # Maximum number of cores to use
-#SBATCH --time=00-07:00:00                      # Time limit to execute the job
-#SBATCH --mem-per-cpu=50G                       # Required Memory per core
+#SBATCH --time=00-01:00:00                      # Time limit to execute the job
+#SBATCH --mem-per-cpu=10G                       # Required Memory per core
 #SBATCH --cpus-per-task=2                       # CPUs assigned per task.
 #SBATCH --qos=short                             # QoS: short,medium,long,long-mem
 
