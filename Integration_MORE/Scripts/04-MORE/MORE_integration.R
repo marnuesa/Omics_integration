@@ -270,14 +270,15 @@ write.table(MORE_final_sort, file = paste0(output_path,"/Regulators_global.tsv")
 # Summarize number of genes with potencial regulators for condition
 MORE_final_summary <- MORE_final_sort %>%
   mutate(
-    Stress = sub("_.*", "", Stress),  
-    Time = sub(".*_", "", Stress),     
-    Regulator = Omic                  
+    Stress_original = Stress,
+    Stress = sub("_.*", "",Stress_original),  
+    Time = sub(".*_", "", Stress_original),
+    Omic = Omic
   ) %>%
-  group_by(Stress, Time, Regulator) %>% 
+  group_by(Stress, Time, Omic) %>% 
   summarise(
     n_genes = n(),     
-    IDs = if_else(Regulator == "miRNA-seq", 
+    IDs = if_else(Omic == "miRNA-seq", 
                   paste(Gene, Regulator, sep = "-"),
                   Gene) %>% 
       paste(collapse = ", ")
