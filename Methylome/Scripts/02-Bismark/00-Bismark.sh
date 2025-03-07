@@ -4,7 +4,7 @@
 #SBATCH --ntasks=4									# Run on one mode. 
 #SBATCH --cpus-per-task=26								# Number of tasks = cpus. 
 #SBATCH --time=06-00:00:00								# Time limit days-hrs:min:sec.
-#SBATCH --mem-per-cpu=5gb								# Job memory request.
+#SBATCH --mem=30gb								# Job memory request.
 
 
 ####### MODULES
