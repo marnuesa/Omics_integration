@@ -263,6 +263,8 @@ for (group in unique(metadata_global$Group)){
 MORE_final_sort <- MORE_final %>%
   arrange(Coef.stress)
 
+MORE_final_sort <- unique(MORE_final_sort)
+
 write.table(MORE_final_sort, file = paste0(output_path,"/Regulators_global.tsv"),sep = "\t", col.names = TRUE,row.names = FALSE,quote = FALSE)
 
 # Summarize number of genes with potencial regulators for condition
