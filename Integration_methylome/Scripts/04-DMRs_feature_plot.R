@@ -358,7 +358,7 @@ for (level in stress_levels) {
   p <- ggplot(df_filtered, aes(x = "", y = percentage, fill = Context)) +
     geom_bar(stat = "identity", width = 1, color = "white", size = 1) +  # Add white border to segments
     coord_polar("y", start = 0) +  # Convert to a pie chart
-    scale_fill_manual(values = c("CG" = "#cb7eff", "CHG" = "#946eff", "CHH" = "#5d5dff")) +  # Custom colors
+    scale_fill_manual(values = c("CG" = "#ffcd06", "CHG" = "#7b0fcd", "CHH" = "#0000cd")) +  # Custom colors
     labs(title = paste0(level, " - Total DMRs: ", unique(df_filtered$total_counts)), 
          fill = "Context") +
     theme_void() +  # Remove background and gridlines
