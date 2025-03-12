@@ -86,6 +86,11 @@ get_arguments <- function() {
                         type = 'character',
                         help = 'Input directory path.',
                         required = TRUE)
+  required$add_argument('-b', '--bismark',
+                        type = 'character',
+                        help = 'Bismark results directory path.',
+                        required = TRUE)
+  
   required$add_argument('-o', '--output',
                         type = 'character',
                         help = 'Output directory path',
@@ -96,7 +101,7 @@ get_arguments <- function() {
   args <- parser$parse_args()
   
   #  Check for missing arguments
-  expected_arguments <- c('input', 'output')
+  expected_arguments <- c('input', 'output',bismark)
   if (any(sapply(args, is.null))) {
     empty_args <- names(args[sapply(args, is.null)])
     error_message <- paste('\n\tError. Unspecified argument:', empty_args, sep = ' ')
@@ -113,6 +118,7 @@ args <- get_arguments()
 # Save the the arguments in variables
 path_in <- args$input
 path_out <- args$output
+path_bismark <- args$bismark
 
 # Create output paths
 path_out_feature <- paste(path_out, '01-Feature', sep = '/')
@@ -319,7 +325,7 @@ for (stress in unique(final_long$Stress)) {
                                  "unknown_region"="Unknown"))
 
   # Save plot
-  ggsave(plot = last_plot(), filename = paste0(path_out_global, "/Feature_analysis_",stress,".svg"), height = 10, width = 17, )
+  ggsave(plot = last_plot(), filename = paste0(path_out_global, "/Feature_analysis_",stress,".svg"), height = 10, width = 17 )
 }
 
 ############################################## Context PIE CHARTS #####################################################
@@ -395,3 +401,27 @@ grid.arrange(do.call(arrangeGrob, c(pie_charts, ncol = 2, nrow = 2)),
 
 # Close the graphical device
 dev.off()
+
+
+###################### Create a plot to percentage of Cs methylated #############
+summary_cs <- read.table("/home/marnuesa/Documentos/Omics_integration/Results/Methylome/02.Bismark/Summary_Cs.tsv",sep = "\t",header = FALSE)
+colnames(summary_cs) <- c("Time","Stress", "Replica", "Percentage","Context")
+
+summary_cs_filt <- summary_cs[,c(2,4,5)]
+# Crear el gráfico
+p <- ggplot(summary_cs_filt, aes(x = Context, y = Percentage, fill = Context)) +
+  geom_jitter(shape = 21, color = "white", stroke = 1, width = 0.2, size = 5) +
+  facet_wrap(~ Stress,nrow = 1) +  # Separar por "Stress"
+  theme_classic() +
+  theme(
+    strip.text = element_text(size = 20),
+    axis.text.x = element_text(size = 20 ),
+    axis.text.y = element_text(size = 20),
+    axis.title = element_text(size = 22)
+  ) +
+  ylab("Percentage") +
+  xlab("Context") +
+  ggtitle("Distribution of Percentage by Context and Stress") +
+  scale_fill_manual(values =  c("CpG" = "#ffcd06", "CHG" = "#7b0fcd", "CHH" = "#0000cd"))
+
+ggsave(plot = p, filename = paste0(path_out_global, "/Cs_methylation.png"), height = 10, width = 17 )
