@@ -28,11 +28,12 @@ source activate group_sRNA
 # Paths
 path_in='/home/nuezsal/Omics_integration/Integration_methylome/Results/02-Total_features_DMRs'
 path_out='/home/nuezsal/Omics_integration/Integration_methylome/Results/03-Plots'
-
+path_BISMARK='/home/nuezsal/Omics_integration/Methylome/Results/02-Bismark/05-Global_reports'
 mkdir -p "$path_out"
 
 # Execution 
 srun -N1 -n1 -c$SLURM_CPUS_PER_TASK --quiet --exclusive Rscript 04-DMRs_feature_plot.R \
             --input $path_in \
-            --output $path_out
+            --output $path_out \
+            --bismark $path_BISMARK
        
