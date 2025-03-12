@@ -167,8 +167,8 @@ for(estres in names(dataframes_transcritos)){
             up.tab = upSimGO@result
             write.table(up.tab, file = paste0(output_path_table,'/',estres,'_T',n, "_up.txt"), sep = "\t", quote = F, 
                          row.names = F, col.names = T) 
-            up_name <- paste0("up_",estres,"_T",n)
-            up.tab$Estres <- paste0(estres)
+            up.tab$Estres <- estres
+            up.tab$Time <- paste0("T_",n)
             final_table_up <- rbind(final_table_up,up.tab)
           }
         }
@@ -205,8 +205,8 @@ for(estres in names(dataframes_transcritos)){
             dn.tab = downSimGO@result    
             write.table(dn.tab, file = paste0(output_path_table,'/',estres,'_T',n,"_down.txt"), sep = "\t", quote = F, 
                          row.names = F, col.names = T)
-            down_name <- paste0("down_",estres,"_T",n)
-            dn.tab$Estres <- paste0(estres)
+            dn.tab$Estres <- estres
+            dn.tab$Time <- paste0("T_",n)
             final_table_down <- rbind(final_table_down,dn.tab)
           }
         }
@@ -214,102 +214,70 @@ for(estres in names(dataframes_transcritos)){
   }
 }
 
-####################### UPSET PLOT FOR UP-REGULATED GENES ######################
-# Prepare data for the upset plot
-upset_up <- final_table_up %>%
+####################### UPSET PLOT FOR UP and DOWN-REGULATED GENES ######################
+
+final_table_up$DE <- "up"
+final_table_down$DE <- "down"
+final_table <- rbind(final_table_down,final_table_up)
+
+upset <- final_table %>%
   select(ID, Estres) %>%
   distinct() %>%
   mutate(Presence = 1) %>%
   pivot_wider(names_from = Estres, values_from = Presence, values_fill = list(Presence = 0))
 
-# Sort columns to maintain consistent ordering
-upset_up <- upset_up %>%
-  select(ID, sort(colnames(upset_up)[-1]))
-
-# Extract stress condition names
-stresses = colnames(upset_up)[-1]
-
-# Convert to boolean matrix for upset plot compatibility
-upset_up[stresses] = upset_up[stresses] == 1
-
-# Sort stress conditions in descending order for better visualization
-stresses <- sort(stresses, decreasing = TRUE)
-
-# Generate the upset plot
-plot_upset_up <- upset(
-  upset_up, stresses, name='stresses', width_ratio=0.1, height_ratio=1, sort_sets = FALSE,
-  base_annotations=list('Intersection size' = intersection_size(
-    text = list(vjust = -0.1, hjust = -0.1, angle = 45, color = "grey"))),
-  themes = upset_modify_themes(
-    list(
-      'main_bar' = theme(text = element_text(size = 20)),   
-      'sets' = theme(text = element_text(size = 20)),      
-      'intersections_matrix' = theme(text = element_text(size = 15)),
-      'intersection_sizes' = theme(text = element_text(size = 20)),  
-      'sets_sizes' = theme(text = element_text(size = 20))          
-    )
-  )
-)
-
-ggsave(paste0(output_path_common, '/upset_up_plot.png'), plot = plot_upset_up, width = 15, height = 10)
-
-# Identify common up-regulated biological processes in three conditions
-id_up <- upset_up %>%
-  rowwise() %>%
-  filter(sum(c_across(-ID)) == 3) %>%
-  pull(ID)
-
-# Extract the unique gene IDs and their descriptions for up-regulated processes
-table_up <- unique(final_table_up[final_table_up$ID %in% id_up, c("ID", "Description")])
-
-# Save tables of common biological processes
-write.table(table_up, file = paste0(output_path_common, '/common_BP_up.txt'), sep = "\t", quote = F, 
-            row.names = F, col.names = T) 
-
-####################### UPSET PLOT FOR DOWN-REGULATED GENES ######################
-upset_down <- final_table_down %>%
-  select(ID, Estres) %>%
-  distinct() %>%
-  mutate(Presence = 1) %>%
-  pivot_wider(names_from = Estres, values_from = Presence, values_fill = list(Presence = 0))
-
-upset_down <- upset_down %>%
+upset <- upset %>%
   select(ID, sort(colnames(upset_down)[-1]))
 
-stresses = colnames(upset_down)[-1]
-
-upset_down[stresses] = upset_down[stresses] == 1
+stresses = colnames(upset)[-1]
+# transfrom in a boolean matrix
+upset[stresses] = upset[stresses] == 1
 
 stresses <- sort(stresses, decreasing = TRUE)
 
-plot_upset_down <- upset(
-  upset_down, stresses, name='stresses', width_ratio=0.1, height_ratio=1, sort_sets = FALSE,
-  base_annotations=list('Intersection size' = intersection_size(
-    text = list(vjust = -0.1, hjust = -0.1, angle = 45, color = "grey"))),
-  themes = upset_modify_themes(
-    list(
-      'main_bar' = theme(text = element_text(size = 20)), 
-      'sets' = theme(text = element_text(size = 20)),    
-      'intersections_matrix' = theme(text = element_text(size = 15)),
-      'intersection_sizes' = theme(text = element_text(size = 20)),  
-      'sets_sizes' = theme(text = element_text(size = 20))             
-    )
-  )
-)
+plot_upset <- upset(upset, stresses, name='stresses', width_ratio=0.1, height_ratio=1,sort_sets = FALSE,
+                    base_annotations=list('Intersection size'=intersection_size(
+                      text=list(vjust=-0.1, hjust=-0.1,angle=45, color="grey"))),
+                    themes=upset_modify_themes(
+                      list(
+                        'main_bar' = theme(text = element_text(size = 20)),         # Tamaño de texto en la barra principal
+                        'sets' = theme(text = element_text(size = 20)),             # Tamaño de texto en las etiquetas de conjuntos
+                        'intersections_matrix' = theme(text = element_text(size = 15)), # Tamaño de texto en la matriz de intersecciones
+                        'intersection_sizes' = theme(text = element_text(size = 20)),   # Tamaño de texto en tamaños de intersección
+                        'sets_sizes' = theme(text = element_text(size = 20))             # Tamaño de texto en tamaños de conjuntos
+                        
+                      )
+                    ))
 
-# Save upset plots
-ggsave(paste0(output_path_common, '/upset_down_plot.png'), plot = plot_upset_down, width = 15, height = 10)
+ggsave(paste0(output_path_common, '/upset_plot.png'), plot = plot_upset_up, width = 15, height = 10)
 
-# Identify common down-regulated biological processes in three conditions
-id_down <- upset_down %>%
+# Identify common biological processes in or more  than three conditions
+id <- upset %>%
   rowwise() %>%
-  filter(sum(c_across(-ID)) == 3) %>%
+  filter(sum(c_across(-ID)) >= 3) %>%
   pull(ID)
 
-# Extract the unique gene IDs and their descriptions for down-regulated processes
-table_down <- unique(final_table_down[final_table_down$ID %in% id_down, c("ID", "Description")])
+# Select columns
+final_table_filt <- final_table[final_table$ID %in% id, c("ID","Description", "Estres","Time", "DE")]
+
+# Create a column to each stress
+df_pivot <- final_table_filt %>%
+  select(-Time) %>%  
+  pivot_wider(
+    names_from = Estres, 
+    values_from = DE, 
+    values_fn = list(DE = function(x) {
+      unique_vals <- unique(x)
+      if (length(unique_vals) == 1) {
+        return(unique_vals) 
+      } else {
+        return("Both") 
+      }
+    }),
+    values_fill = list(DE = "N.E")  
+  )
 
 # Save tables of common biological processes
-write.table(table_down, file = paste0(output_path_common, '/common_BP_down.txt'), sep = "\t", quote = F, 
+write.table(df_pivot, file = paste0(output_path_common, '/common_BP.txt'), sep = "\t", quote = F, 
             row.names = F, col.names = T) 
 
