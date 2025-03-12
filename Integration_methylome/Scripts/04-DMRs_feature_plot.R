@@ -101,7 +101,7 @@ get_arguments <- function() {
   args <- parser$parse_args()
   
   #  Check for missing arguments
-  expected_arguments <- c('input', 'output',bismark)
+  expected_arguments <- c('input', 'output','bismark')
   if (any(sapply(args, is.null))) {
     empty_args <- names(args[sapply(args, is.null)])
     error_message <- paste('\n\tError. Unspecified argument:', empty_args, sep = ' ')
