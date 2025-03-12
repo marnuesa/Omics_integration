@@ -364,7 +364,7 @@ for (level in stress_levels) {
   p <- ggplot(df_filtered, aes(x = "", y = percentage, fill = Context)) +
     geom_bar(stat = "identity", width = 1, color = "white", size = 1) +  # Add white border to segments
     coord_polar("y", start = 0) +  # Convert to a pie chart
-    scale_fill_manual(values = c("CG" = "#ffcd06", "CHG" = "#7b0fcd", "CHH" = "#0000cd")) +  # Custom colors
+    scale_fill_manual(values = c("CG" = "#ffcd06", "CHG" = "#7b0fcd", "CHH" = "#2c41ff")) +  # Custom colors
     labs(title = paste0(level, " - Total DMRs: ", unique(df_filtered$total_counts)), 
          fill = "Context") +
     theme_void() +  # Remove background and gridlines
@@ -379,7 +379,7 @@ for (level in stress_levels) {
 }
 
 # Define colors and labels for the legend
-colors <- c("#cb7eff", "#946eff", "#5d5dff")  # Defined colors
+colors <- c("#ffcd06","#7b0fcd","#2c41ff")  # Defined colors
 contexts <- c("CG", "CHG", "CHH")  # Methylation contexts
 
 # Create a legend as a graphical object
@@ -422,6 +422,6 @@ p <- ggplot(summary_cs_filt, aes(x = Context, y = Percentage, fill = Context)) +
   ylab("Percentage") +
   xlab("Context") +
   ggtitle("Distribution of Percentage by Context and Stress") +
-  scale_fill_manual(values =  c("CpG" = "#ffcd06", "CHG" = "#7b0fcd", "CHH" = "#0000cd"))
+  scale_fill_manual(values =  c("CpG" = "#ffcd06", "CHG" = "#7b0fcd", "CHH" = "#2c41ff"))
 
 ggsave(plot = p, filename = paste0(path_out_global, "/Cs_methylation.png"), height = 10, width = 17 )
