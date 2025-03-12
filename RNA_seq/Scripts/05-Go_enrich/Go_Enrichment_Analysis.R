@@ -246,7 +246,7 @@ plot_upset <- upset(upset, stresses, name='stresses', width_ratio=0.1, height_ra
                       )
                     ))
 
-ggsave(paste0(output_path_common, '/upset_plot.png'), plot = plot_upset_up, width = 15, height = 10)
+ggsave(paste0(output_path_common, '/upset_plot.png'), plot = plot_upset, width = 15, height = 10)
 
 # Identify common biological processes in or more  than three conditions
 id <- upset %>%
