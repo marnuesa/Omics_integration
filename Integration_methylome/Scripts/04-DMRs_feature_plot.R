@@ -404,7 +404,7 @@ dev.off()
 
 
 ###################### Create a plot to percentage of Cs methylated #############
-summary_cs <- read.table("/home/marnuesa/Documentos/Omics_integration/Results/Methylome/02.Bismark/Summary_Cs.tsv",sep = "\t",header = FALSE)
+summary_cs <- read.table(paste0(path_bismark,"/Summary_Cs.tsv"),sep = "\t",header = FALSE)
 colnames(summary_cs) <- c("Time","Stress", "Replica", "Percentage","Context")
 
 summary_cs_filt <- summary_cs[,c(2,4,5)]
