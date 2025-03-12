@@ -132,7 +132,6 @@ for(estres in names(dataframes_transcritos)){
       # GO enrichment analysis
       Gene_list_universe = unique(Anotation_file$Gene)
       if(length(upreg) > 10){
-        print(upreg)
         upEGO = enrichGO(gene = upreg,
                          universe = Gene_list_universe,
                          OrgDb = org.CMelo.eg.db,
@@ -145,14 +144,12 @@ for(estres in names(dataframes_transcritos)){
                          #qvalueCutoff = 0.05,
                          readable = TRUE,
                          pool = FALSE)
-        print("##############ego")
-        print(upEGO@result[,c(1,2)])
+
         if(nrow(upEGO@result) != 0) {
           # Use the simplify function to reduce redundancy of enriched GO terms.
           upSimGO = simplify(upEGO, cutoff = 0.7, by = "p.adjust", select_fun = min, measure = "Wang",
                              semData = NULL)
-          print("##############simego")
-          print(upSimGO@result[,c(1,2)])
+
           if (nrow(upSimGO@result) != 0){
             # Plot analysis
             # up
@@ -227,7 +224,7 @@ upset <- final_table %>%
   pivot_wider(names_from = Estres, values_from = Presence, values_fill = list(Presence = 0))
 
 upset <- upset %>%
-  select(ID, sort(colnames(upset_down)[-1]))
+  select(ID, sort(colnames(upset)[-1]))
 
 stresses = colnames(upset)[-1]
 # transfrom in a boolean matrix
