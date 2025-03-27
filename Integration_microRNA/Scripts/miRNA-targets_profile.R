@@ -740,11 +740,12 @@ for (gene in genes) {
   lfc_table <- gene_table_uniq[gene_table_uniq$Gene == gene, ]
   row <- data.frame(matrix(0, nrow = 1, ncol = length(stresses) * length(times)))
   colnames(row) <- c(outer(stresses, times, paste, sep = "_"))
-  
+  print(head(lfc_table))
   for (time in times) {
     for (stress in stresses) {
       name <- paste0(stress, "_", time)
       row[[name]] <- ifelse(name %in% lfc_table$stress_time, as.numeric(lfc_table[lfc_table$stress_time == name, "LFC_gene"]), NA)
+      print(head(row))
     }
   }
   rownames(row) <- gene
