@@ -740,12 +740,10 @@ for (gene in genes) {
   lfc_table <- gene_table_uniq[gene_table_uniq$Gene == gene, ]
   row <- data.frame(matrix(0, nrow = 1, ncol = length(stresses) * length(times)))
   colnames(row) <- c(outer(stresses, times, paste, sep = "_"))
-  print(head(lfc_table))
   for (time in times) {
     for (stress in stresses) {
       name <- paste0(stress, "_", time)
       row[[name]] <- ifelse(name %in% lfc_table$stress_time, as.numeric(lfc_table[lfc_table$stress_time == name, "LFC_gene"]), NA)
-      print(head(row))
     }
   }
   rownames(row) <- gene
@@ -800,7 +798,6 @@ annotation_row <- rowAnnotation(microRNA = annotation_table$microRNA, col = list
 row_group <- ifelse(grepl("^miR", rownames_order), "miR", "MELO")
 
 HM_matrix_filtrada <- HM_matrix[, colSums(!is.na(HM_matrix)) > 0]
-print(head(HM_matrix_filtrada))
 heat <- Heatmap(HM_matrix_filtrada, rect_gp = gpar(col = "white", lwd = 0.5),
                 col = col_fun, right_annotation = annotation_row, 
                 column_names_rot = 45, column_names_gp = gpar(fontsize = 16),
