@@ -708,7 +708,7 @@ for (mirna in mirnas) {
   for (time in times) {
     for (stress in stresses) {
       name <- paste0(stress, "_", time)
-      row[[name]] <- ifelse(name %in% lfc_table$stress_time, as.numeric(lfc_table[lfc_table$stress_time == name, "LFC_micro"]), 0)
+      row[[name]] <- ifelse(name %in% lfc_table$stress_time, as.numeric(lfc_table[lfc_table$stress_time == name, "LFC_micro"]), NA)
     }
   }
   rownames(row) <- mirna
@@ -744,7 +744,7 @@ for (gene in genes) {
   for (time in times) {
     for (stress in stresses) {
       name <- paste0(stress, "_", time)
-      row[[name]] <- ifelse(name %in% lfc_table$stress_time, as.numeric(lfc_table[lfc_table$stress_time == name, "LFC_gene"]), 0)
+      row[[name]] <- ifelse(name %in% lfc_table$stress_time, as.numeric(lfc_table[lfc_table$stress_time == name, "LFC_gene"]), NA)
     }
   }
   rownames(row) <- gene
@@ -785,7 +785,7 @@ HM_matrix <- HM_matrix[match(rownames_order, rownames(HM_matrix)), ]
 annotation_table <- annotation_table[match(rownames_order, rownames(annotation_table)), ]
 
 # Define color function
-col_fun <- colorRamp2(c(-3, 0, 3), c("blue", "grey", "red"))
+col_fun <- colorRamp2(c(-3, 0, 3), c("blue", "white", "red"))
 col_fun(seq(-1, 1))
 
 # Define microRNA annotation colors
