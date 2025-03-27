@@ -799,7 +799,7 @@ annotation_row <- rowAnnotation(microRNA = annotation_table$microRNA, col = list
 row_group <- ifelse(grepl("^miR", rownames_order), "miR", "MELO")
 
 HM_matrix_filtrada <- HM_matrix[, colSums(HM_matrix != 0) > 0]
-
+print(head(HM_matrix_filtrada))
 heat <- Heatmap(HM_matrix_filtrada, rect_gp = gpar(col = "white", lwd = 0.5),
                 col = col_fun, right_annotation = annotation_row, 
                 column_names_rot = 45, column_names_gp = gpar(fontsize = 16),
