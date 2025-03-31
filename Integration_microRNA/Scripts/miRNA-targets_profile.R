@@ -539,9 +539,7 @@ print("Claculating the correlation...")
 write.table(correlation_table,paste0(path_out_analysis2,"/Correlation_table.tsv"), row.names= FALSE, col.names = TRUE, quote= FALSE)
 
 # Calculate the correlation to a No normal data distribution
-correlation_table$LFC_gene_jitter <- jitter(correlation_table$LFC_gene)
-correlation_table$LFC_micro_jitter <- jitter(correlation_table$LFC_micro)
-cor_spearman <- cor.test(correlation_table$LFC_gene_jitter, correlation_table$LFC_micro_jitter, method = "spearman")
+cor_spearman <- cor.test(correlation_table$LFC_gene, correlation_table$LFC_micro, method = "spearman",exact = FALSE)
 
 # Clculate the max malue to the axes
 max_abs_x <- max(abs(correlation_table$LFC_micro), na.rm = TRUE) +0.5
