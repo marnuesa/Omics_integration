@@ -6,6 +6,21 @@
 #SBATCH --time=06-00:00:00								# Time limit days-hrs:min:sec.
 #SBATCH --mem=30gb								# Job memory request.
 
+################################################################################
+#                       02-Bismark.sh
+#
+#   This script runs the Bismark pipeline for whole-genome bisulfite sequencing
+#   (WGBS) data processing. It includes:
+#     - Genome preparation (indexing)
+#     - Paired-end alignment
+#     - Deduplication of BAM files
+#     - Methylation extraction
+#     - Global quality control and report generation
+#
+#   Input  : Raw paired-end reads (FASTQ)
+#   Output : Aligned BAM files, methylation calls, and summary reports
+#
+################################################################################
 
 ####### MODULES
 module load biotools
