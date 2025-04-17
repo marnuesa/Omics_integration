@@ -1,4 +1,4 @@
-# 🧬 Omics Integration in *Cucumis melo*
+# 🧬 Omics Integration
 
 This repository contains all the scripts and resources used for a multi-omics analysis of stress response in melon plants (*Cucumis melo*, cultivar Piel de Sapo). The pipeline integrates small and long RNA transcriptomics, whole-genome bisulfite sequencing (WGBS) methylome data, and miRNA–mRNA–methylation associations using multiple linear regression.
 
