@@ -1,6 +1,6 @@
 # 🧬 Omics Integration
 
-This repository contains all the scripts and resources used for a multi-omics analysis of stress response in melon plants (*Cucumis melo*, cultivar Piel de Sapo). The pipeline integrates small and long RNA transcriptomics, whole-genome bisulfite sequencing (WGBS) methylome data, and miRNA–mRNA–methylation associations using multiple linear regression.
+This repository contains all the scripts and resources used for a multi-omics analysis of stress response in melon plants (*Cucumis melo*, cultivar Piel de Sapo). The pipeline integrates sRNA and mRNA transcriptomics, whole-genome bisulfite sequencing (WGBS) methylome data, and miRNA–mRNA–methylation associations using multiple linear regression.
 
 ---
 
@@ -21,7 +21,7 @@ The pipeline includes several analysis stages:
 - **Differential expression**: `DESeq2`
 - **miRNA identification**: `miRNAs_Annotation.sh`, `Group_miRNA_by_family.sh` (alignment with `Bowtie`)
 
-### 3. Long RNA Transcriptome (genes)
+### 3. RNA Transcriptome (genes)
 
 - **Preprocessing**: `fastp` + `FastQC`
 - **Quantification**: `Salmon`
