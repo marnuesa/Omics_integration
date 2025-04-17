@@ -6,6 +6,16 @@
 #SBATCH --time=10-00:00:00                                                              # Time limit days-hrs:min:sec.
 #SBATCH --mem=300gb                                                               # Job memory request.
 
+################################################################################
+#                       03-DMRcaller.sh
+#
+#   This script runs DMRcaller using an R script to identify differentially
+#   methylated regions (DMRs) from bisulfite sequencing data.
+#
+#   Input  : Methylation extractor output, sample summary table
+#   Output : DMR tables and visualizations
+#
+################################################################################
 
 ####### MODULES
 module load anaconda
