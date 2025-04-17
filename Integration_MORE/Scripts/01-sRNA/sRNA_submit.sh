@@ -13,7 +13,6 @@
 #   sRNA_submit.sh
 #
 #   This program generate normalize count tables of microRNA
-#   and execute a integration with MLR model of MORE
 #
 #   Author: Marta Nuñez Salvador
 #   Date: 18/12/2024
